@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import Signup from "./Pages/SignUp/Signup";
-import Productdetail from "./Pages/ProductDetail/Productdetail";
-import Main from "./Pages/Main/Main";
-import Login from "./Pages/Login/Login";
-import Cart from "./Pages/Cart/Cart";
+import Signup from './Pages/SignUp/Signup';
+import Productdetail from './Pages/ProductDetail/Productdetail';
+import Main from './Pages/Main/Main';
+import Login from './Pages/Login/Login';
+import Cart from './Pages/Cart/Cart';
 
 class Routes extends Component {
   render() {
