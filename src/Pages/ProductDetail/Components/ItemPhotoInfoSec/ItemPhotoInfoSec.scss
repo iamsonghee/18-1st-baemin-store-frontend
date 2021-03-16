@@ -1,0 +1,153 @@
+@import '../../../../Styles/common.scss';
+
+.itemPhotoInfoSec {
+  display: flex;
+  width: 1200px;
+  margin: 0 auto;
+  padding: 40px 40px 0;
+  line-height: 24px;
+
+  .itemPhotoViewBox {
+    img {
+      width: 473px;
+      height: 585px;
+    }
+  }
+
+  .itemInfoBox {
+    position: relative;
+    width: 556px;
+    height: 585px;
+    margin-left: 90px;
+
+    h3 {
+      padding-bottom: 25px;
+      font-weight: 600;
+      font-size: 30px;
+      color: #333;
+    }
+
+    .itemDetailList {
+      margin: 10px 0 20px 0;
+      padding-bottom: 10px;
+      line-height: 1.5;
+
+      dl {
+        display: flex;
+        min-height: 24px;
+        padding: 4px 0;
+      }
+
+      dt {
+        width: 100px;
+        margin: 0 10px 0 5px;
+        font-size: 16px;
+        font-weight: 600;
+        color: #717171;
+      }
+
+      dd {
+        width: 440px;
+      }
+
+      .itemPrice {
+        dd {
+          font-size: 18px;
+          font-weight: 600;
+
+          strong {
+            font-size: 21px;
+            font-weight: 600;
+          }
+        }
+      }
+
+      .itemDelivery {
+        dd {
+          strong {
+            padding: 0 5px 5px 0;
+          }
+        }
+      }
+    }
+
+    .itemPriceContainer {
+      position: absolute;
+      width: 100%;
+      bottom: 65px;
+      right: 0;
+
+      .totalAmount {
+        display: flex;
+        margin-top: 15px;
+        height: 70px;
+        padding: 10px 0 5px;
+        border-top: 1px solid #dbdbdb;
+
+        dt {
+          margin-top: 11px;
+          font-weight: 600;
+          font-size: 16px;
+          color: #717171;
+        }
+
+        .totalPrice {
+          position: absolute;
+          display: inline-block;
+          right: 0;
+          font-size: 36px;
+          font-weight: 600;
+          line-height: 54px;
+          color: #29c1bc;
+
+          b {
+            font-size: 30px;
+          }
+        }
+      }
+    }
+
+    .btnChoiceBox {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      padding-top: 20px;
+
+      button {
+        vertical-align: middle;
+        padding: 0;
+        border: 1px solid #cccccc;
+        cursor: pointer;
+        background: none;
+      }
+
+      #wishBtn {
+        width: 52px;
+        height: 52px;
+        margin-right: 6px;
+        background: url(https://cdns.iconmonstr.com/wp-content/assets/preview/2018/240/iconmonstr-heart-thin.png)
+          no-repeat center;
+        background-size: 26px 23px;
+      }
+
+      #cartBtn {
+        width: 152px;
+        height: 52px;
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      #orderBtn {
+        width: 230px;
+        height: 52px;
+        margin: 0 0 0 6px;
+        padding: 0 10px 0 10px;
+        border: 1px solid #000;
+        background-color: #000;
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 600;
+      }
+    }
+  }
+}

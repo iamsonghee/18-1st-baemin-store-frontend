@@ -1,0 +1,57 @@
+@import '../../Styles/common.scss';
+
+.productDetail {
+  .itemGoodsSec {
+    width: 1200px;
+    margin: 0 auto;
+
+    h3 {
+      padding: 45px 0 10px 10px;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    #detail {
+      .detailContainer {
+        width: 900px;
+        margin: 0 auto;
+
+        .detailTable {
+          width: 100%;
+          font-size: 12px;
+
+          tr {
+            height: 52px;
+
+            th {
+              width: 20%;
+              vertical-align: middle;
+              padding: 10px 10px 10px 14px;
+              border: $themeBorder;
+              background-color: #f9f9f9;
+              color: #555555;
+              font-weight: bold;
+              text-align: left;
+            }
+
+            td {
+              width: 80%;
+              vertical-align: middle;
+              padding: 10px 10px 10px 18px;
+              border: $themeBorder;
+              color: #777777;
+            }
+          }
+        }
+      }
+    }
+
+    #delivery,
+    #exchange {
+      p {
+        font-size: 12px;
+        line-height: 1.8;
+      }
+    }
+  }
+}

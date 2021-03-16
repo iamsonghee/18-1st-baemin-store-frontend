@@ -1,0 +1,28 @@
+@import '../../../../Styles/common.scss';
+
+.itemGoodsTab {
+  padding-top: 80px;
+  border-bottom: $themeBorder;
+
+  ul {
+    display: flex;
+    width: 870px;
+    height: 41px;
+    margin: 0 auto;
+
+    li {
+      width: 174px;
+      text-align: center;
+      border: $themeBorder;
+
+      a {
+        display: block;
+        padding: 10px 0 12px;
+        line-height: 18px;
+        font-size: 12px;
+        text-decoration: none;
+        color: #999999;
+      }
+    }
+  }
+}
