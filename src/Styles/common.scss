@@ -6,18 +6,27 @@ $themeGray: #888888;
 $themeGrayDetail: #f5f5f5;
 $themeGraySoldout: #b5b5b5;
 $themeBorder: 1px solid #eaeaea;
-
-
-:root {
+common.scss :root {
   font-family: 'Noto Sans KR', sans-serif !important;
-  color:#333;
+  color: #333;
 }
 
-*{
+* {
   box-sizing: border-box;
 }
 
 input:focus,
 button:focus {
   outline: none;
+}
+
+a,
+a:active,
+a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+
+button i {
+  cursor: pointer;
 }
