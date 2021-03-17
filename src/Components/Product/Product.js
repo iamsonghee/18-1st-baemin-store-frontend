@@ -4,7 +4,7 @@ import './Product.scss';
 class Product extends Component {
   render() {
     return (
-      <product>
+      <div className="product">
         <div className="item">
           <div className="itemImgBox">
             <img
@@ -19,10 +19,10 @@ class Product extends Component {
             <div className="likeOrCart">
               <div className="buttons">
                 <button>
-                  <i class="far fa-heart"></i>
+                  <i className="far fa-heart"></i>
                 </button>
                 <button>
-                  <i class="fas fa-cart-plus"></i>
+                  <i className="fas fa-cart-plus"></i>
                 </button>
               </div>
             </div>
@@ -38,7 +38,7 @@ class Product extends Component {
             </div>
           </div>
         </div>
-      </product>
+      </div>
     );
   }
 }

@@ -85,11 +85,23 @@ header {
     ul {
       display: flex;
       li {
-        padding: 0px 20px;
         cursor: pointer;
         &:hover {
           color: $themeBlue;
         }
+        .menuTitle {
+          padding: 10px 15px 10px 15px;
+          &.on {
+            border-bottom: 3px solid $themeBlue;
+          }
+        }
+        // .on {
+        //   //   display: flex;
+        //   //   margin-top: 10px;
+        //   //   height: 3px;
+        //   //   background-color: $themeBlue;
+        //   //   border-bottom: 2px solid $themeBlue;
+        // }
       }
     }
   }

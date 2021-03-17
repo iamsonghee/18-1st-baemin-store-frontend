@@ -4,6 +4,23 @@ import { Link } from 'react-router-dom';
 import './Header.scss';
 
 class Header extends Component {
+  constructor() {
+    super();
+    this.state = {
+      clickedId: null,
+    };
+
+    this.handleMenuClick = idx => {
+      this.setState({
+        clickedId: idx,
+      });
+    };
+    this.handleAddClassName = idx => {
+      if (idx === this.state.clickedId) {
+        return 'on';
+      }
+    };
+  }
   render() {
     return (
       <header>
@@ -43,7 +60,13 @@ class Header extends Component {
         <nav className="headerMenu">
           <ul>
             {MENUARR.map((menu, idx) => {
-              return <li key={idx}>{menu}</li>;
+              return (
+                <li key={idx} onClick={() => this.handleMenuClick(idx)}>
+                  <div className={'menuTitle ' + this.handleAddClassName(idx)}>
+                    {menu}
+                  </div>
+                </li>
+              );
             })}
           </ul>
         </nav>
