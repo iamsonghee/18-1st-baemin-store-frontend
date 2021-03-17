@@ -2,37 +2,48 @@ import React, { Component } from 'react';
 import './Productdetail.scss';
 import ItemPhotoInfoSec from './Components/ItemPhotoInfoSec/ItemPhotoInfoSec';
 import ItemGoodsTab from './Components/ItemGoodsTab/ItemGoodsTab';
+import TableElements from './Components/TableElements/TableElements';
+import Review from './Components/Review/Review';
 
 class Productdetail extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { data: [], reviews: [] };
+  }
+
+  componentDidMount() {
+    fetch('/data/data.json')
+      .then(res => res.json())
+      .then(res =>
+        this.setState({
+          data: res,
+        })
+      );
   }
 
   render() {
+    const { name, img, price, isSale, detailImg, sale } = this.state.data;
     return (
       <div className="productDetail">
-        <ItemPhotoInfoSec />
+        {
+          <ItemPhotoInfoSec
+            name={name}
+            img={img}
+            price={price}
+            isSale={isSale}
+            sale={sale}
+          />
+        }
         <section className="itemGoodsSec">
           <div id="detail">
             <ItemGoodsTab />
             <div className="detailContainer">
               <h3>상품상세정보</h3>
-              <img
-                src="https://store.baemin.com/data/editor/goods/201103/3_184140.png"
-                alt="제품명 의 상세정보"
-              />
+              <img src={detailImg} alt={`${name}의 상세정보`} />
               <h3>상품필수 정보</h3>
-              <table className="detailTable">
+              <table className="productDetailTable">
                 <tbody>
-                  <tr>
-                    <th>품명</th>
-                    <td>품명 value</td>
-                  </tr>
-                  <tr>
-                    <th>재질</th>
-                    <td>재질 value</td>
-                  </tr>
+                  <TableElements />
                 </tbody>
               </table>
             </div>
@@ -122,6 +133,7 @@ class Productdetail extends Component {
           <div id="reviews">
             <ItemGoodsTab />
             <h3>상품후기</h3>
+            <Review />
           </div>
           <div id="qna">
             <ItemGoodsTab />

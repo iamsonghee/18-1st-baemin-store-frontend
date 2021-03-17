@@ -3,15 +3,76 @@
 .optionArea {
   width: 100%;
   height: 60px;
-  vertical-align: middle;
   background-color: $themeGrayDetail;
 
+  td {
+    vertical-align: middle;
+  }
+
   .cartProductName {
+    width: 330px;
+
     strong {
       padding: 20px 0 20px 20px;
       font-size: 13px;
       font-weight: 500;
       color: #333333;
+    }
+  }
+
+  .count {
+    display: flex;
+    padding: 13.5px 0;
+
+    input {
+      padding: 0 5px;
+      width: 43px;
+      height: 33px;
+      border: 1px solid #ccc;
+      color: #3f3f3f;
+      text-align: center;
+    }
+
+    .btnContainer {
+      button {
+        display: block;
+        width: 21px;
+        height: 15px;
+        border: none;
+        opacity: 0.3;
+        cursor: pointer;
+        &:enabled {
+          outline: none;
+        }
+      }
+
+      .container {
+        border: 1px solid #ccc;
+        background-color: white;
+      }
+
+      .countUpBtn {
+        background: url('https://www.flaticon.com/svg/vstatic/svg/566/566014.svg?token=exp=1615958940~hmac=46a24cc14a9e7ae76bacb4b5e44b9e82')
+          no-repeat center;
+        background-size: 12px 9px;
+      }
+
+      .countDownBtn {
+        margin-top: -1px;
+        background: url('https://www.flaticon.com/svg/vstatic/svg/566/566015.svg?token=exp=1615960022~hmac=498eba05db7ae83647f8cc03cb15b8ce')
+          no-repeat center;
+        background-size: 12px 9px;
+      }
+    }
+  }
+
+  .itemChoicePrice {
+    padding-right: 40px;
+    font-size: 14px;
+    text-align: right;
+
+    strong {
+      font-weight: 600;
     }
   }
 }

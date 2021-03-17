@@ -119,6 +119,9 @@
         border: 1px solid #cccccc;
         cursor: pointer;
         background: none;
+        &:enabled {
+          outline: none;
+        }
       }
 
       #wishBtn {

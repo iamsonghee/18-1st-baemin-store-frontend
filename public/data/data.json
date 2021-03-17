@@ -1,1 +1,9 @@
-[{ "data": "data" }]
+{
+  "id": 1,
+  "name": "을지로 일회용캬메라. 잘 나왔다",
+  "img": "https://store.baemin.com/data/goods/20/10/44/311/311_detail_02.jpg",
+  "detailImg": "https://store.baemin.com/data/editor/goods/201028/8dccbe91add6cabb9ca4d498421281d8_145712.jpg",
+  "price": 1000,
+  "isSale": true,
+  "sale": 20
+}
