@@ -12,9 +12,19 @@ class Product extends Component {
               alt="camera"
             />
             <div className="itemTags">
-              <span className="sale">SALE</span>
+              <span className="sale show">SALE</span>
               <span className="best">BEST</span>
-              <span className="new">NEW</span>
+              <span className="new show">NEW</span>
+            </div>
+            <div className="likeOrCart">
+              <div className="buttons">
+                <button>
+                  <i class="far fa-heart"></i>
+                </button>
+                <button>
+                  <i class="fas fa-cart-plus"></i>
+                </button>
+              </div>
             </div>
           </div>
           <div className="itemInfo">
