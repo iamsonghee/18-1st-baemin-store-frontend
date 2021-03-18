@@ -12,11 +12,14 @@
   .loginBox {
     margin-bottom: 20px;
     .loginInput {
+      margin-bottom: 12px;
+
       input {
         width: 90%;
-        height: 50px;
+        height: 40px;
         padding: 0 10px;
         margin-bottom: 12px;
+        margin-top: 12px;
         border: none;
         border-bottom: 1px solid #c0c0c0;
         outline: none;
