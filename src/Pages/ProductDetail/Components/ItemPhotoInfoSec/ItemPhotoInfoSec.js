@@ -7,14 +7,13 @@ class ItemPhotoInfoSec extends Component {
     counts: 1,
   };
 
-  IncreaseItem = () => {
-    const { counts } = this.state;
+  increaseItem = () => {
     this.setState({
-      counts: counts + 1,
+      counts: this.state.counts + 1,
     });
   };
 
-  DecreaseItem = () => {
+  decreaseItem = () => {
     const { counts } = this.state;
     counts <= 1
       ? this.setState({
@@ -23,14 +22,25 @@ class ItemPhotoInfoSec extends Component {
       : this.setState({ counts: counts - 1 });
   };
 
-  InputItemCounts = e => {
-    this.setState({ counts: Number(e.target.value) });
+  inputItemCounts = e => {
+    let onlyNum = /^[0-9]*$/;
+    onlyNum.test(e.target.value) &&
+      this.setState({ counts: Number(e.target.value) });
   };
 
   render() {
-    const { InputItemCounts, IncreaseItem, DecreaseItem } = this;
+    const { inputItemCounts, increaseItem, decreaseItem } = this;
     const { counts } = this.state;
-    const { name, img, price, isSale, sale } = this.props;
+    const { name, img, price, isSale, sale, option, options } = this.props;
+    const optionList = options?.map(optionList => (
+      <option>{`${optionList.opName}  ${
+        optionList.priceAdd === 0
+          ? `(재고 : ${optionList.stock})`
+          : `(+${optionList.priceAdd.toLocaleString('ko-KR')}원 / 재고 : ${
+              optionList.stock
+            })`
+      }`}</option>
+    ));
     return (
       <div className="itemPhotoInfoSec">
         <div className="itemPhotoViewBox">
@@ -42,31 +52,48 @@ class ItemPhotoInfoSec extends Component {
             <dl className="netPrice" style={{ display: !isSale && 'none' }}>
               <dt>정가</dt>
               <dd>
-                <del>{price}원</del>
+                <del>{price?.toLocaleString('ko-KR')}원</del>
               </dd>
             </dl>
             <dl className="itemPrice">
               <dt>판매가격</dt>
               <dd>
-                <strong>{(price * (100 - sale)) / 100}</strong>원
+                <strong>
+                  {((price * (100 - sale)) / 100).toLocaleString('ko-KR')}
+                </strong>
+                원
               </dd>
             </dl>
             <dl className="itemDelivery">
               <dt>배송정보</dt>
               <dd>
                 <strong>
-                  {((price * (100 - sale)) / 100) * counts >= 30000 ? 0 : 2500}
-                  원{' '}
+                  {((price * (100 - sale)) / 100) * counts >= 30000
+                    ? 0
+                    : (2500).toLocaleString('ko-KR')}
+                  원
                 </strong>
                 <span>(3만원 이상 구매 시 무료)</span>
                 <p>오후 2시 당일배송마감</p>
               </dd>
             </dl>
+            <dl
+              className="itemAddOptionBox"
+              style={{ display: option === '' && 'none' }}
+            >
+              <dt>{option}</dt>
+              <dd>
+                <select onChange>
+                  <option>{option} / 가격 / 재고</option>
+                  {optionList}
+                </select>
+              </dd>
+            </dl>
           </div>
           <OptionArea
-            InputItemCounts={InputItemCounts}
-            IncreaseItem={IncreaseItem}
-            DecreaseItem={DecreaseItem}
+            inputItemCounts={inputItemCounts}
+            increaseItem={increaseItem}
+            decreaseItem={decreaseItem}
             counts={counts}
             price={price}
             sale={sale}
@@ -77,7 +104,9 @@ class ItemPhotoInfoSec extends Component {
               <dt>총 합계금액</dt>
               <dd>
                 <strong class="totalPrice">
-                  {((price * (100 - sale)) / 100) * counts}
+                  {(((price * (100 - sale)) / 100) * counts).toLocaleString(
+                    'ko-KR'
+                  )}
                   <b>원</b>
                 </strong>
               </dd>

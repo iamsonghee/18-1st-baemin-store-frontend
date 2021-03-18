@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import './Productdetail.scss';
 import ItemPhotoInfoSec from './Components/ItemPhotoInfoSec/ItemPhotoInfoSec';
 import ItemGoodsTab from './Components/ItemGoodsTab/ItemGoodsTab';
 import TableElements from './Components/TableElements/TableElements';
 import Review from './Components/Review/Review';
+import './Productdetail.scss';
 
 class Productdetail extends Component {
   constructor(props) {
@@ -22,18 +22,27 @@ class Productdetail extends Component {
   }
 
   render() {
-    const { name, img, price, isSale, detailImg, sale } = this.state.data;
+    const {
+      name,
+      img,
+      price,
+      isSale,
+      detailImg,
+      sale,
+      option,
+      options,
+    } = this.state.data;
     return (
       <div className="productDetail">
-        {
-          <ItemPhotoInfoSec
-            name={name}
-            img={img}
-            price={price}
-            isSale={isSale}
-            sale={sale}
-          />
-        }
+        <ItemPhotoInfoSec
+          name={name}
+          img={img}
+          price={price}
+          isSale={isSale}
+          sale={sale}
+          option={option}
+          options={options}
+        />
         <section className="itemGoodsSec">
           <div id="detail">
             <ItemGoodsTab />
@@ -53,9 +62,8 @@ class Productdetail extends Component {
             <h3>배송안내</h3>
             <p>· 배송사 : CJ대한통운</p>
             <p>· 배송비 : 2,500원 (3만원 이상 구매 시 무료배송)</p>
-            <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;도서,
-              산간 일부지역은 배송비가 추가될 수 있습니다.{' '}
+            <p className="needSpace">
+              도서, 산간 일부지역은 배송비가 추가될 수 있습니다.
             </p>
             <p>· 배송기간: 오후 2시 이전 결제완료시 당일 출고 (영업일 기준)</p>
             <p>&nbsp;</p>

@@ -13,7 +13,9 @@
     li {
       width: 174px;
       text-align: center;
-      border: $themeBorder;
+      border-top: $themeBorder;
+      border-right: $themeBorder;
+      border-left: $themeBorder;
 
       a {
         display: block;

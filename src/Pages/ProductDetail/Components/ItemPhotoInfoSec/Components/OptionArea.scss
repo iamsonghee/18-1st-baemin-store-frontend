@@ -5,24 +5,16 @@
   height: 60px;
   background-color: $themeGrayDetail;
 
-  td {
-    vertical-align: middle;
-  }
-
   .cartProductName {
     width: 330px;
-
-    strong {
-      padding: 20px 0 20px 20px;
-      font-size: 13px;
-      font-weight: 500;
-      color: #333333;
-    }
+    padding: 20px 0 20px 20px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #333333;
   }
 
   .count {
     display: flex;
-    padding: 13.5px 0;
 
     input {
       padding: 0 5px;

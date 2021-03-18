@@ -5,9 +5,9 @@ class OptionArea extends Component {
   render() {
     const {
       counts,
-      InputItemCounts,
-      IncreaseItem,
-      DecreaseItem,
+      inputItemCounts,
+      increaseItem,
+      decreaseItem,
       price,
       sale,
       name,
@@ -16,22 +16,25 @@ class OptionArea extends Component {
       <table className="optionArea">
         <tbody>
           <tr>
-            <td className="cartProductName">
-              <strong>{name}</strong>
-            </td>
+            <td className="cartProductName">{name}</td>
             <td className="count">
-              <input type="text" value={counts} onChange={InputItemCounts} />
+              <input type="text" value={counts} onChange={inputItemCounts} />
               <div className="btnContainer">
                 <div className="upBtn container">
-                  <button className="countUpBtn" onClick={IncreaseItem} />
+                  <button className="countUpBtn" onClick={increaseItem} />
                 </div>
                 <div className="downBtn container">
-                  <button className="countDownBtn" onClick={DecreaseItem} />
+                  <button className="countDownBtn" onClick={decreaseItem} />
                 </div>
               </div>
             </td>
             <td className="itemChoicePrice">
-              <strong>{((price * (100 - sale)) / 100) * counts}</strong>원
+              <strong>
+                {(((price * (100 - sale)) / 100) * counts).toLocaleString(
+                  'ko-KR'
+                )}
+              </strong>
+              원
             </td>
           </tr>
         </tbody>

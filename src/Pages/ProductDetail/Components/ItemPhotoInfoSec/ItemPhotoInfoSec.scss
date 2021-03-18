@@ -69,6 +69,26 @@
           }
         }
       }
+
+      .itemAddOptionBox {
+        select {
+          width: 440px;
+          height: 31px;
+          padding: 0 8px;
+          color: #717171;
+          background: url(https://www.flaticon.com/svg/vstatic/svg/566/566004.svg?token=exp=1616078882~hmac=788de5c8a307b78858b78fd022ce16e9)
+            no-repeat 98%;
+          background-size: 10px;
+          border: 1px solid #cccccc;
+          appearance: none;
+          &:hover {
+            cursor: pointer;
+          }
+          &:enabled {
+            outline: none;
+          }
+        }
+      }
     }
 
     .itemPriceContainer {
