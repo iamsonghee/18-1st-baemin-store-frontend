@@ -12,31 +12,31 @@ class Login extends Component {
     this.setState({
       [e.target.name]: e.target.value,
     });
-    console.log(e.target.name);
   };
 
   handleLogin = e => {
     e.preventDefault();
-    fetch('http://10.58.6.21:8000/user/signin', {
+    console.log('a');
+    fetch('http://10.58.3.162:8000/user/login', {
       method: 'POST',
       body: JSON.stringify({
-        email: this.state.userId,
+        username: this.state.userId,
         password: this.state.password,
       }),
     })
       .then(res => res.json())
       .then(result => {
         console.log(result);
-        if (result.access_token) {
+        if (result.token) {
           console.log('굿굿구웃이에요');
-          localStorage.setItem('access_token', result.access_token);
+          localStorage.setItem('token', result.token);
           alert('성공');
           this.props.history.push('/signin');
-          this.setState({
-            isLogin: true,
-            email: this.state.userId,
-            password: this.state.password,
-          });
+          // this.setState({
+          //   isLogin: true,
+          //   email: this.state.userId,
+          //   password: this.state.password,
+          // });
         } else {
           alert('로그인 실패 ');
         }
@@ -44,7 +44,6 @@ class Login extends Component {
   };
 
   render() {
-    console.log(this.state.userId);
     return (
       <div class="loginComponent">
         <h3> 회원로그인</h3>
