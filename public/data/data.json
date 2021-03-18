@@ -8,8 +8,9 @@
   "sale": 10,
   "option": "컬러",
   "options": [
-    { "opName": "Yello", "priceAdd": 0, "stock": 0 },
-    { "opName": "Blue", "priceAdd": 100, "stock": 15 },
+    { "opName": "Black", "priceAdd": 0, "stock": 10 },
+    { "opName": "Yello", "priceAdd": 500, "stock": 0 },
+    { "opName": "Blue", "priceAdd": 1000, "stock": 15 },
     { "opName": "Red", "priceAdd": 5000, "stock": 250 }
   ]
 }
