@@ -1,0 +1,40 @@
+[ 
+    {
+    "id": 1,
+    "productName" :"을지로 일회용캬메라. 잘 나왔다",
+    "imgURL":"https://lifearchive.co.kr/wp-content/uploads/2020/01/1000x1500_01-1.jpg",
+    "isSale" : false,
+    "isBest" : false,
+    "isNew" : false,
+    "isJjim" : false,
+    "discountRate" : 20,
+    "beforePrice" : 19000,
+    "finalPrice" : 15200
+    },
+    {
+    "id": 2,
+    "productName" :"볼펜. 나도 언젠간 쓸데가 있겠지",
+    "imgURL":"https://lifearchive.co.kr/wp-content/uploads/2020/01/1000x1500_01-1.jpg",
+    "isSale" : false,
+    "isBest" : false,
+    "isNew" : false,
+    "isJjim" : false,
+    "discountRate" : 20,
+    "beforePrice" : 19000,
+    "finalPrice" : 15200
+    },
+    {
+    "id": 3,
+    "productName" :"미니갑티슈 세트. 티었슈?",
+    "imgURL":"https://lifearchive.co.kr/wp-content/uploads/2020/01/1000x1500_01-1.jpg",
+    "isSale" : false,
+    "isBest" : false,
+    "isNew" : false,
+    "isJjim" : false,
+    "discountRate" : 20,
+    "beforePrice" : 19000,
+    "finalPrice" : 15200
+    
+    }
+]
+

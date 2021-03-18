@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 import './Product.scss';
 
 class Product extends Component {
+  goToDetail = () => {
+    this.props.history.push('/productdetail');
+  };
   render() {
+    console.log('********Product :', this.props);
     return (
       <div className="product">
         <div className="item">
-          <div className="itemImgBox">
+          <div className="itemImgBox" onClick={this.goToDetail}>
             <img
-              src="https://store.baemin.com/data/goods/20/10/44/311/311_detail_02.jpg"
+              src="https://lifearchive.co.kr/wp-content/uploads/2020/01/1000x1500_01-1.jpg"
               alt="camera"
             />
             <div className="itemTags">
@@ -28,7 +33,9 @@ class Product extends Component {
             </div>
           </div>
           <div className="itemInfo">
-            <div className="discountRate">20%</div>
+            <div className="discountRate">
+              20<span>%</span>
+            </div>
             <div className="itemName">을지로 일회용캬메라. 잘 나왔다</div>
             <div className="itemBeforePrice">
               19,000<span>원</span>
@@ -43,4 +50,4 @@ class Product extends Component {
   }
 }
 
-export default Product;
+export default withRouter(Product);

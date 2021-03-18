@@ -74,7 +74,8 @@ class Header extends Component {
     );
   }
 }
-const MAPPING_OBJ = {};
+
+// const MAPPING_OBJ = {};
 const MENUARR = [
   '전체',
   '문구',
@@ -86,4 +87,5 @@ const MENUARR = [
   '선물세트',
   '콜라보레이션',
 ];
+
 export default Header;
