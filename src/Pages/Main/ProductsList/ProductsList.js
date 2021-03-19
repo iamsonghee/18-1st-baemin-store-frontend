@@ -19,7 +19,20 @@ class ProductsList extends Component {
     return (
       <div className="productsList">
         {this.state.productList.map(product => {
-          return <Product id={product.id} />;
+          return (
+            <Product
+              id={product.id}
+              productName={product.productName}
+              imgURL={product.imgURL}
+              isSale={product.isSale}
+              isBest={product.isBest}
+              isNew={product.isNew}
+              isJjim={product.isJjim}
+              discountRate={product.discountRate}
+              beforePrice={product.beforePrice}
+              finalPrice={product.finalPrice}
+            />
+          );
         })}
       </div>
     );

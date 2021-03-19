@@ -12,6 +12,12 @@
     .itemImgBox {
       position: relative;
       width: 100%;
+      img {
+        object-fit: cover;
+        width: 100%;
+        height: 340px;
+      }
+
       &:hover .likeOrCart .buttons {
         transition: all 0.5s ease-in-out;
         opacity: 1;
@@ -24,10 +30,14 @@
 
         bottom: 0px;
       }
-      img {
+      .img {
         width: 100%;
         height: 340px;
-        object-fit: cover;
+        overflow: hidden;
+      }
+      .scale:hover {
+        transition: all 1s ease-in-out;
+        transform: scale(1.1);
       }
       .itemTags {
         display: flex;

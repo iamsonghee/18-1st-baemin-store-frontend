@@ -1,5 +1,7 @@
 @import '../../../Styles/common.scss';
 .slideBanner {
+  display: flex;
+  width: 100%;
   background-color: $themeBlue;
   height: 500px;
 }

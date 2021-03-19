@@ -7,19 +7,24 @@ class Product extends Component {
     this.props.history.push('/productdetail');
   };
   render() {
-    console.log('********Product :', this.props);
     return (
       <div className="product">
         <div className="item">
           <div className="itemImgBox" onClick={this.goToDetail}>
-            <img
-              src="https://lifearchive.co.kr/wp-content/uploads/2020/01/1000x1500_01-1.jpg"
-              alt="camera"
-            />
+            <div className="img">
+              <div className="scale">
+                <img src={this.props.imgURL} alt="camera" />
+              </div>
+            </div>
+
             <div className="itemTags">
-              <span className="sale show">SALE</span>
-              <span className="best">BEST</span>
-              <span className="new show">NEW</span>
+              <span className={'sale ' + (this.props.isSale && 'show')}>
+                SALE
+              </span>
+              <span className={'best ' + (this.props.isBest && 'show')}>
+                BEST
+              </span>
+              <span className={'new ' + (this.props.isNew && 'show')}>NEW</span>
             </div>
             <div className="likeOrCart">
               <div className="buttons">
@@ -34,14 +39,17 @@ class Product extends Component {
           </div>
           <div className="itemInfo">
             <div className="discountRate">
-              20<span>%</span>
+              {this.props.discountRate}
+              <span>%</span>
             </div>
-            <div className="itemName">을지로 일회용캬메라. 잘 나왔다</div>
+            <div className="itemName">{this.props.productName}</div>
             <div className="itemBeforePrice">
-              19,000<span>원</span>
+              {this.props.beforePrice}
+              <span>원</span>
             </div>
             <div className="itemFinalPrice">
-              15,200<span>원</span>
+              {this.props.finalPrice}
+              <span>원</span>
             </div>
           </div>
         </div>

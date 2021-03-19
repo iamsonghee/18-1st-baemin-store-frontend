@@ -9,18 +9,18 @@ class Header extends Component {
     this.state = {
       clickedId: null,
     };
-
-    this.handleMenuClick = idx => {
-      this.setState({
-        clickedId: idx,
-      });
-    };
-    this.handleAddClassName = idx => {
-      if (idx === this.state.clickedId) {
-        return 'on';
-      }
-    };
   }
+
+  handleMenuClick = idx => {
+    this.setState({
+      clickedId: idx,
+    });
+  };
+  handleAddClassName = idx => {
+    if (idx === this.state.clickedId) {
+      return 'on';
+    }
+  };
   render() {
     return (
       <header>
@@ -43,7 +43,7 @@ class Header extends Component {
           </ul>
         </div>
         <div className="headerSearch">
-          <div className="headerSearch__content">
+          <div className="content">
             <div className="mainLogo">
               <Link to="/main">
                 <img src="/Images/logo_main.png" alt="mainlogo" />
