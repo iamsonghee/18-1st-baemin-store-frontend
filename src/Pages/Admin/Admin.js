@@ -3,37 +3,52 @@ import './Admin.scss';
 
 class Admin extends Component {
   state = {
-    emailAgree: true,
-    phoneAgree: true,
-    userId: 1,
-    userIdUsable: '',
-    password: '',
-    passwordCheck: '',
-    name: '',
-    phone: '',
-    email: '',
-    address: '',
-    zoneCode: '',
-    fullAddress: '',
-    isDaumPost: false,
-    isRegister: false,
+    // emailAgree: true,
+    // phoneAgree: true,
+    category: '',
+    categorySub: '',
+    productName: '',
+    cost: '',
+    imgUrl: '',
+    option: '',
+    options: [],
+    optionName1: '',
+    optionCost1: '',
+    optionName2: '',
+    optionCost2: '',
+    optionName3: '',
+    optionCost3: '',
+    // address: '',
+    // zoneCode: '',
+    // fullAddress: '',
+    // isDaumPost: false,
+    // isRegister: false,
     register: [],
+  };
+
+  handleRegister = () => {
+    const options = [1, 2, 3].map(i => ({
+      name: this.state[`optionName${i}`],
+      cost: this.state[`optionCost${i}`],
+    }));
+
+    console.log(options);
+
+    this.setState({
+      options,
+    });
+
+    setTimeout(() => {
+      console.log(this.state);
+    }, 1000);
   };
 
   //input 값
   handleInputChange = e => {
-    const idPattern = /^[a-z0-9_]{4,12}$/;
-
-    if (
-      e.target.name === 'userId' &&
-      idPattern.test(e.target.value) === false
-    ) {
-      this.setState({ userId: '' });
-      return;
-    }
+    const { name, value } = e.target;
 
     this.setState({
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
   };
 
@@ -65,27 +80,7 @@ class Admin extends Component {
   }
 
   render() {
-    const { isModalShow, isModalClose } = this.props;
-    const {
-      name,
-      phone,
-      address,
-      isDaumPost,
-      fullAddress,
-      zoneCode,
-      isRegister,
-    } = this.state;
-    const width = 595;
-    const height = 450;
-    const modalStyle = {
-      position: 'fixed',
-      top: '10%',
-      left: '10%',
-      zIndex: '100',
-      border: '1px solid #000000',
-      overflow: 'hidden',
-    };
-
+    // console.log(this.state);
     return (
       <div className="adminComponent">
         <form id="formJoin" name="formJoin" method="post">
@@ -183,6 +178,126 @@ class Admin extends Component {
                       </div>
                     </td>
                   </tr>
+
+                  <tr>
+                    <th>
+                      <span className="important">◾이미지 url</span>
+                    </th>
+                    <td>
+                      <div className="memberWarning">
+                        <input
+                          type="text"
+                          onChange={this.handleInputChange}
+                          name="imgUrl"
+                        ></input>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th>
+                      <span className="important">◾option</span>
+                    </th>
+                    <td>
+                      <div className="memberWarning">
+                        <input
+                          type="text"
+                          onChange={this.handleInputChange}
+                          name="option"
+                        ></input>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th>
+                      <span className="important">◾optionName1</span>
+                    </th>
+                    <td>
+                      <div className="memberWarning">
+                        <input
+                          type="text"
+                          onChange={this.handleInputChange}
+                          name="optionName1"
+                        ></input>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th>
+                      <span className="important">◾optionCost1</span>
+                    </th>
+                    <td>
+                      <div className="memberWarning">
+                        <input
+                          type="text"
+                          onChange={this.handleInputChange}
+                          name="optionCost1"
+                        ></input>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th>
+                      <span className="important">◾optionName2</span>
+                    </th>
+                    <td>
+                      <div className="memberWarning">
+                        <input
+                          type="text"
+                          onChange={this.handleInputChange}
+                          name="optionName2"
+                        ></input>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th>
+                      <span className="important">◾optionCost2</span>
+                    </th>
+                    <td>
+                      <div className="memberWarning">
+                        <input
+                          type="text"
+                          onChange={this.handleInputChange}
+                          name="optionCost2"
+                        ></input>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th>
+                      <span className="important">◾optionName3</span>
+                    </th>
+                    <td>
+                      <div className="memberWarning">
+                        <input
+                          type="text"
+                          onChange={this.handleInputChange}
+                          name="optionName3"
+                        ></input>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th>
+                      <span className="important">◾optionCost3</span>
+                    </th>
+                    <td>
+                      <div className="memberWarning">
+                        <input
+                          type="text"
+                          onChange={this.handleInputChange}
+                          name="optionCost3"
+                        ></input>
+                      </div>
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -191,7 +306,7 @@ class Admin extends Component {
 
         <div className="btnFinalBox">
           <button className="btnMemberCancel">취소</button>
-          <button className="btnMemberJoin" onClick={this.clickJoin}>
+          <button className="btnMemberJoin" onClick={this.handleRegister}>
             상품등록
           </button>
         </div>
