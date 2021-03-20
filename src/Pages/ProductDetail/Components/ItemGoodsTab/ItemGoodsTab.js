@@ -14,8 +14,8 @@ class ItemGoodsTab extends Component {
     return (
       <nav className="itemGoodsTab">
         <ul>
-          {tabList.map(tab => (
-            <li>
+          {tabList.map((tab, index) => (
+            <li key={index}>
               <a href={tab.id}>{tab.title}</a>
             </li>
           ))}

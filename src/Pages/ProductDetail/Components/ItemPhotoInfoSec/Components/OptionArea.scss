@@ -3,6 +3,7 @@
 .optionArea {
   width: 100%;
   height: 60px;
+  margin-bottom: 2px;
   background-color: $themeGrayDetail;
 
   .cartProductName {
@@ -11,6 +12,10 @@
     font-size: 13px;
     font-weight: 600;
     color: #333333;
+
+    span {
+      font-weight: 400;
+    }
   }
 
   .count {
@@ -59,12 +64,36 @@
   }
 
   .itemChoicePrice {
-    padding-right: 40px;
+    padding-right: 15px;
     font-size: 14px;
     text-align: right;
 
     strong {
       font-weight: 600;
+    }
+  }
+
+  .optDelBtn {
+    vertical-align: middle;
+
+    button {
+      width: 16px;
+      height: 16px;
+      margin-right: 6px;
+      padding: 0;
+      border: none;
+      &:enabled {
+        outline: none;
+      }
+      &:hover {
+        cursor: pointer;
+      }
+
+      img {
+        width: 16px;
+        height: 16px;
+        opacity: 0.15;
+      }
     }
   }
 }

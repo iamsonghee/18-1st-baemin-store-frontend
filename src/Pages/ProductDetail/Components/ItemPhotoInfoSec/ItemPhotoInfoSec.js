@@ -5,6 +5,7 @@ import './ItemPhotoInfoSec.scss';
 class ItemPhotoInfoSec extends Component {
   state = {
     counts: 1,
+    showOptions: [],
   };
 
   increaseItem = () => {
@@ -24,23 +25,67 @@ class ItemPhotoInfoSec extends Component {
 
   inputItemCounts = e => {
     let onlyNum = /^[0-9]*$/;
-    onlyNum.test(e.target.value) &&
+    if (onlyNum.test(e.target.value) && e.target.value !== 0)
       this.setState({ counts: Number(e.target.value) });
   };
 
+  addOption = e => {
+    let check = false;
+    const { options } = this.props;
+    const { showOptions } = this.state;
+    const optionData = options.filter(
+      option => option.option_name === e.target.value
+    )[0];
+    const newItem = {
+      id: optionData.product_option_id,
+      name: optionData.option_name,
+      priceAdd: optionData.option_additional_price,
+      stock: optionData.option_stock,
+    };
+    showOptions.forEach(option => {
+      if (option.name === newItem.name) {
+        alert('이미 선택된 옵션입니다');
+        check = true;
+        return;
+      }
+    });
+    if (check) return false;
+    this.setState({
+      showOptions: [...showOptions, newItem],
+    });
+  };
+
+  deleteOption = e => {
+    const restOptions = this.state.showOptions.filter(
+      data => data.id !== Number(e.target.id)
+    );
+    this.setState({ showOptions: restOptions });
+  };
+
   render() {
-    const { inputItemCounts, increaseItem, decreaseItem } = this;
-    const { counts } = this.state;
-    const { name, img, price, isSale, sale, option, options } = this.props;
+    const {
+      inputItemCounts,
+      increaseItem,
+      decreaseItem,
+      addOption,
+      deleteOption,
+    } = this;
+    const { counts, showOptions } = this.state;
+    const { name, img, price, sale, options } = this.props;
     const optionList = options?.map(optionList => (
-      <option>{`${optionList.opName}  ${
-        optionList.priceAdd === 0
-          ? `(재고 : ${optionList.stock})`
-          : `(+${optionList.priceAdd.toLocaleString('ko-KR')}원 / 재고 : ${
-              optionList.stock
+      <option
+        key={optionList.product_option_id}
+        value={optionList.option_name}
+        disabled={optionList.option_stock === 0 && true}
+      >{`${optionList.option_name}  ${
+        optionList.option_additional_price === 0
+          ? `(재고 : ${optionList.option_stock})`
+          : `(+${optionList.option_additional_price.toLocaleString()}원 / 재고 : ${
+              optionList.option_stock
             })`
       }`}</option>
     ));
+    const opName = options && options[0].option_classification;
     return (
       <div className="itemPhotoInfoSec">
         <div className="itemPhotoViewBox">
@@ -49,17 +94,17 @@ class ItemPhotoInfoSec extends Component {
         <div className="itemInfoBox">
           <h3>{name}</h3>
           <div className="itemDetailList">
-            <dl className="netPrice" style={{ display: !isSale && 'none' }}>
+            <dl className="netPrice" style={{ display: sale === 0 && 'none' }}>
               <dt>정가</dt>
               <dd>
-                <del>{price?.toLocaleString('ko-KR')}원</del>
+                <del>{price?.toLocaleString()}원</del>
               </dd>
             </dl>
             <dl className="itemPrice">
               <dt>판매가격</dt>
               <dd>
                 <strong>
-                  {((price * (100 - sale)) / 100).toLocaleString('ko-KR')}
+                  {((price * (100 - sale)) / 100).toLocaleString()}
                 </strong>
                 원
               </dd>
@@ -70,7 +115,7 @@ class ItemPhotoInfoSec extends Component {
                 <strong>
                   {((price * (100 - sale)) / 100) * counts >= 30000
                     ? 0
-                    : (2500).toLocaleString('ko-KR')}
+                    : (2500).toLocaleString()}
                   원
                 </strong>
                 <span>(3만원 이상 구매 시 무료)</span>
@@ -79,34 +124,44 @@ class ItemPhotoInfoSec extends Component {
             </dl>
             <dl
               className="itemAddOptionBox"
-              style={{ display: option === '' && 'none' }}
+              style={{ display: options?.length === 0 && 'none' }}
             >
-              <dt>{option}</dt>
+              <dt>{opName}</dt>
               <dd>
-                <select onChange>
-                  <option>{option} / 가격 / 재고</option>
+                <select value={`${opName} / 가격 / 재고`} onChange={addOption}>
+                  <option>{opName} / 가격 / 재고</option>
                   {optionList}
                 </select>
               </dd>
             </dl>
           </div>
-          <OptionArea
-            inputItemCounts={inputItemCounts}
-            increaseItem={increaseItem}
-            decreaseItem={decreaseItem}
-            counts={counts}
-            price={price}
-            sale={sale}
-            name={name}
-          />
-          <div className="itemPriceContainer">
+          <div className="optionContainer">
+            {showOptions.map(opt => (
+              <OptionArea
+                key={opt.id}
+                id={opt.id}
+                name={opt.name}
+                priceAdd={opt.priceAdd}
+                stock={opt.stock}
+                counts={counts}
+                price={price}
+                sale={sale}
+                inputItemCounts={inputItemCounts}
+                increaseItem={increaseItem}
+                decreaseItem={decreaseItem}
+                deleteOption={deleteOption}
+              />
+            ))}
+          </div>
+          <div
+            className="itemPriceContainer"
+            style={{ display: showOptions.length === 0 && 'none' }}
+          >
             <dl className="totalAmount">
               <dt>총 합계금액</dt>
               <dd>
                 <strong class="totalPrice">
-                  {(((price * (100 - sale)) / 100) * counts).toLocaleString(
-                    'ko-KR'
-                  )}
+                  {(((price * (100 - sale)) / 100) * counts).toLocaleString()}
                   <b>원</b>
                 </strong>
               </dd>

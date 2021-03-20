@@ -12,7 +12,7 @@ class Productdetail extends Component {
   }
 
   componentDidMount() {
-    fetch('/data/data.json')
+    fetch('http://172.30.1.43:8000/product/10')
       .then(res => res.json())
       .then(res =>
         this.setState({
@@ -23,36 +23,46 @@ class Productdetail extends Component {
 
   render() {
     const {
-      name,
-      img,
-      price,
-      isSale,
-      detailImg,
-      sale,
-      option,
-      options,
+      product_name,
+      product_thumbnail,
+      product_price,
+      images_list,
+      discount_rate,
+      options_list,
+      detailed_description,
     } = this.state.data;
     return (
       <div className="productDetail">
         <ItemPhotoInfoSec
-          name={name}
-          img={img}
-          price={price}
-          isSale={isSale}
-          sale={sale}
-          option={option}
-          options={options}
+          name={product_name}
+          img={product_thumbnail}
+          price={product_price}
+          sale={discount_rate}
+          options={options_list}
         />
         <section className="itemGoodsSec">
           <div id="detail">
             <ItemGoodsTab />
             <div className="detailContainer">
               <h3>상품상세정보</h3>
-              <img src={detailImg} alt={`${name}의 상세정보`} />
+              {images_list?.map((imgUrl, index) => (
+                <img
+                  key={index}
+                  src={imgUrl}
+                  alt={`${product_name}의 상세정보`}
+                />
+              ))}
               <h3>상품필수 정보</h3>
               <table className="productDetailTable">
                 <tbody>
-                  <TableElements />
+                  {detailed_description &&
+                    Object.entries(detailed_description).map((table, index) => (
+                      <TableElements
+                        key={index}
+                        list={table[0]}
+                        description={table[1]}
+                      />
+                    ))}
                 </tbody>
               </table>
             </div>
