@@ -93,6 +93,9 @@
       width: 100%;
       padding: 10px 0 20px 0px;
       text-align: left;
+      .none {
+        display: none;
+      }
       .discountRate {
         font-size: 20px;
         color: $themeOrange;

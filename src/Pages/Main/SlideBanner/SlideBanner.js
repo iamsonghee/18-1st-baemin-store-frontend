@@ -3,7 +3,15 @@ import './SlideBanner.scss';
 
 class SlideBanner extends Component {
   render() {
-    return <div className="slideBanner">slideBanner</div>;
+    return (
+      <div className="slideBanner">
+        <div className="images">
+          <img className="showing" src="/Images/slide1.png"></img>
+          <img src="/Images/slide2.png"></img>
+          <img src="/Images/slide3.png"></img>
+        </div>
+      </div>
+    );
   }
 }
 

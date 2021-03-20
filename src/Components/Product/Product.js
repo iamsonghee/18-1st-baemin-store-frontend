@@ -7,6 +7,8 @@ class Product extends Component {
     this.props.history.push('/productdetail');
   };
   render() {
+    console.log('this.props.discountRate:', typeof this.props.discountRate);
+
     return (
       <div className="product">
         <div className="item">
@@ -16,7 +18,6 @@ class Product extends Component {
                 <img src={this.props.imgURL} alt="camera" />
               </div>
             </div>
-
             <div className="itemTags">
               <span className={'sale ' + (this.props.isSale && 'show')}>
                 SALE
@@ -38,12 +39,20 @@ class Product extends Component {
             </div>
           </div>
           <div className="itemInfo">
-            <div className="discountRate">
+            <div
+              className={
+                'discountRate ' + (this.props.discountRate < 1 && 'none')
+              }
+            >
               {this.props.discountRate}
               <span>%</span>
             </div>
             <div className="itemName">{this.props.productName}</div>
-            <div className="itemBeforePrice">
+            <div
+              className={
+                'itemBeforePrice ' + (this.props.discountRate < 1 && 'none')
+              }
+            >
               {this.props.beforePrice}
               <span>원</span>
             </div>
