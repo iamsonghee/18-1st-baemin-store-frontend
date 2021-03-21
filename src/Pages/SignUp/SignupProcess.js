@@ -4,18 +4,18 @@ import './SignupProcess.scss';
 
 class SignupProcess extends Component {
   state = {
-    emailAgree: true,
-    phoneAgree: true,
-    userId: 1,
+    emailAgree: false,
+    phoneAgree: false,
+    userId: 1, //아이디
     userIdUsable: '',
-    password: '',
-    passwordCheck: '',
-    name: '',
-    phone: '',
-    email: '',
-    address: '',
-    zoneCode: '',
-    fullAddress: '',
+    password: '1', //비밀번호
+    passwordCheck: '', //비밀번호 확인
+    name: '', //이름
+    email: '', //이메일
+    phone: '', //휴대폰번호
+    zoneCode: '', //우편번호
+    fullAddress: '', //기본주소
+    detailAddress: '', //상세주소
     isDaumPost: false,
     isRegister: false,
     register: [],
@@ -30,31 +30,23 @@ class SignupProcess extends Component {
     })
       .then(res => res.json())
       .then(res => {
+        console.log(Object.values(res), res);
         const check = Object.values(res).filter(
           i => i.userId === this.state.userId
         );
-
+        console.log(check);
         if (check.length) {
-          alert('이미 사용중이라네');
+          alert('이미 사용중입니다 ☢');
           return;
         }
-
-        alert('사용가능한 아이디라네');
-
-        if (res.status === 200) {
-          alert('사용가능한 아이디라네');
-
-          this.setState({ userIdUsable: true });
-        } else if (res.status === 409) {
-          alert('이미 사용중이라네');
-        } else {
-          alert('사용 불가한 아이디라네');
-        }
+        alert('사용가능한 아이디입니다');
       });
   };
-  //input 값
+  //input
+  값;
   handleInputChange = e => {
     const idPattern = /^[a-z0-9_]{4,12}$/;
+    const pwPattern = /^[a-z0-9_]{4,12}$/;
 
     if (
       e.target.name === 'userId' &&
@@ -63,10 +55,18 @@ class SignupProcess extends Component {
       this.setState({ userId: '' });
       return;
     }
+    if (
+      e.target.name === 'password' &&
+      pwPattern.test(e.target.value) === false
+    ) {
+      this.setState({ password: '' });
+      return;
+    }
 
     this.setState({
       [e.target.name]: e.target.value,
     });
+    console.log(e.target.name);
   };
 
   //회원가입
@@ -87,7 +87,7 @@ class SignupProcess extends Component {
       return;
     }
     if (this.state.password !== this.state.passwordCheck) {
-      alert('비밀번호를 잘못 입력하셨습니다. ');
+      alert('비밀번호를 확인해주세요. ');
       return;
     }
     if (!this.state.name) {
@@ -130,6 +130,13 @@ class SignupProcess extends Component {
         });
     }
   };
+  //마케팅 확인
+  handleMarketing = () => {
+    console.log('check');
+    this.setState({
+      emailAgree: !this.state.emailAgree,
+    });
+  };
 
   //주소 API 연결 및 등록
   handleOpenPost = () => {
@@ -161,6 +168,7 @@ class SignupProcess extends Component {
   };
 
   render() {
+    console.log(this.state.zoneCode);
     const { isModalShow, isModalClose } = this.props;
     const {
       name,
@@ -234,7 +242,12 @@ class SignupProcess extends Component {
                           type="password"
                           onChange={this.handleInputChange}
                           name="password"
-                        ></input>
+                        />
+                        {this.state.password ? null : (
+                          <div style={{ color: 'red', fontSize: '10px' }}>
+                            4~12자 영문소문자, 숫자, 언더라인(_) 사용가능
+                          </div>
+                        )}
                       </div>
                     </td>
                   </tr>
@@ -275,21 +288,26 @@ class SignupProcess extends Component {
                     <td>
                       <div className="memberWarning">
                         <input
-                          className="inputEmail"
+                          // className="inputEmail"
                           type="text"
                           name="email"
                           onChange={this.handleInputChange}
                         />
-                        <select id="emailDomain" name="emailDomain">
+                        {/* <select id="emailDomain" name="emailDomain">
                           <option value="self">직접입력</option>
                           <option value="naver.com">naver.com</option>
                           <option value="gmail.com">gmail.com</option>
-                        </select>
+                        </select> */}
                       </div>
                       <div className="memberWarning jsEmail"></div>
                       <div className="formElement">
-                        <input type="checkbox" id="mailing" name="mailing" />
-                        <label for="mailing">
+                        <input
+                          type="checkbox"
+                          id="mailing"
+                          name="mailing"
+                          onClick={this.handleMarketing}
+                        />
+                        <label htmlFor="mailing">
                           (선택)마케팅 및 이벤트 정보 메일 수신에 동의합니다.
                         </label>
                       </div>
@@ -331,8 +349,6 @@ class SignupProcess extends Component {
                           className="inputAddress"
                           type="text"
                           value={zoneCode}
-                          onChange={this.handleInputChange}
-                          name="address"
                         />
                         <input
                           type="button"
@@ -348,7 +364,12 @@ class SignupProcess extends Component {
                           />
                         </div>
                         <div>
-                          <input type="text" placeholder="상세주소" />
+                          <input
+                            type="text"
+                            placeholder="상세주소"
+                            name="detailAddress"
+                            onChange={this.handleInputChange}
+                          />
                         </div>
                       </div>
                     </td>
