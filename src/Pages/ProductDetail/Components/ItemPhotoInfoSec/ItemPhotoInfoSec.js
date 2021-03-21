@@ -4,29 +4,69 @@ import './ItemPhotoInfoSec.scss';
 
 class ItemPhotoInfoSec extends Component {
   state = {
-    counts: 1,
     showOptions: [],
   };
 
-  increaseItem = () => {
-    this.setState({
-      counts: this.state.counts + 1,
-    });
+  increaseItem = e => {
+    const { showOptions } = this.state;
+    const findIndex = showOptions.findIndex(
+      data => data.id === Number(e.target.name)
+    );
+    let updNum = [...showOptions];
+    if (
+      showOptions.find(data => data.id === Number(e.target.name)).counts ===
+      showOptions.find(data => data.id === Number(e.target.name)).stock
+    ) {
+      alert('선택 가능한 수량을 초과했습니다');
+      return;
+    } else {
+      updNum[findIndex] = {
+        ...updNum[findIndex],
+        counts: updNum[findIndex].counts + 1,
+      };
+      this.setState({ showOptions: updNum });
+    }
   };
 
-  decreaseItem = () => {
-    const { counts } = this.state;
-    counts <= 1
-      ? this.setState({
+  decreaseItem = e => {
+    const { showOptions } = this.state;
+    const findIndex = showOptions.findIndex(
+      data => data.id === Number(e.target.name)
+    );
+    let updNum = [...showOptions];
+    Number(showOptions[findIndex].counts) <= 1
+      ? (updNum[findIndex] = {
+          ...updNum[findIndex],
           counts: 1,
         })
-      : this.setState({ counts: counts - 1 });
+      : (updNum[findIndex] = {
+          ...updNum[findIndex],
+          counts: updNum[findIndex].counts - 1,
+        });
+    this.setState({ showOptions: updNum });
   };
 
   inputItemCounts = e => {
+    const { showOptions } = this.state;
     let onlyNum = /^[0-9]*$/;
-    if (onlyNum.test(e.target.value) && e.target.value !== 0)
-      this.setState({ counts: Number(e.target.value) });
+    const findIndex = showOptions.findIndex(
+      data => data.id === Number(e.target.name)
+    );
+    let updNum = [...showOptions];
+    if (onlyNum.test(e.target.value) && Number(e.target.value) !== 0) {
+      if (
+        Number(e.target.value) >
+        showOptions.find(data => data.id === Number(e.target.name)).stock
+      ) {
+        alert('선택 가능한 수량을 초과했습니다');
+        return;
+      }
+      updNum[findIndex] = {
+        ...updNum[findIndex],
+        counts: Number(e.target.value),
+      };
+      this.setState({ showOptions: updNum });
+    }
   };
 
   addOption = e => {
@@ -41,9 +81,10 @@ class ItemPhotoInfoSec extends Component {
       name: optionData.option_name,
       priceAdd: optionData.option_additional_price,
       stock: optionData.option_stock,
+      counts: 1,
     };
     showOptions.forEach(option => {
-      if (option.name === newItem.name) {
+      if (option.id === newItem.id) {
         alert('이미 선택된 옵션입니다');
         check = true;
         return;
@@ -62,6 +103,14 @@ class ItemPhotoInfoSec extends Component {
     this.setState({ showOptions: restOptions });
   };
 
+  totalSum = data => {
+    let sum = 0;
+    for (let i = 0; i < data.length; i++) {
+      sum += data[i];
+    }
+    return sum;
+  };
+
   render() {
     const {
       inputItemCounts,
@@ -70,22 +119,27 @@ class ItemPhotoInfoSec extends Component {
       addOption,
       deleteOption,
     } = this;
-    const { counts, showOptions } = this.state;
+    const { showOptions } = this.state;
     const { name, img, price, sale, options } = this.props;
     const optionList = options?.map(optionList => (
       <option
         key={optionList.product_option_id}
         value={optionList.option_name}
         disabled={optionList.option_stock === 0 && true}
-      >{`${optionList.option_name}  ${
-        optionList.option_additional_price === 0
-          ? `(재고 : ${optionList.option_stock})`
-          : `(+${optionList.option_additional_price.toLocaleString()}원 / 재고 : ${
-              optionList.option_stock
-            })`
-      }`}</option>
+      >
+        {`${optionList.option_name}  ${
+          optionList.option_additional_price === 0
+            ? `(재고 : ${optionList.option_stock})`
+            : `(+${optionList.option_additional_price.toLocaleString()}원 / 재고 : ${
+                optionList.option_stock
+              })`
+        }`}
+      </option>
     ));
     const opName = options && options[0].option_classification;
+    const totalArray = showOptions.map(
+      data => ((price * (100 - sale)) / 100 + data.priceAdd) * data.counts
+    );
     return (
       <div className="itemPhotoInfoSec">
         <div className="itemPhotoViewBox">
@@ -113,7 +167,7 @@ class ItemPhotoInfoSec extends Component {
               <dt>배송정보</dt>
               <dd>
                 <strong>
-                  {((price * (100 - sale)) / 100) * counts >= 30000
+                  {(price * (100 - sale)) / 100 >= 30000
                     ? 0
                     : (2500).toLocaleString()}
                   원
@@ -143,7 +197,7 @@ class ItemPhotoInfoSec extends Component {
                 name={opt.name}
                 priceAdd={opt.priceAdd}
                 stock={opt.stock}
-                counts={counts}
+                counts={opt.counts}
                 price={price}
                 sale={sale}
                 inputItemCounts={inputItemCounts}
@@ -161,7 +215,7 @@ class ItemPhotoInfoSec extends Component {
               <dt>총 합계금액</dt>
               <dd>
                 <strong class="totalPrice">
-                  {(((price * (100 - sale)) / 100) * counts).toLocaleString()}
+                  {this.totalSum(totalArray).toLocaleString()}
                   <b>원</b>
                 </strong>
               </dd>
