@@ -17,6 +17,7 @@ class Login extends Component {
 
   handleLogin = e => {
     e.preventDefault();
+
     fetch('http://10.58.6.21:8000/user/signin', {
       method: 'POST',
       body: JSON.stringify({
@@ -51,6 +52,7 @@ class Login extends Component {
         <div class="loginBox">
           <div class="loginInput">
             <input
+              type="text"
               onChange={this.handleInput}
               name="userId"
               className="inputId"
@@ -62,6 +64,7 @@ class Login extends Component {
               </div>
             )}
             <input
+              type="password"
               onChange={this.handleInput}
               name="password"
               className="inputPw"
