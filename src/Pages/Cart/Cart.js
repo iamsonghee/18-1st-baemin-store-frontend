@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './Cart.scss';
+import CartItem from './CartItem';
+import product1 from './product1.JPG';
 
 class Cart extends Component {
   render() {
@@ -13,6 +15,7 @@ class Cart extends Component {
                 <span>01</span>
                 장바구니
                 <span>
+                  ▶
                   <img src="" />
                 </span>
               </li>
@@ -20,6 +23,7 @@ class Cart extends Component {
                 <span>02</span>
                 주문서작성/결제
                 <span>
+                  ▶
                   <img src="" />
                 </span>
               </li>
@@ -37,13 +41,13 @@ class Cart extends Component {
               <div className="cartContentList">
                 <div className="orderTable">
                   <colgroup>
-                    <col style="width:3%"></col>
+                    <col style={{ width: '3%' }}></col>
                     <col></col>
-                    <col style="width:5%"></col>
-                    <col style="width:10%"></col>
-                    <col style="width:13%"></col>
-                    <col style="width:10%"></col>
-                    <col style="width:10%"></col>
+                    <col style={{ width: '5%' }}></col>
+                    <col style={{ width: '10%' }}></col>
+                    <col style={{ width: '13%' }}></col>
+                    <col style={{ width: '10%' }}></col>
+                    <col style={{ width: '10%' }}></col>
                   </colgroup>
                   <thead>
                     <tr>
@@ -56,72 +60,28 @@ class Cart extends Component {
                       <th>상품/옵션 정보</th>
                       <th>수량</th>
                       <th>상품 금액</th>
-                      <th class="dn">할인/적립</th>
-                      <th class="dn">합계금액</th>
+                      {/* <th class="dn">할인/적립</th>
+                      <th class="dn">합계금액</th> */}
                       <th>배송비</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td className="tdCheck">
-                        <div className="formElement">
-                          <input type="check" />
-                          <label></label>
-                        </div>
-                      </td>
-                      <td className="tdLeft">
-                        <div className="pickContent">
-                          <span className="pickImage">
-                            <a>
-                              <img />
-                            </a>
-                          </span>
-                          <div className="pickInformation">
-                            <div className="pickBtnCoupon">
-                              <a>
-                                <img />
-                              </a>
-                            </div>
-                            <em>
-                              <a>을지로 마스킹 테이프 </a>
-                            </em>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="tdOrderAmount">
-                        <div className="orderNumber">
-                          <strong>1개</strong>
-                          <div className="orderNumberChange">
-                            <a>
-                              <span>옵션/수량변경</span>
-                            </a>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="tdOrderPrice">
-                        <strong>4500원</strong>
-                        <p></p>
-                      </td>
-                      <td className="tdDelivery">
-                        "기본배송비"
-                        <br />
-                        0
-                        <br />
-                        (택배-선결제)
-                      </td>
-                    </tr>
+                    <CartItem rowspan={4} />
+                    <CartItem />
+                    <CartItem />
+                    <CartItem />
                   </tbody>
                 </div>
               </div>
             </form>
             <div className="btnContinue">
               <a>
-                <em>쇼핑 계속하기</em>
+                <em> &lt; 쇼핑 계속하기</em>
               </a>
             </div>
             <div className="priceSum">
               <div className="priceSumContent">
-                <dl>
+                <dl className="dl1">
                   <dt>
                     총<strong>2</strong>개의 상품금액
                   </dt>
@@ -130,34 +90,36 @@ class Cart extends Component {
                   </dd>
                 </dl>
                 <span>
+                  ➕
                   <img />
                 </span>
-                <dl>
+                <dl className="dl2">
                   <dt> 배송비</dt>
                   <dd>
                     <strong>0</strong>원
                   </dd>
                 </dl>
                 <span>
+                  🔀
                   <img />
                 </span>
+                <dl className="dl3">
+                  <dt> 합계</dt>
+                  <dd>
+                    <strong className="dl3Amount">34,900</strong>원
+                  </dd>
+                </dl>
               </div>
-              <dl>
-                <dt> 합계</dt>
-                <dd>
-                  <strong>34,900</strong>원
-                </dd>
-              </dl>
             </div>
             <div className="btnOrderBox">
-              <span className="btnLeftOrder">
+              <div className="btnLeftOrder">
                 <button>선택상품 삭제</button>
                 <button>선택상품 찜</button>
-              </span>
-              <span className="btnRightOrder">
+              </div>
+              <div className="btnRightOrder">
                 <button>선택상품 주문</button>
                 <button>전체상품 주문</button>
-              </span>
+              </div>
             </div>
             <div className="checkPoint">
               <em>
