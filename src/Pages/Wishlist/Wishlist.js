@@ -43,21 +43,24 @@ class Wishlist extends Component {
     fetch('http://10.58.4.112:8000/order/wishlist')
       .then(res => res.json())
       .then(res => {
+        console.log('페치', res.result);
         this.setState({
-          wishlistItems: res,
+          wishlistItems: res.result,
         });
       });
   }
 
   render() {
     console.log('상위컴포넌트 렌더', this.state);
+    console.log(this.state.wishlistItems[1]?.point);
     return (
       <div className="wishlistComponent">
         <div className="orderWrap">
           <div className="orderTitle">
             <h2>푸핫 반가워요, 찜💘리스트</h2>
             <p>
-              적립금 : 무려 <strong>0</strong>원
+              적립금 : 무려{' '}
+              <strong>{this.state.wishlistItems[1]?.point}</strong>원
             </p>
             {/* <ol>
               <li className="pageOn">
@@ -91,11 +94,11 @@ class Wishlist extends Component {
                 <div className="orderTable">
                   <colgroup>
                     <col style={{ width: '3%' }}></col>
-                    <col></col>
-                    <col style={{ width: '18%' }}></col>
+                    <col style={{ width: '60%' }}></col>
                     <col style={{ width: '20%' }}></col>
+                    <col style={{ width: '17%' }}></col>
                     {/* <col style={{ width: '13%' }}></col> */}
-                    <col style={{ width: '20%' }}></col>
+                    {/* <col style={{ width: '20%' }}></col> */}
                   </colgroup>
                   <thead>
                     <tr>
@@ -123,6 +126,7 @@ class Wishlist extends Component {
                             //     ? this.state.wishlistItems.length
                             //     : null
                             // }
+                            point={wishlistItem.point}
                             count={wishlistItem.quantity}
                             price={wishlistItem.price}
                             name={wishlistItem.product}
