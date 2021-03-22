@@ -1,18 +1,22 @@
-.cartComponent {
+.wishlistComponent {
   .orderWrap {
-    width: 1200px;
+    width: 700px;
     margin: 0 auto;
-    padding: 40px 0 150px 0;
+    padding: 40px 0 50px 0;
     .orderTitle {
-      border-bottom: 1px solid #dbdbdb;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
+      // border-bottom: 1px solid #dbdbdb;
+
       margin-bottom: 20px;
       padding-bottom: 20px;
 
       h2 {
+        display: block;
         font-size: 28px;
+        font-weight: bold;
+      }
+      p {
+        margin-top: 10px;
+        color: orangered;
         font-weight: bold;
       }
       ol {
@@ -130,11 +134,35 @@
                     }
                   }
                 }
-                .tdOrderPrice {
-                  vertical-align: middle;
-                  strong {
+                .btnOrderBox {
+                  padding-top: 30px;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+
+                  .btnLeftOrder {
+                    display: block;
+                    font-size: 12px;
+                    width: 68px;
+                    border: 1px solid #a3a3a3;
+                    padding: 3px;
+
+                    color: #626262;
+                    background: white;
                   }
-                  p {
+                  .btnRightOrder {
+                    display: block;
+                    font-size: 14px;
+
+                    width: 68px;
+
+                    padding: 3px;
+                    color: white;
+                    font-size: 12px;
+                    background: black;
+                    border: 1px solid #000;
+                    cursor: pointer;
+                    margin-bottom: 5px;
                   }
                 }
                 .tdDelivery {

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import product1 from './product1.JPG';
 
-class CartItem extends Component {
+class WishlistItem extends Component {
   render() {
+    console.log('모야모야', this.props.price);
     return (
       <tr>
         <td className="tdCheck">
@@ -34,7 +35,9 @@ class CartItem extends Component {
         </td>
         <td className="tdOrderAmount">
           <div className="orderNumber">
-            <strong>{this.props.count}개</strong>
+            <strong>
+              {this.props.price}원 /{this.props.count}개
+            </strong>
             <div className="orderNumberChange">
               <a>
                 <span>옵션/수량변경</span>
@@ -42,22 +45,13 @@ class CartItem extends Component {
             </div>
           </div>
         </td>
-        <td className="tdOrderPrice">
-          <strong>{this.props.price}원</strong>
-          <p></p>
+        <td className="btnOrderBox">
+          <button className="btnRightOrder">장바구니</button>
+          <button className="btnLeftOrder">삭제하기</button>
         </td>
-        {this.props.rowspan ? (
-          <td className="tdDelivery" rowspan={this.props.rowspan}>
-            기본배송비
-            <br />
-            2,500원
-            <br />
-            (택배-선결제)
-          </td>
-        ) : null}
       </tr>
     );
   }
 }
 
-export default CartItem;
+export default WishlistItem;

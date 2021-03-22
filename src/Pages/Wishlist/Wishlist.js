@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
-import './Cart.scss';
-import CartItem from './CartItem';
+import './Wishlist.scss';
+import WishlistItem from './WishlistItem';
 import product1 from './product1.JPG';
 
-class Cart extends Component {
+class Wishlist extends Component {
   state = {
-    cartItems: null,
-    seletedCartItems: {},
+    wishlistItems: [],
+    seletedWishlistItems: {},
   };
 
   handleDelete = () => {
     this.setState({
-      cartItems: this.state.cartItems.filter(
-        item => !this.state.seletedCartItems[item.id]
+      wishlistItems: this.state.wishlistItems.filter(
+        item => !this.state.seletedWishlistItems[item.id]
       ),
     });
 
-    const selectedCartItems = Object.entries(
-      this.state.seletedCartItems
+    const selectedwishlistItems = Object.entries(
+      this.state.seletedWishlistItems
     ).reduce((acc, { key, value }) => {
       if (value) {
         return acc;
@@ -32,31 +32,34 @@ class Cart extends Component {
 
   handleClickCheck = id => {
     this.setState({
-      seletedCartItems: {
-        ...this.state.seletedCartItems,
-        [id]: !this.state.seletedCartItems[id],
+      seletedWishlistItems: {
+        ...this.state.seletedWishlistItems,
+        [id]: !this.state.seletedWishlistItems[id],
       },
     });
   };
 
   componentDidMount() {
-    fetch('http://localhost:3000/data/cartItems.json')
+    fetch('http://10.58.4.112:8000/order/wishlist')
       .then(res => res.json())
       .then(res => {
-        console.log(res);
         this.setState({
-          cartItems: res.cartItems,
+          wishlistItems: res,
         });
       });
   }
 
   render() {
+    console.log('상위컴포넌트 렌더', this.state);
     return (
-      <div className="cartComponent">
+      <div className="wishlistComponent">
         <div className="orderWrap">
           <div className="orderTitle">
-            <h2>장바구니</h2>
-            <ol>
+            <h2>푸핫 반가워요, 찜💘리스트</h2>
+            <p>
+              적립금 : 무려 <strong>0</strong>원
+            </p>
+            {/* <ol>
               <li className="pageOn">
                 <span>01</span>
                 장바구니
@@ -80,7 +83,7 @@ class Cart extends Component {
                   <img src="" />
                 </span>
               </li>
-            </ol>
+            </ol> */}
           </div>
           <div className="cartContent">
             <form id="formCart" method="POST">
@@ -89,11 +92,10 @@ class Cart extends Component {
                   <colgroup>
                     <col style={{ width: '3%' }}></col>
                     <col></col>
-                    <col style={{ width: '5%' }}></col>
-                    <col style={{ width: '10%' }}></col>
-                    <col style={{ width: '13%' }}></col>
-                    <col style={{ width: '10%' }}></col>
-                    <col style={{ width: '10%' }}></col>
+                    <col style={{ width: '18%' }}></col>
+                    <col style={{ width: '20%' }}></col>
+                    {/* <col style={{ width: '13%' }}></col> */}
+                    <col style={{ width: '20%' }}></col>
                   </colgroup>
                   <thead>
                     <tr>
@@ -103,26 +105,29 @@ class Cart extends Component {
                           <label></label>
                         </div>
                       </th>
-                      <th>상품/옵션 정보</th>
-                      <th>수량</th>
-                      <th>상품 금액</th>
+                      <th>상품명/옵션</th>
+                      <th>상품금액/수량</th>
+                      <th>합계</th>
                       {/* <th class="dn">할인/적립</th>
                       <th class="dn">합계금액</th> */}
-                      <th>배송비</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {this.state.cartItems ? (
-                      this.state.cartItems.map((cartItem, index) => {
+                    {this.state.wishlistItems ? (
+                      this.state.wishlistItems.map(wishlistItem => {
                         return (
-                          <CartItem
-                            rowspan={
-                              index === 0 ? this.state.cartItems.length : null
-                            }
-                            count={cartItem.count}
-                            price={cartItem.price}
-                            name={cartItem.name}
-                            id={cartItem.id}
+                          <WishlistItem
+                            WishlistItems={this.state.WishlistItems}
+                            // rowspan={
+                            //   index === 0
+                            //     ? this.state.wishlistItems.length
+                            //     : null
+                            // }
+                            count={wishlistItem.quantity}
+                            price={wishlistItem.price}
+                            name={wishlistItem.product}
+                            thumnail={wishlistItem.product_thumnail}
+                            // id={wishlistItem.id}
                             onClickCheck={this.handleClickCheck}
                           />
                         );
@@ -134,17 +139,16 @@ class Cart extends Component {
                 </div>
               </div>
             </form>
-            <div className="btnContinue">
+            {/* <div className="btnContinue">
               <a>
                 <em> &lt; 쇼핑 계속하기</em>
               </a>
-            </div>
-            <div className="priceSum">
+            </div> */}
+            {/* <div className="priceSum">
               <div className="priceSumContent">
                 <dl className="dl1">
                   <dt>
-                    총<strong>{this.state.cartItem.length} </strong>개의
-                    상품금액
+                    총<strong>100 </strong>개의 상품금액
                   </dt>
                   <dd>
                     <strong>34,900</strong>원
@@ -172,21 +176,19 @@ class Cart extends Component {
                 </dl>
               </div>
             </div>
+            */}
             <div className="btnOrderBox">
               <div className="btnLeftOrder">
                 <button onClick={this.handleDelete}>선택상품 삭제</button>
-                <button>선택상품 찜</button>
-              </div>
-              <div className="btnRightOrder">
-                <button>선택상품 주문</button>
-                <button>전체상품 주문</button>
+                <button>선택상품 장바구니</button>
               </div>
             </div>
-            <div className="checkPoint">
-              <em>
+
+            {/* <div className="checkPoint"> 
+            <em>
                 ❕ 주문서 작성단계에서 할인/적립금 적용을 하실 수 있습니다.
               </em>
-            </div>
+            </div>  */}
           </div>
         </div>
       </div>
@@ -194,4 +196,4 @@ class Cart extends Component {
   }
 }
 
-export default Cart;
+export default Wishlist;
