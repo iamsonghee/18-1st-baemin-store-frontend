@@ -17,24 +17,24 @@ class Login extends Component {
   handleLogin = e => {
     e.preventDefault();
 
-    fetch('http://10.58.4.112:8000/user/signin', {
+    fetch('http://10.58.4.112:8000/user/login', {
       method: 'POST',
       body: JSON.stringify({
-        email: this.state.userId,
+        username: this.state.userId,
         password: this.state.password,
       }),
     })
       .then(res => res.json())
       .then(result => {
         console.log(result);
-        if (result.access_token) {
+        if (result.token) {
           console.log('서버연결 성공!💟');
-          localStorage.setItem('access_token', result.access_token);
-          alert('성공');
+          localStorage.setItem('access_token', result.token);
+          alert('result.message');
           this.props.history.push('/signin');
           this.setState({
             isLogin: true,
-            email: this.state.userId,
+            userId: this.state.userId,
             password: this.state.password,
           });
         } else {
@@ -44,7 +44,7 @@ class Login extends Component {
   };
 
   render() {
-    console.log(this.state.userId);
+    console.log(this.state.password);
     return (
       <div class="loginComponent">
         <h3> 회원로그인</h3>
