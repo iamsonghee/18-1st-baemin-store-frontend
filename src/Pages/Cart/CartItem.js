@@ -7,7 +7,10 @@ class CartItem extends Component {
       <tr>
         <td className="tdCheck">
           <div className="formElement">
-            <input type="checkbox" />
+            <input
+              type="checkbox"
+              onChange={() => this.props.onClickCheck(this.props.id)}
+            />
             <label></label>
           </div>
         </td>
@@ -25,13 +28,13 @@ class CartItem extends Component {
                               </a>
                             </div> */}
 
-              <a>을지로 마스킹 테이프 </a>
+              <a>{this.props.name} </a>
             </div>
           </div>
         </td>
         <td className="tdOrderAmount">
           <div className="orderNumber">
-            <strong>1개</strong>
+            <strong>{this.props.count}개</strong>
             <div className="orderNumberChange">
               <a>
                 <span>옵션/수량변경</span>
@@ -40,7 +43,7 @@ class CartItem extends Component {
           </div>
         </td>
         <td className="tdOrderPrice">
-          <strong>4500원</strong>
+          <strong>{this.props.price}원</strong>
           <p></p>
         </td>
         {this.props.rowspan ? (

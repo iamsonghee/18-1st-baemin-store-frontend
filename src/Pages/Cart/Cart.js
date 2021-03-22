@@ -4,6 +4,52 @@ import CartItem from './CartItem';
 import product1 from './product1.JPG';
 
 class Cart extends Component {
+  state = {
+    cartItems: null,
+    seletedCartItems: {},
+  };
+
+  handleDelete = () => {
+    this.setState({
+      cartItems: this.state.cartItems.filter(
+        item => !this.state.seletedCartItems[item.id]
+      ),
+    });
+
+    const selectedCartItems = Object.entries(
+      this.state.seletedCartItems
+    ).reduce((acc, { key, value }) => {
+      if (value) {
+        return acc;
+      }
+
+      return {
+        ...acc,
+        [key]: value,
+      };
+    }, {});
+  };
+
+  handleClickCheck = id => {
+    this.setState({
+      seletedCartItems: {
+        ...this.state.seletedCartItems,
+        [id]: !this.state.seletedCartItems[id],
+      },
+    });
+  };
+
+  componentDidMount() {
+    fetch('http://localhost:3000/data/cartItems.json')
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+        this.setState({
+          cartItems: res.cartItems,
+        });
+      });
+  }
+
   render() {
     return (
       <div className="cartComponent">
@@ -66,10 +112,24 @@ class Cart extends Component {
                     </tr>
                   </thead>
                   <tbody>
-                    <CartItem rowspan={4} />
-                    <CartItem />
-                    <CartItem />
-                    <CartItem />
+                    {this.state.cartItems ? (
+                      this.state.cartItems.map((cartItem, index) => {
+                        return (
+                          <CartItem
+                            rowspan={
+                              index === 0 ? this.state.cartItems.length : null
+                            }
+                            count={cartItem.count}
+                            price={cartItem.price}
+                            name={cartItem.name}
+                            id={cartItem.id}
+                            onClickCheck={this.handleClickCheck}
+                          />
+                        );
+                      })
+                    ) : (
+                      <p>장바구니가 비었습니다. 텅~</p>
+                    )}
                   </tbody>
                 </div>
               </div>
@@ -113,7 +173,7 @@ class Cart extends Component {
             </div>
             <div className="btnOrderBox">
               <div className="btnLeftOrder">
-                <button>선택상품 삭제</button>
+                <button onClick={this.handleDelete}>선택상품 삭제</button>
                 <button>선택상품 찜</button>
               </div>
               <div className="btnRightOrder">
