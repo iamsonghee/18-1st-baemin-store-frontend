@@ -143,7 +143,8 @@ class Cart extends Component {
               <div className="priceSumContent">
                 <dl className="dl1">
                   <dt>
-                    총<strong>2</strong>개의 상품금액
+                    총<strong>{this.state.cartItem.length} </strong>개의
+                    상품금액
                   </dt>
                   <dd>
                     <strong>34,900</strong>원
@@ -164,7 +165,7 @@ class Cart extends Component {
                   <img />
                 </span>
                 <dl className="dl3">
-                  <dt> 합계</dt>
+                  <dt>합계</dt>
                   <dd>
                     <strong className="dl3Amount">34,900</strong>원
                   </dd>
