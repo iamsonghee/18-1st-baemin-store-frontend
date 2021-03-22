@@ -6,6 +6,8 @@
   position: relative;
   .contents {
     display: flex;
+    width: 80%;
+
     flex-direction: column;
     .wrap {
       padding-top: 60px;

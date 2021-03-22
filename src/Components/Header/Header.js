@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import './Header.scss';
 
@@ -12,10 +12,12 @@ class Header extends Component {
     };
   }
 
-  handleMenuClick = idx => {
+  handleMenuClick = (idx, menu) => {
     this.setState({
       clickedId: idx,
     });
+    // console.log('******', idx, Object.values(menu)[0]);
+    this.props.history.push(`/ct/${Object.values(menu)[0]}`);
   };
   handleAddClassName = idx => {
     if (idx === this.state.clickedId) {
@@ -42,24 +44,20 @@ class Header extends Component {
     return (
       <header>
         <div className="headerTop">
+          <div className={this.state.didScroll ? 'small' : 'none'}>
+            <img src="/Images/logo_main.png" alt="mainlogo" />
+          </div>
           <ul className="userMenu">
-            <li>
-              <Link to="/login">로그인</Link>
-            </li>
-            <li>
-              <Link to="/signup">회원가입</Link>
-            </li>
-            <li>
-              <Link to="/main">마이페이지</Link>
-            </li>
-            <li>
-              <Link to="/cart">
-                장바구니<span className="cartCount">0</span>
-              </Link>
-            </li>
+            {Object.keys(USERMENU).map(function (menu) {
+              return (
+                <li>
+                  <Link to={menu}>{USERMENU[menu]}</Link>
+                </li>
+              );
+            })}
           </ul>
         </div>
-        <div className="headerSearch">
+        <div className={'headerSearch ' + (this.state.didScroll && 'none')}>
           <div className="content">
             <div className="mainLogo">
               <Link to="/main">
@@ -78,7 +76,10 @@ class Header extends Component {
           <ul>
             {MENUARR.map((menu, idx) => {
               return (
-                <li key={idx} onClick={() => this.handleMenuClick(idx)}>
+                <li
+                  key={idx}
+                  onClick={() => this.handleMenuClick(idx, { menu })}
+                >
                   <div className={'menuTitle ' + this.handleAddClassName(idx)}>
                     {menu}
                   </div>
@@ -92,6 +93,12 @@ class Header extends Component {
   }
 }
 
+const USERMENU = {
+  '/login': '로그인',
+  '/signup': '회원가입',
+  '/main': '마이페이지',
+  '/cart': '장바구니',
+};
 // const MAPPING_OBJ = {};
 const MENUARR = [
   '전체',
@@ -105,4 +112,4 @@ const MENUARR = [
   '콜라보레이션',
 ];
 
-export default Header;
+export default withRouter(Header);

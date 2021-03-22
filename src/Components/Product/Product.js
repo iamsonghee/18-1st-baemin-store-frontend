@@ -3,8 +3,19 @@ import { withRouter } from 'react-router';
 import './Product.scss';
 
 class Product extends Component {
+  constructor() {
+    super();
+    this.state = {
+      isJjim: false,
+    };
+  }
   goToDetail = () => {
     this.props.history.push('/productdetail');
+  };
+  handleJjim = () => {
+    this.setState({
+      isJjim: !this.state.isJjim,
+    });
   };
   render() {
     // console.log('this.props.discountRate:', typeof this.props.discountRate);
@@ -12,8 +23,8 @@ class Product extends Component {
     return (
       <div className="product">
         <div className="item">
-          <div className="itemImgBox" onClick={this.goToDetail}>
-            <div className="img">
+          <div className="itemImgBox">
+            <div className="img" onClick={this.goToDetail}>
               <div className="scale">
                 <img src={this.props.imgURL} alt="camera" />
               </div>
@@ -30,7 +41,10 @@ class Product extends Component {
             <div className="likeOrCart">
               <div className="buttons">
                 <button>
-                  <i className="far fa-heart"></i>
+                  <i
+                    className={'far fa-heart ' + (this.state.isJjim && 'fas')}
+                    onClick={this.handleJjim}
+                  ></i>
                 </button>
                 <button>
                   <i className="fas fa-cart-plus"></i>

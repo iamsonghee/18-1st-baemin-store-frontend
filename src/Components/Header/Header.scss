@@ -11,14 +11,24 @@ header {
   .headerTop {
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     height: 40px;
     border-bottom: $themeBorder;
+    .small {
+      img {
+        height: 40px;
+      }
+    }
+    .none {
+      display: none;
+    }
 
     .userMenu {
       display: flex;
       flex-direction: row;
+      position: absolute;
+      right: 0;
       width: 33%;
       font-size: 12px;
       font-weight: bold;
