@@ -67,11 +67,11 @@ class Product extends Component {
                 'itemBeforePrice ' + (this.props.discountRate < 1 && 'none')
               }
             >
-              {this.props.beforePrice}
+              {this.props.beforePrice.toLocaleString()}
               <span>원</span>
             </div>
             <div className="itemFinalPrice">
-              {this.props.finalPrice}
+              {this.props.finalPrice.toLocaleString()}
               <span>원</span>
             </div>
           </div>
