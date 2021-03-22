@@ -7,7 +7,7 @@ class Product extends Component {
     this.props.history.push('/productdetail');
   };
   render() {
-    console.log('this.props.discountRate:', typeof this.props.discountRate);
+    // console.log('this.props.discountRate:', typeof this.props.discountRate);
 
     return (
       <div className="product">
