@@ -12,22 +12,21 @@ class Main extends Component {
         <Header />
         <SlideBanner />
         <div className="contents">
-          <div className="wrap">
-            <div className="title">잘나가요</div>
-            <ProductsList className="productsList" />
-          </div>
-          <div className="wrap">
-            <div className="title">새로 나왔어요</div>
-            <ProductsList className="productsList" />
-          </div>
-          <div className="wrap">
-            <div className="title">할인중</div>
-            <ProductsList className="productsList" />
-          </div>
+          {Object.keys(MAINMENU).map(menu => {
+            return (
+              // console.log('menumenumenumenu: ', MAINMENU[menu]);
+              <div className="wrap">
+                <div className="title">{MAINMENU[menu]}</div>
+                <ProductsList className="productsList" />
+              </div>
+            );
+          })}
         </div>
       </div>
     );
   }
 }
+
+const MAINMENU = { 1: '잘나가요', 2: '새로 나왔어요', 3: '할인중' };
 
 export default Main;

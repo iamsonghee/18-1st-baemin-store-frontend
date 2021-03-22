@@ -19,6 +19,17 @@ class Product extends Component {
   };
   render() {
     // console.log('this.props.discountRate:', typeof this.props.discountRate);
+    const {
+      imgURL,
+      isSale,
+      isBest,
+      isNew,
+      isJjim,
+      discountRate,
+      productName,
+      beforePrice,
+      finalPrice,
+    } = this.props;
 
     return (
       <div className="product">
@@ -26,23 +37,19 @@ class Product extends Component {
           <div className="itemImgBox">
             <div className="img" onClick={this.goToDetail}>
               <div className="scale">
-                <img src={this.props.imgURL} alt="camera" />
+                <img src={imgURL} alt="camera" />
               </div>
             </div>
             <div className="itemTags">
-              <span className={'sale ' + (this.props.isSale && 'show')}>
-                SALE
-              </span>
-              <span className={'best ' + (this.props.isBest && 'show')}>
-                BEST
-              </span>
-              <span className={'new ' + (this.props.isNew && 'show')}>NEW</span>
+              <span className={'sale ' + (isSale && 'show')}>SALE</span>
+              <span className={'best ' + (isBest && 'show')}>BEST</span>
+              <span className={'new ' + (isNew && 'show')}>NEW</span>
             </div>
             <div className="likeOrCart">
               <div className="buttons">
                 <button>
                   <i
-                    className={'far fa-heart ' + (this.state.isJjim && 'fas')}
+                    className={'far fa-heart ' + (isJjim && 'fas')}
                     onClick={this.handleJjim}
                   ></i>
                 </button>
@@ -53,25 +60,17 @@ class Product extends Component {
             </div>
           </div>
           <div className="itemInfo">
-            <div
-              className={
-                'discountRate ' + (this.props.discountRate < 1 && 'none')
-              }
-            >
-              {this.props.discountRate}
+            <div className={'discountRate ' + (discountRate < 1 && 'none')}>
+              {discountRate}
               <span>%</span>
             </div>
-            <div className="itemName">{this.props.productName}</div>
-            <div
-              className={
-                'itemBeforePrice ' + (this.props.discountRate < 1 && 'none')
-              }
-            >
-              {this.props.beforePrice.toLocaleString()}
+            <div className="itemName">{productName}</div>
+            <div className={'itemBeforePrice ' + (discountRate < 1 && 'none')}>
+              {beforePrice.toLocaleString()}
               <span>원</span>
             </div>
             <div className="itemFinalPrice">
-              {this.props.finalPrice.toLocaleString()}
+              {finalPrice.toLocaleString()}
               <span>원</span>
             </div>
           </div>
