@@ -11,6 +11,7 @@ class OptionArea extends Component {
       counts,
       price,
       sale,
+      options,
       inputItemCounts,
       increaseItem,
       decreaseItem,
@@ -50,13 +51,16 @@ class OptionArea extends Component {
             <td className="itemChoicePrice">
               <strong>
                 {(
-                  ((price * (100 - sale)) / 100 + priceAdd) *
+                  ((price * (100 - sale)) / 100 + (priceAdd ? priceAdd : 0)) *
                   counts
                 ).toLocaleString()}
               </strong>
               원
             </td>
-            <td className="optDelBtn">
+            <td
+              className="optDelBtn"
+              style={{ display: options?.length === 0 && 'none' }}
+            >
               <button onClick={deleteOption}>
                 <img
                   id={id}

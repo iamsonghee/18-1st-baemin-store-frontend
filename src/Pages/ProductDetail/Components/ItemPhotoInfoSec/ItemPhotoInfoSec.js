@@ -7,16 +7,20 @@ class ItemPhotoInfoSec extends Component {
     showOptions: [],
   };
 
+  componentDidUpdate(prevProps) {
+    if (prevProps !== this.props && this.props.options.length === 0) {
+      this.setState({ showOptions: [this.props] });
+    }
+  }
+
   increaseItem = e => {
     const { showOptions } = this.state;
     const findIndex = showOptions.findIndex(
       data => data.id === Number(e.target.name)
     );
     let updNum = [...showOptions];
-    if (
-      showOptions.find(data => data.id === Number(e.target.name)).counts ===
-      showOptions.find(data => data.id === Number(e.target.name)).stock
-    ) {
+    let foundObj = showOptions.find(data => data.id === Number(e.target.name));
+    if (foundObj.counts === foundObj.stock) {
       alert('선택 가능한 수량을 초과했습니다');
       return;
     } else {
@@ -53,11 +57,9 @@ class ItemPhotoInfoSec extends Component {
       data => data.id === Number(e.target.name)
     );
     let updNum = [...showOptions];
+    let foundObj = showOptions.find(data => data.id === Number(e.target.name));
     if (onlyNum.test(e.target.value) && Number(e.target.value) !== 0) {
-      if (
-        Number(e.target.value) >
-        showOptions.find(data => data.id === Number(e.target.name)).stock
-      ) {
+      if (Number(e.target.value) > foundObj.stock) {
         alert('선택 가능한 수량을 초과했습니다');
         return;
       }
@@ -111,6 +113,16 @@ class ItemPhotoInfoSec extends Component {
     return sum;
   };
 
+  addCountsKey = () => {
+    const { options } = this.props;
+    const { showOptions } = this.state;
+    if (options?.length === 0 && showOptions) {
+      let newObj = [...showOptions];
+      newObj[0] = { ...newObj[0], counts: 1 };
+      this.setState({ showOptions: newObj });
+    }
+  };
+
   render() {
     const {
       inputItemCounts,
@@ -118,9 +130,10 @@ class ItemPhotoInfoSec extends Component {
       decreaseItem,
       addOption,
       deleteOption,
+      totalSum,
     } = this;
     const { showOptions } = this.state;
-    const { name, img, price, sale, options } = this.props;
+    const { id, name, img, price, sale, stock, options } = this.props;
     const optionList = options?.map(optionList => (
       <option
         key={optionList.product_option_id}
@@ -136,7 +149,7 @@ class ItemPhotoInfoSec extends Component {
         }`}
       </option>
     ));
-    const opName = options && options[0].option_classification;
+    const opName = options && options[0]?.option_classification;
     const totalArray = showOptions.map(
       data => ((price * (100 - sale)) / 100 + data.priceAdd) * data.counts
     );
@@ -167,7 +180,7 @@ class ItemPhotoInfoSec extends Component {
               <dt>배송정보</dt>
               <dd>
                 <strong>
-                  {(price * (100 - sale)) / 100 >= 30000
+                  {this.totalSum(totalArray) >= 30000
                     ? 0
                     : (2500).toLocaleString()}
                   원
@@ -178,50 +191,86 @@ class ItemPhotoInfoSec extends Component {
             </dl>
             <dl
               className="itemAddOptionBox"
-              style={{ display: options?.length === 0 && 'none' }}
+              style={{
+                display: options?.length === 0 && 'none',
+              }}
             >
-              <dt>{opName}</dt>
+              <dt style={{ display: stock === 0 && 'none' }}>{opName}</dt>
               <dd>
-                <select value={`${opName} / 가격 / 재고`} onChange={addOption}>
+                <select
+                  value={`${opName} / 가격 / 재고`}
+                  style={{ display: stock === 0 && 'none' }}
+                  onChange={addOption}
+                >
                   <option>{opName} / 가격 / 재고</option>
                   {optionList}
                 </select>
               </dd>
             </dl>
           </div>
-          <div className="optionContainer">
-            {showOptions.map(opt => (
-              <OptionArea
-                key={opt.id}
-                id={opt.id}
-                name={opt.name}
-                priceAdd={opt.priceAdd}
-                stock={opt.stock}
-                counts={opt.counts}
-                price={price}
-                sale={sale}
-                inputItemCounts={inputItemCounts}
-                increaseItem={increaseItem}
-                decreaseItem={decreaseItem}
-                deleteOption={deleteOption}
-              />
-            ))}
+          <div
+            className="optionContainer"
+            style={{ display: stock === 0 && 'none' }}
+          >
+            {options?.length !== 0
+              ? showOptions.map(opt => (
+                  <OptionArea
+                    key={opt.id}
+                    id={opt.id}
+                    name={opt.name}
+                    stock={opt.stock}
+                    counts={opt.counts}
+                    priceAdd={opt.priceAdd}
+                    price={price}
+                    sale={sale}
+                    inputItemCounts={inputItemCounts}
+                    increaseItem={increaseItem}
+                    decreaseItem={decreaseItem}
+                    deleteOption={deleteOption}
+                  />
+                ))
+              : showOptions[0] && (
+                  <OptionArea
+                    id={id}
+                    name={name}
+                    stock={stock}
+                    counts={showOptions[0].counts}
+                    price={price}
+                    sale={sale}
+                    options={options}
+                    inputItemCounts={inputItemCounts}
+                    increaseItem={increaseItem}
+                    decreaseItem={decreaseItem}
+                    deleteOption={deleteOption}
+                  />
+                )}
           </div>
           <div
             className="itemPriceContainer"
-            style={{ display: showOptions.length === 0 && 'none' }}
+            style={{
+              display: showOptions.length === 0 && 'none',
+              display: stock === 0 && 'none',
+            }}
           >
             <dl className="totalAmount">
               <dt>총 합계금액</dt>
               <dd>
                 <strong class="totalPrice">
-                  {this.totalSum(totalArray).toLocaleString()}
+                  {options && options.length === 0
+                    ? (
+                        ((price * (100 - sale)) / 100) *
+                        showOptions[0]?.counts
+                      ).toLocaleString()
+                    : totalSum(totalArray).toLocaleString()}
                   <b>원</b>
                 </strong>
               </dd>
             </dl>
           </div>
-          <div className="btnChoiceBox">
+          <div
+            className="btnChoiceBox"
+            style={{ display: stock === 0 && 'none' }}
+          >
             <button
               id="wishBtn"
               onClick={() => alert('찜리스트에 등록되었습니다.')}
@@ -230,6 +279,12 @@ class ItemPhotoInfoSec extends Component {
             <button id="orderBtn" onClick={() => alert('구매 완료되었습니다.')}>
               바로 구매
             </button>
+          </div>
+          <div
+            className="soldOutBtnBox"
+            style={{ display: stock !== 0 && 'none' }}
+          >
+            SOLD OUT
           </div>
         </div>
       </div>

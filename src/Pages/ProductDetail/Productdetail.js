@@ -23,21 +23,27 @@ class Productdetail extends Component {
 
   render() {
     const {
+      id,
+      counts,
       product_name,
       product_thumbnail,
       product_price,
       images_list,
       discount_rate,
+      product_stock,
       options_list,
       detailed_description,
     } = this.state.data;
     return (
       <div className="productDetail">
         <ItemPhotoInfoSec
+          id={id}
+          counts={counts}
           name={product_name}
           img={product_thumbnail}
           price={product_price}
           sale={discount_rate}
+          stock={product_stock}
           options={options_list}
         />
         <section className="itemGoodsSec">

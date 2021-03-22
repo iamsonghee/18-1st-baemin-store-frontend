@@ -1,5 +1,6 @@
 {
   "id": 1,
+  "counts": 1,
   "product_name": "매거진F 파운드:",
   "product_thumbnail": "https://store.baemin.com/data/goods/20/08/33/306/306_magnify_097.jpg",
   "images_list": [
@@ -8,6 +9,7 @@
   ],
   "product_price": 18000,
   "discount_rate": 10,
+  "product_stock": 10,
   "options_list": [
     {
       "product_option_id": 1,

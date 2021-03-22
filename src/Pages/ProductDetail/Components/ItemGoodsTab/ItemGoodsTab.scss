@@ -13,9 +13,8 @@
     li {
       width: 174px;
       text-align: center;
-      border-top: $themeBorder;
-      border-right: $themeBorder;
-      border-left: $themeBorder;
+      border: $themeBorder;
+      border-bottom: none;
 
       a {
         display: block;
