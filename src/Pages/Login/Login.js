@@ -7,18 +7,17 @@ class Login extends Component {
     password: '0',
     isLogin: false,
   };
-
+  //input 창 입력
   handleInput = e => {
     this.setState({
       [e.target.name]: e.target.value,
     });
-    console.log(e.target.name);
   };
-
+  //로그인 버튼 클릭
   handleLogin = e => {
     e.preventDefault();
 
-    fetch('http://10.58.6.21:8000/user/signin', {
+    fetch('http://10.58.4.112:8000/user/signin', {
       method: 'POST',
       body: JSON.stringify({
         email: this.state.userId,
@@ -29,7 +28,7 @@ class Login extends Component {
       .then(result => {
         console.log(result);
         if (result.access_token) {
-          console.log('굿굿구웃이에요');
+          console.log('서버연결 성공!💟');
           localStorage.setItem('access_token', result.access_token);
           alert('성공');
           this.props.history.push('/signin');
