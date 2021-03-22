@@ -1,14 +1,16 @@
 @import '../../../Styles/common.scss';
 .slideBanner {
-  // display: flex;
+  display: flex;
   width: 100%;
   background-color: $themeBlue;
+
   .images {
     position: relative;
-    margin-bottom: 500px;
+    padding-top: 200px;
+    // margin-bottom: 500px;
     .item {
-      position: absolute;
-      top: 0;
+      //   position: absolute;
+      //   top: 0px;
       width: 100%;
       object-fit: cover;
       height: 500px;

@@ -8,6 +8,7 @@ class Header extends Component {
     super();
     this.state = {
       clickedId: null,
+      didScroll: false,
     };
   }
 
@@ -21,7 +22,23 @@ class Header extends Component {
       return 'on';
     }
   };
+  componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll);
+  }
+  handleScroll = () => {
+    if (this.state.didScroll & (window.scrollY < 145)) {
+      this.setState({
+        didScroll: false,
+      });
+    } else if (!this.state.didScroll & (window.scrollY >= 145)) {
+      this.setState({
+        didScroll: true,
+      });
+    }
+  };
+
   render() {
+    console.log('didScroll', this.state.didScroll);
     return (
       <header>
         <div className="headerTop">

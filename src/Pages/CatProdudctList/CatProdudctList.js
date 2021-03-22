@@ -10,7 +10,7 @@ class CatProdudctList extends PureComponent {
     };
   }
   componentDidMount() {
-    fetch('http://172.30.1.47:8000/product/category/리빙')
+    fetch('http://10.58.2.56:8000/product/category/리빙')
       .then(res => res.json())
       .then(res => {
         console.log('******: ', res['results']);

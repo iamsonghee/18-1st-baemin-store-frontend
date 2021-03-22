@@ -8,7 +8,7 @@ import './Main.scss';
 class Main extends Component {
   render() {
     return (
-      <div className="main">
+      <div className="main" onScroll={this.handleScroll}>
         <Header />
         <SlideBanner />
         <div className="contents">
