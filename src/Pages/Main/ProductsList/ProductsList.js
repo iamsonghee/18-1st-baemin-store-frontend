@@ -15,7 +15,6 @@ class ProductsList extends Component {
       .then(res => this.setState({ productList: res }));
   }
   render() {
-    console.log(this.state.productList);
     return (
       <div className="productsList">
         {this.state.productList.map(product => {
@@ -31,6 +30,7 @@ class ProductsList extends Component {
               discountRate={product.discountRate}
               beforePrice={product.beforePrice}
               finalPrice={product.finalPrice}
+              stockCount={product.stockCount}
             />
           );
         })}

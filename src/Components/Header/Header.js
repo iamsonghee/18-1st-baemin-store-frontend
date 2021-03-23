@@ -16,7 +16,6 @@ class Header extends Component {
     this.setState({
       clickedId: idx,
     });
-    // console.log('******', idx, Object.values(menu)[0]);
     this.props.history.push(`/ct/${Object.values(menu)[0]}`);
   };
   handleAddClassName = idx => {
@@ -40,7 +39,6 @@ class Header extends Component {
   };
 
   render() {
-    console.log('didScroll', this.state.didScroll);
     return (
       <header>
         <div className="headerTop">
@@ -99,7 +97,6 @@ const USERMENU = {
   '/main': '마이페이지',
   '/cart': '장바구니',
 };
-// const MAPPING_OBJ = {};
 const MENUARR = [
   '전체',
   '문구',

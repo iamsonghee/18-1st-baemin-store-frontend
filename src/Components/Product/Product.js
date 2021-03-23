@@ -18,19 +18,19 @@ class Product extends Component {
     });
   };
   render() {
-    // console.log('this.props.discountRate:', typeof this.props.discountRate);
     const {
       imgURL,
       isSale,
       isBest,
       isNew,
-      isJjim,
       discountRate,
       productName,
       beforePrice,
       finalPrice,
+      stockCount,
     } = this.props;
 
+    const { isJjim } = this.state;
     return (
       <div className="product">
         <div className="item">
@@ -51,13 +51,14 @@ class Product extends Component {
                   <i
                     className={'far fa-heart ' + (isJjim && 'fas')}
                     onClick={this.handleJjim}
-                  ></i>
+                  />
                 </button>
                 <button>
-                  <i className="fas fa-cart-plus"></i>
+                  <i className="fas fa-cart-plus" />
                 </button>
               </div>
             </div>
+            <div className="soldout">다 팔렸어요</div>
           </div>
           <div className="itemInfo">
             <div className={'discountRate ' + (discountRate < 1 && 'none')}>

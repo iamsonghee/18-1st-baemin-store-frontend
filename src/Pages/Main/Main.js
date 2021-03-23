@@ -8,13 +8,12 @@ import './Main.scss';
 class Main extends Component {
   render() {
     return (
-      <div className="main" onScroll={this.handleScroll}>
+      <main onScroll={this.handleScroll}>
         <Header />
         <SlideBanner />
         <div className="contents">
           {Object.keys(MAINMENU).map(menu => {
             return (
-              // console.log('menumenumenumenu: ', MAINMENU[menu]);
               <div className="wrap">
                 <div className="title">{MAINMENU[menu]}</div>
                 <ProductsList className="productsList" />
@@ -22,7 +21,7 @@ class Main extends Component {
             );
           })}
         </div>
-      </div>
+      </main>
     );
   }
 }

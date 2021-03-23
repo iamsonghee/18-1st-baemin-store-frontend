@@ -9,9 +9,10 @@
     "isJjim" : false,
     "discountRate" : 20,
     "beforePrice" : 19000,
-    "finalPrice" : 15200
-    },
-    {
+    "finalPrice" : 15200,
+    "stockCount" : 3
+},
+{
     "id": 2,
     "productName" :"볼펜. 나도 언젠간 쓸데가 있겠지",
     "imgURL":"http://img2.tmon.kr/cdn3/deals/2020/07/08/3949145954/catlist_3col_v2_eccf0_ikzyv.jpg",
@@ -21,9 +22,10 @@
     "isJjim" : false,
     "discountRate" : 0,
     "beforePrice" : 4500,
-    "finalPrice" : 4500
-    },
-    {
+    "finalPrice" : 4500,
+    "stockCount" : 1
+},
+{
     "id": 3,
     "productName" :"미니갑티슈 세트. 티었슈?",
     "imgURL":"http://jesus1019.cafe24.com/%C5%E4%C5%BB%B1%A4%B0%ED/%C8%A3%C5%DA%BF%EB%C7%B0%20301~446/381%20%B9%E8%B3%CA.jpg",
@@ -33,7 +35,8 @@
     "isJjim" : false,
     "discountRate" : 50,
     "beforePrice" : 4800,
-    "finalPrice" : 2400
+    "finalPrice" : 2400,
+    "stockCount" : 0
     
     },
     {
@@ -46,7 +49,8 @@
     "isJjim" : false,
     "discountRate" : 0,
     "beforePrice" : 9000,
-    "finalPrice" : 9000
+    "finalPrice" : 9000,
+    "stockCount" : 10
     
     }
     ,
@@ -60,7 +64,8 @@
     "isJjim" : false,
     "discountRate" : 0,
     "beforePrice" : 0,
-    "finalPrice" : 1800
+    "finalPrice" : 1800,
+    "stockCount" : 10
     
     }
 ]

@@ -9,13 +9,22 @@
     // box-sizing: border-box;
     width: 300px;
     padding: 0 10px;
+
     .itemImgBox {
       position: relative;
       width: 100%;
+      .soldout {
+        position: absolute;
+        top: 45%;
+        left: 15%;
+        color: white;
+        font-size: 40px;
+      }
       img {
         object-fit: cover;
         width: 100%;
         height: 340px;
+        position: relative;
       }
 
       &:hover .likeOrCart .buttons {
@@ -27,17 +36,28 @@
         transition: all 0.5s ease-in-out;
         opacity: 0;
         position: absolute;
-
         bottom: 0px;
       }
       .img {
+        position: relative;
         width: 100%;
         height: 340px;
         overflow: hidden;
       }
+
       .scale:hover {
         transition: all 1s ease-in-out;
         transform: scale(1.1);
+      }
+      .scale::after {
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 0;
+        background-color: black;
+        width: 100%;
+        height: 100%;
+        opacity: 0.5;
       }
       .itemTags {
         display: flex;
