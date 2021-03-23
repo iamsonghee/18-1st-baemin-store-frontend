@@ -118,10 +118,13 @@ class ItemPhotoInfoSec extends Component {
       product_option_id: data.id,
       product_option_quantity: data.counts,
     }));
-    console.log({ results: opsData });
+    console.log(opsData);
     this.props.options.length === 0
       ? fetch('http://10.58.2.56:8000/order/cart', {
           method: 'POST',
+          headers: {
+            Authorization: sessionStorage.access_token,
+          },
           body: JSON.stringify({
             results: [
               {
@@ -134,13 +137,80 @@ class ItemPhotoInfoSec extends Component {
           }),
         })
           .then(response => response.json())
-          .then(result => console.log('결과 : ', result))
+          .then(result =>
+            result.message === 'SUCCESS'
+              ? console.log('장바구니로 이동')
+              : result.message === 'OPTION_NOT_SELECTED'
+              ? alert('옵션을 선택해 주세요')
+              : alert('로그인이 필요합니다')
+          )
       : fetch('http://10.58.2.56:8000/order/cart', {
           method: 'POST',
+          headers: {
+            Authorization: sessionStorage.access_token,
+          },
           body: JSON.stringify({ results: opsData }),
         })
           .then(response => response.json())
-          .then(result => console.log('결과 : ', result));
+          .then(result =>
+            result.message === 'SUCCESS'
+              ? console.log('장바구니로 이동')
+              : result.message === 'OPTION_NOT_SELECTED'
+              ? alert('옵션을 선택해 주세요')
+              : alert('로그인이 필요합니다')
+          );
+  };
+
+  addWish = () => {
+    const { showOptions } = this.state;
+    const { id } = this.props;
+    const opsData = showOptions.map(data => ({
+      product_id: id,
+      quantity: 0,
+      product_option_id: data.id,
+      product_option_quantity: data.counts,
+    }));
+    console.log(opsData);
+    this.props.options.length === 0
+      ? fetch('http://10.58.0.59:8000/user/wishlist', {
+          method: 'POST',
+          headers: {
+            Authorization: sessionStorage.access_token,
+          },
+          body: JSON.stringify({
+            results: [
+              {
+                product_id: id,
+                quantity: showOptions[0].counts,
+                product_option_id: '',
+                product_option_quantity: '',
+              },
+            ],
+          }),
+        })
+          .then(response => response.json())
+          .then(result =>
+            result.message === 'SUCCESS'
+              ? console.log('장바구니로 이동')
+              : result.message === 'OPTION_NOT_SELECTED'
+              ? alert('옵션을 선택해 주세요')
+              : alert('로그인이 필요합니다')
+          )
+      : fetch('http://10.58.2.56:8000/order/cart', {
+          method: 'POST',
+          headers: {
+            Authorization: sessionStorage.access_token,
+          },
+          body: JSON.stringify({ results: opsData }),
+        })
+          .then(response => response.json())
+          .then(result =>
+            result.message === 'SUCCESS'
+              ? console.log('장바구니로 이동')
+              : result.message === 'OPTION_NOT_SELECTED'
+              ? alert('옵션을 선택해 주세요')
+              : alert('로그인이 필요합니다')
+          );
   };
 
   render() {
@@ -152,6 +222,7 @@ class ItemPhotoInfoSec extends Component {
       deleteOption,
       totalSum,
       sendData,
+      addWish,
     } = this;
     const { showOptions } = this.state;
     const { id, name, img, price, sale, stock, options } = this.props;
@@ -292,11 +363,10 @@ class ItemPhotoInfoSec extends Component {
             className="btnChoiceBox"
             style={{ display: stock === 0 && 'none' }}
           >
-            <button
-              id="wishBtn"
-              onClick={() => alert('찜리스트에 등록되었습니다.')}
-            />
-            <button id="cartBtn">장바구니</button>
+            <button id="wishBtn" onClick={addWish} />
+            <button id="cartBtn" onClick={sendData}>
+              장바구니
+            </button>
             <button id="orderBtn" onClick={sendData}>
               바로 구매
             </button>
