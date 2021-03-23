@@ -39,8 +39,24 @@ class Wishlist extends Component {
     });
   };
 
+  // componentDidMount() {
+  //   fetch('http://10.58.4.112:8000/order/wishlist')
+  //     .then(res => res.json())
+  //     .then(res => {
+  //       console.log('페치', res.result);
+  //       this.setState({
+  //         wishlistItems: res.result,
+  //       });
+  //     });
+  // }
+
   componentDidMount() {
-    fetch('http://10.58.4.112:8000/order/wishlist')
+    fetch('http://10.58.0.59:8000/user/wishlist', {
+      // method: 'GET',
+      headers: {
+        Authorization: sessionStorage.getItem('token'),
+      },
+    })
       .then(res => res.json())
       .then(res => {
         console.log('페치', res.result);
@@ -128,8 +144,8 @@ class Wishlist extends Component {
                             // }
                             point={wishlistItem.point}
                             count={wishlistItem.quantity}
-                            price={wishlistItem.price}
-                            name={wishlistItem.product}
+                            price={wishlistItem.product_price}
+                            name={wishlistItem.product_name}
                             thumnail={wishlistItem.product_thumnail}
                             // id={wishlistItem.id}
                             onClickCheck={this.handleClickCheck}
@@ -182,7 +198,7 @@ class Wishlist extends Component {
             </div>
             */}
             <div className="btnOrderBox">
-              <div className="btnLeftOrder">
+              <div className="btnLeftOrderEnd">
                 <button onClick={this.handleDelete}>선택상품 삭제</button>
                 <button>선택상품 장바구니</button>
               </div>
