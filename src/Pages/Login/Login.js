@@ -29,7 +29,8 @@ class Login extends Component {
         console.log(result);
         if (result.token) {
           console.log('서버연결 성공!💟');
-          localStorage.setItem('access_token', result.token);
+          window.sessionStorage.setItem('access_token', result.token);
+
           alert('result.message');
           this.props.history.push('/signin');
           this.setState({
