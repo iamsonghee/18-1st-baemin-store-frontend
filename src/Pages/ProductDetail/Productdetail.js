@@ -12,7 +12,7 @@ class Productdetail extends Component {
   }
 
   componentDidMount() {
-    fetch('http://10.58.2.56:8000/product/16')
+    fetch('http://10.58.2.56:8000/product/19')
       .then(res => res.json())
       .then(res =>
         this.setState({

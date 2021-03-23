@@ -118,6 +118,7 @@ class ItemPhotoInfoSec extends Component {
       product_option_id: data.id,
       product_option_quantity: data.counts,
     }));
+    console.log({ results: opsData });
     this.props.options.length === 0
       ? fetch('http://10.58.2.56:8000/order/cart', {
           method: 'POST',
