@@ -12,7 +12,7 @@ class Productdetail extends Component {
   }
 
   componentDidMount() {
-    fetch('/data/data.json')
+    fetch('http://10.58.2.56:8000/product/16')
       .then(res => res.json())
       .then(res =>
         this.setState({
@@ -23,7 +23,7 @@ class Productdetail extends Component {
 
   render() {
     const {
-      id,
+      product_id,
       counts,
       product_name,
       product_thumbnail,
@@ -37,7 +37,7 @@ class Productdetail extends Component {
     return (
       <div className="productDetail">
         <ItemPhotoInfoSec
-          id={id}
+          id={product_id}
           counts={counts}
           name={product_name}
           img={product_thumbnail}

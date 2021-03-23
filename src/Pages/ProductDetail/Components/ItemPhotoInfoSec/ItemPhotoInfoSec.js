@@ -18,8 +18,10 @@ class ItemPhotoInfoSec extends Component {
     const findIndex = showOptions.findIndex(
       data => data.id === Number(e.target.name)
     );
-    let updNum = [...showOptions];
-    let foundObj = showOptions.find(data => data.id === Number(e.target.name));
+    const updNum = [...showOptions];
+    const foundObj = showOptions.find(
+      data => data.id === Number(e.target.name)
+    );
     if (foundObj.counts === foundObj.stock) {
       alert('선택 가능한 수량을 초과했습니다');
       return;
@@ -37,38 +39,32 @@ class ItemPhotoInfoSec extends Component {
     const findIndex = showOptions.findIndex(
       data => data.id === Number(e.target.name)
     );
-    let updNum = [...showOptions];
-    Number(showOptions[findIndex].counts) <= 1
-      ? (updNum[findIndex] = {
-          ...updNum[findIndex],
-          counts: 1,
-        })
-      : (updNum[findIndex] = {
-          ...updNum[findIndex],
-          counts: updNum[findIndex].counts - 1,
-        });
+    if (showOptions[findIndex].counts <= 1) return;
+    const updNum = [...showOptions];
+    updNum[findIndex].counts = updNum[findIndex].counts - 1;
     this.setState({ showOptions: updNum });
   };
 
   inputItemCounts = e => {
     const { showOptions } = this.state;
-    let onlyNum = /^[0-9]*$/;
+    const onlyNum = /^[0-9]*$/;
     const findIndex = showOptions.findIndex(
       data => data.id === Number(e.target.name)
     );
-    let updNum = [...showOptions];
-    let foundObj = showOptions.find(data => data.id === Number(e.target.name));
-    if (onlyNum.test(e.target.value) && Number(e.target.value) !== 0) {
-      if (Number(e.target.value) > foundObj.stock) {
-        alert('선택 가능한 수량을 초과했습니다');
-        return;
-      }
-      updNum[findIndex] = {
-        ...updNum[findIndex],
-        counts: Number(e.target.value),
-      };
-      this.setState({ showOptions: updNum });
+    const updNum = [...showOptions];
+    const foundObj = showOptions.find(
+      data => data.id === Number(e.target.name)
+    );
+    if (!onlyNum.test(e.target.value) && Number(e.target.value) === 0) return;
+    if (Number(e.target.value) > foundObj.stock) {
+      alert('선택 가능한 수량을 초과했습니다');
+      return;
     }
+    updNum[findIndex] = {
+      ...updNum[findIndex],
+      counts: Number(e.target.value),
+    };
+    this.setState({ showOptions: updNum });
   };
 
   addOption = e => {
@@ -113,14 +109,37 @@ class ItemPhotoInfoSec extends Component {
     return sum;
   };
 
-  addCountsKey = () => {
-    const { options } = this.props;
+  sendData = () => {
     const { showOptions } = this.state;
-    if (options?.length === 0 && showOptions) {
-      let newObj = [...showOptions];
-      newObj[0] = { ...newObj[0], counts: 1 };
-      this.setState({ showOptions: newObj });
-    }
+    const { id } = this.props;
+    const opsData = showOptions.map(data => ({
+      product_id: id,
+      quantity: 0,
+      product_option_id: data.id,
+      product_option_quantity: data.counts,
+    }));
+    this.props.options.length === 0
+      ? fetch('http://10.58.2.56:8000/order/cart', {
+          method: 'POST',
+          body: JSON.stringify({
+            results: [
+              {
+                product_id: id,
+                quantity: showOptions[0].counts,
+                product_option_id: '',
+                product_option_quantity: '',
+              },
+            ],
+          }),
+        })
+          .then(response => response.json())
+          .then(result => console.log('결과 : ', result))
+      : fetch('http://10.58.2.56:8000/order/cart', {
+          method: 'POST',
+          body: JSON.stringify({ results: opsData }),
+        })
+          .then(response => response.json())
+          .then(result => console.log('결과 : ', result));
   };
 
   render() {
@@ -131,6 +150,7 @@ class ItemPhotoInfoSec extends Component {
       addOption,
       deleteOption,
       totalSum,
+      sendData,
     } = this;
     const { showOptions } = this.state;
     const { id, name, img, price, sale, stock, options } = this.props;
@@ -247,12 +267,12 @@ class ItemPhotoInfoSec extends Component {
           </div>
           <div
             className="itemPriceContainer"
-            style={{
-              display: showOptions.length === 0 && 'none',
-              display: stock === 0 && 'none',
-            }}
+            style={{ display: showOptions.length === 0 && 'none' }}
           >
-            <dl className="totalAmount">
+            <dl
+              className="totalAmount"
+              style={{ display: stock === 0 && 'none' }}
+            >
               <dt>총 합계금액</dt>
               <dd>
                 <strong class="totalPrice">
@@ -276,7 +296,7 @@ class ItemPhotoInfoSec extends Component {
               onClick={() => alert('찜리스트에 등록되었습니다.')}
             />
             <button id="cartBtn">장바구니</button>
-            <button id="orderBtn" onClick={() => alert('구매 완료되었습니다.')}>
+            <button id="orderBtn" onClick={sendData}>
               바로 구매
             </button>
           </div>

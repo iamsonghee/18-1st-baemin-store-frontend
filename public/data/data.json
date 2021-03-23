@@ -1,5 +1,5 @@
 {
-  "id": 1,
+  "product_id": 1,
   "counts": 1,
   "product_name": "매거진F 파운드:",
   "product_thumbnail": "https://store.baemin.com/data/goods/20/08/33/306/306_magnify_097.jpg",
@@ -10,36 +10,7 @@
   "product_price": 18000,
   "discount_rate": 10,
   "product_stock": 10,
-  "options_list": [
-    {
-      "product_option_id": 1,
-      "option_classification": "컬러",
-      "option_name": "Black",
-      "option_additional_price": 0,
-      "option_stock": 10
-    },
-    {
-      "product_option_id": 2,
-      "option_classification": "컬러",
-      "option_name": "Yello",
-      "option_additional_price": 500,
-      "option_stock": 0
-    },
-    {
-      "product_option_id": 3,
-      "option_classification": "컬러",
-      "option_name": "Blue",
-      "option_additional_price": 1000,
-      "option_stock": 15
-    },
-    {
-      "product_option_id": 4,
-      "option_classification": "컬러",
-      "option_name": "Red",
-      "option_additional_price": 5000,
-      "option_stock": 250
-    }
-  ],
+  "options_list": [],
   "detailed_description": {
     "name": "그냥 양말입니다",
     "material": "면, 폴리에스터, 우레탄",
