@@ -47,6 +47,7 @@ class CatProdudctList extends PureComponent {
                   discountRate={product.discount_rate}
                   beforePrice={product.product_price}
                   finalPrice={product.discounted_price}
+                  stockCount={product.stock}
                 />
               );
             })}

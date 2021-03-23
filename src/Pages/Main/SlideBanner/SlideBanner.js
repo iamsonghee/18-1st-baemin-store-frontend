@@ -12,13 +12,13 @@ class SlideBanner extends Component {
   }
 
   change = () => {
-    const test = document.getElementsByClassName('showing');
-    if (test[0].nextSibling !== null) {
-      const next = test[0].nextSibling;
-      next.classList.add('showing');
-      test[0].classList.remove('showing');
+    const showItem = document.getElementsByClassName('showing');
+    if (showItem[0].nextSibling !== null) {
+      const nextItem = showItem[0].nextSibling;
+      nextItem.classList.add('showing');
+      showItem[0].classList.remove('showing');
     } else {
-      test[0].classList.remove('showing');
+      showItem[0].classList.remove('showing');
       document.getElementsByClassName('sitem')[0].classList.add('showing');
     }
   };
