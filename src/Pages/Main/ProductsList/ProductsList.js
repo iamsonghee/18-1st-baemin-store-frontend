@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Product from '../../../Components/Product/Product';
 import './ProductsList.scss';
+
 class ProductsList extends Component {
   constructor() {
     super();
@@ -14,6 +15,7 @@ class ProductsList extends Component {
       .then(res => res.json())
       .then(res => this.setState({ productList: res }));
   }
+
   render() {
     return (
       <div className="productsList">

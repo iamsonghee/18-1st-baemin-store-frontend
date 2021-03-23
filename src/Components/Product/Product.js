@@ -9,14 +9,19 @@ class Product extends Component {
       isJjim: false,
     };
   }
+
   goToDetail = () => {
-    this.props.history.push('/productdetail');
+    if (this.props.stockCount > 0) {
+      this.props.history.push('/productdetail');
+    }
   };
+
   handleJjim = () => {
     this.setState({
       isJjim: !this.state.isJjim,
     });
   };
+
   render() {
     const {
       imgURL,
@@ -36,6 +41,9 @@ class Product extends Component {
         <div className="item">
           <div className="itemImgBox">
             <div className="img" onClick={this.goToDetail}>
+              <div className={'soldout ' + (stockCount > 0 && 'none')}>
+                다 팔렸어요
+              </div>
               <div className="scale">
                 <img src={imgURL} alt="camera" />
               </div>
@@ -58,7 +66,6 @@ class Product extends Component {
                 </button>
               </div>
             </div>
-            <div className="soldout">다 팔렸어요</div>
           </div>
           <div className="itemInfo">
             <div className={'discountRate ' + (discountRate < 1 && 'none')}>

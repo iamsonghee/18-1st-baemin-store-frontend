@@ -12,9 +12,9 @@ class Main extends Component {
         <Header />
         <SlideBanner />
         <div className="contents">
-          {Object.keys(MAINMENU).map(menu => {
+          {Object.keys(MAINMENU).map((menu, index) => {
             return (
-              <div className="wrap">
+              <div className="wrap" key={index}>
                 <div className="title">{MAINMENU[menu]}</div>
                 <ProductsList className="productsList" />
               </div>

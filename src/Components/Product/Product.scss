@@ -13,13 +13,7 @@
     .itemImgBox {
       position: relative;
       width: 100%;
-      .soldout {
-        position: absolute;
-        top: 45%;
-        left: 15%;
-        color: white;
-        font-size: 40px;
-      }
+
       img {
         object-fit: cover;
         width: 100%;
@@ -44,21 +38,37 @@
         height: 340px;
         overflow: hidden;
       }
-
+      .soldout {
+        position: absolute;
+        color: white;
+        font-size: 40px;
+        z-index: 1;
+        background-color: black;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        opacity: 0.7;
+        &.none {
+          display: none;
+        }
+      }
       .scale:hover {
         transition: all 1s ease-in-out;
         transform: scale(1.1);
       }
-      .scale::after {
-        position: absolute;
-        content: '';
-        top: 0;
-        left: 0;
-        background-color: black;
-        width: 100%;
-        height: 100%;
-        opacity: 0.5;
-      }
+      // .scale::after {
+      //   position: absolute;
+      //   content: '';
+      //   top: 0;
+      //   left: 0;
+      //   background-color: black;
+      //   width: 100%;
+      //   height: 100%;
+      //   opacity: 0.7;
+      // }
       .itemTags {
         display: flex;
         position: absolute;

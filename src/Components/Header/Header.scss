@@ -92,6 +92,25 @@ header {
         border: none;
         padding: 0;
       }
+      .searchHisBox {
+        position: absolute;
+        width: 100%;
+        background-color: white;
+        border: 1px solid $themeGraySoldout;
+        font-size: 12px;
+        line-height: 20px;
+        z-index: 5;
+        color: $themeGray;
+        .histories {
+          padding: 7px 15px 10px 15px;
+        }
+        .endButtons {
+          display: flex;
+          justify-content: space-between;
+          background-color: $themeGrayDetail;
+          padding: 5px 10px 5px 10px;
+        }
+      }
     }
   }
   .headerMenu {

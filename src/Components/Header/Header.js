@@ -12,20 +12,23 @@ class Header extends Component {
     };
   }
 
+  componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll);
+  }
+
   handleMenuClick = (idx, menu) => {
     this.setState({
       clickedId: idx,
     });
     this.props.history.push(`/ct/${Object.values(menu)[0]}`);
   };
+
   handleAddClassName = idx => {
     if (idx === this.state.clickedId) {
       return 'on';
     }
   };
-  componentDidMount() {
-    window.addEventListener('scroll', this.handleScroll);
-  }
+
   handleScroll = () => {
     if (this.state.didScroll & (window.scrollY < 120)) {
       this.setState({
@@ -46,9 +49,9 @@ class Header extends Component {
             <img src="/Images/logo_main.png" alt="mainlogo" />
           </div>
           <ul className="userMenu">
-            {Object.keys(USERMENU).map(function (menu) {
+            {Object.keys(USERMENU).map((menu, index) => {
               return (
-                <li>
+                <li key={index}>
                   <Link to={menu}>{USERMENU[menu]}</Link>
                 </li>
               );
@@ -67,6 +70,21 @@ class Header extends Component {
               <button>
                 <i className="fas fa-search fa-lg"></i>
               </button>
+              <div className="searchHisBox">
+                <div className="histories">
+                  <div>최근검색어</div>
+                  <div>
+                    <ul>
+                      <li>양말</li>
+                      <li>스티커</li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="endButtons">
+                  <span>전체삭제</span>
+                  <span>닫기</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
