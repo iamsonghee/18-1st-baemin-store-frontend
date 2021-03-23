@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import './Cart.scss';
-import CartItem from './CartItem';
+import './Order.scss';
+import OrderItem from './OrderItem';
 import product1 from './product1.JPG';
 
-class Cart extends Component {
+class Order extends Component {
   state = {
     cartItems: null,
     seletedCartItems: {},
@@ -55,7 +55,7 @@ class Cart extends Component {
       <div className="cartComponent">
         <div className="orderWrap">
           <div className="orderTitle">
-            <h2>장바구니</h2>
+            <h2>주문서작성/결제</h2>
             <ol>
               <li className="pageOn">
                 <span>01</span>
@@ -106,6 +106,8 @@ class Cart extends Component {
                       <th>상품/옵션 정보</th>
                       <th>수량</th>
                       <th>상품 금액</th>
+                      <th>할인/적립</th>
+                      <th>합계금액</th>
                       {/* <th class="dn">할인/적립</th>
                       <th class="dn">합계금액</th> */}
                       <th>배송비</th>
@@ -115,7 +117,7 @@ class Cart extends Component {
                     {this.state.cartItems ? (
                       this.state.cartItems.map((cartItem, index) => {
                         return (
-                          <CartItem
+                          <OrderItem
                             rowspan={
                               index === 0 ? this.state.cartItems.length : null
                             }
@@ -193,4 +195,4 @@ class Cart extends Component {
   }
 }
 
-export default Cart;
+export default Order;

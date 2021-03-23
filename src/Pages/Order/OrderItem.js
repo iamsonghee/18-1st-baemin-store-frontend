@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import product1 from './product1.JPG';
 
-class CartItem extends Component {
+class OrderItem extends Component {
   render() {
     return (
       <tr>
@@ -46,6 +46,14 @@ class CartItem extends Component {
           <strong>{this.props.price}원</strong>
           <p></p>
         </td>
+        <td className="tdOrderPrice">
+          <strong>{this.props.price}원</strong>
+          <p></p>
+        </td>
+        <td className="tdOrderPrice">
+          <strong>{this.props.price}원</strong>
+          <p></p>
+        </td>
         {this.props.rowspan ? (
           <td className="tdDelivery" rowspan={this.props.rowspan}>
             기본배송비
@@ -60,4 +68,4 @@ class CartItem extends Component {
   }
 }
 
-export default CartItem;
+export default OrderItem;
