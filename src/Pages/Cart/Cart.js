@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import './Cart.scss';
 import CartItem from './Components/CartItem';
+import './Cart.scss';
+
 class Cart extends Component {
   state = {
     cartItems: null,
@@ -36,20 +37,20 @@ class Cart extends Component {
   };
 
   componentDidMount() {
-    fetch('http://10.58.2.56:8000/order/cart', {
-      // method: 'GET',
-      headers: {
-        Authorization:
-          'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyfQ.wlCljldMPYhX12CrF2N1-nCSvDqf_HXKYFd68gFQPVY',
-      },
-    })
-      .then(res => res.json())
-      .then(res => {
-        console.log(res.results);
-        this.setState({
-          cartItems: res.results,
-        });
-      });
+    //   fetch('http://10.58.2.56:8000/order/cart', {
+    //     // method: 'GET',
+    //     headers: {
+    //       Authorization:
+    //         'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyfQ.wlCljldMPYhX12CrF2N1-nCSvDqf_HXKYFd68gFQPVY',
+    //     },
+    //   })
+    //     .then(res => res.json())
+    //     .then(res => {
+    //       console.log(res);
+    //       this.setState({
+    //         cartItems: res.results,
+    //       });
+    //     });
   }
 
   render() {
