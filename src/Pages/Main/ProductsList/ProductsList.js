@@ -11,7 +11,7 @@ class ProductsList extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:3000/data/products.json')
+    fetch('/data/products.json')
       .then(res => res.json())
       .then(res => this.setState({ productList: res }));
   }

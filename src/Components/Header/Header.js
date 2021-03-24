@@ -16,6 +16,9 @@ class Header extends Component {
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll);
   }
+  // componentWillUnmount() {
+  //   window.removeEventListener('scroll');
+  // }
 
   handleMenuClick = (idx, menu) => {
     this.setState({
