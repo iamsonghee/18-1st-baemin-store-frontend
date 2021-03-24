@@ -10,7 +10,6 @@ class Header extends Component {
     this.state = {
       clickedId: null,
       didScroll: false,
-
       isLogined: false,
     };
   }
@@ -24,6 +23,14 @@ class Header extends Component {
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
   }
+
+  handleLogout = () => {
+    alert('로그아웃 하였습니다.');
+    sessionStorage.removeItem('access_token');
+    this.setState({
+      isLogined: false,
+    });
+  };
 
   handleMenuClick = (idx, menu) => {
     this.setState({
@@ -60,7 +67,10 @@ class Header extends Component {
             {this.state.isLogined
               ? LOGIN_USERMENU.map((menu, index) => {
                   return (
-                    <li key={index}>
+                    <li
+                      key={index}
+                      onClick={menu.path === '/main' && this.handleLogout}
+                    >
                       <Link to={menu.path}>{menu.name}</Link>
                     </li>
                   );
@@ -96,24 +106,10 @@ class Header extends Component {
   }
 }
 
-const USERMENU = {
-  '/login': '로그인',
-  '/signup': '회원가입',
-  '/main': '마이페이지',
-  '/cart': '장바구니',
-};
 const LOGIN_USERMENU = [
   {
     name: '로그아웃',
     path: '/main',
-  },
-  {
-    name: '마이페이지',
-    path: '/main',
-  },
-  {
-    name: '장바구니',
-    path: '/cart',
   },
 ];
 
@@ -126,10 +122,7 @@ const DEFAULT_USERMENU = [
     name: '회원가입',
     path: '/signup',
   },
-  {
-    name: '마이페이지',
-    path: '/main',
-  },
+
   {
     name: '장바구니',
     path: '/cart',
