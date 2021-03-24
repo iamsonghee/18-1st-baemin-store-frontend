@@ -21,24 +21,9 @@ class Footer extends Component {
             <ul className="footerTop">
               {ulName.map(el => (
                 <li>
-                  <a> el </a>
+                  <a> {el} </a>
                 </li>
               ))}
-              {/* <li>
-                <a>공지사항</a>
-              </li>
-              <li>
-                <a>1:1문의</a>
-              </li>
-              <li>
-                <a>이용약관</a>
-              </li>
-              <li>
-                <a>개인정보처리방침</a>
-              </li>
-              <li>
-                <a>판매처 안내</a>
-              </li> */}
             </ul>
             <div className="footerInfomation">
               <dl>
