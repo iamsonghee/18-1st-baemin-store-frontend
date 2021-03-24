@@ -42,11 +42,13 @@ class Header extends Component {
     }
   };
   handleDeleteAll = () => {};
+
   handleCloseSearchBox = () => {
     this.setState({
       closeSearchBox: false,
     });
   };
+
   handleFocusSearchBox = () => {
     this.setState({
       closeSearchBox: true,
