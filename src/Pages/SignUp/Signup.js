@@ -8,9 +8,7 @@ class Signup extends Component {
         <div className="btnJoin"> ㅋ 배민문방구로 회원가입</div>
         <div className="loginGuide">
           이미 배민문방구 회원이신가요?
-          <a href="#">
-            <Link to="/login">로그인</Link>
-          </a>
+          <Link to="/login">로그인</Link>
         </div>
       </div>
     );

@@ -7,7 +7,6 @@ class SignupProcess extends Component {
     emailAgree: false,
     phoneAgree: false,
     userId: 1, //아이디
-    userIdUsable: '',
     password: '1', //비밀번호
     passwordCheck: '', //비밀번호 확인
     name: '', //이름
@@ -30,11 +29,9 @@ class SignupProcess extends Component {
     })
       .then(res => res.json())
       .then(res => {
-        console.log(Object.values(res), res);
         const check = Object.values(res).filter(
           i => i.userId === this.state.userId
         );
-        console.log(check);
         if (check.length) {
           alert('이미 사용중입니다 ☢');
           return;
@@ -66,17 +63,11 @@ class SignupProcess extends Component {
     this.setState({
       [e.target.name]: e.target.value,
     });
-    console.log(e.target.name);
   };
 
   //회원가입
   clickJoin = e => {
     e.preventDefault();
-
-    if (this.state.userIdUsable === false) {
-      alert('아이디 중복확인 점..');
-      return;
-    }
 
     if (!this.state.userId) {
       alert('아이디를 입력해주세요 ');
@@ -107,11 +98,11 @@ class SignupProcess extends Component {
       fetch('http://10.58.2.56:8888/user/sign-up', {
         method: 'POST',
         body: JSON.stringify({
-          username: this.state.userId,
-          password: this.state.password,
           name: this.state.name,
-          phone_number: this.state.phone,
+          username: this.state.userId,
           email: this.state.email,
+          phone_number: this.state.phone,
+          password: this.state.password,
           address: this.state.fullAddress,
           postal_code: this.state.zoneCode,
           detailed_address: this.state.detailAddress,
@@ -119,7 +110,6 @@ class SignupProcess extends Component {
       }) //
         .then(res => res.json())
         .then(result => {
-          console.log('잘됐음', result);
           // if (response.status === 400) {
           //   alert('다시 한번 확인해주세요');
           // } else {
@@ -132,7 +122,6 @@ class SignupProcess extends Component {
   };
   //마케팅 확인
   handleMarketing = () => {
-    console.log('check');
     this.setState({
       emailAgree: !this.state.emailAgree,
     });
@@ -168,7 +157,6 @@ class SignupProcess extends Component {
   };
 
   render() {
-    console.log(this.state);
     const { isModalShow, isModalClose } = this.props;
     const {
       name,
@@ -194,7 +182,7 @@ class SignupProcess extends Component {
       <div className="signupProcessComponent">
         <form id="formJoin" name="formJoin" method="post">
           <div className="baseInputBox">
-            <h3>기본정보</h3>
+            <h3>기본정보 🐱‍🐉</h3>
             <span class="important">
               ◾ 표시는 반드시 입력하셔야 하는 항목입니다.
             </span>
@@ -216,7 +204,7 @@ class SignupProcess extends Component {
                           type="text"
                           onChange={this.handleInputChange}
                           name="userId"
-                        ></input>
+                        />
                         <button
                           className="inputAddressButton"
                           onClick={this.idCheck}
@@ -243,7 +231,7 @@ class SignupProcess extends Component {
                           onChange={this.handleInputChange}
                           name="password"
                         />
-                        {this.state.password ? null : (
+                        {!this.state.password && (
                           <div style={{ color: 'red', fontSize: '10px' }}>
                             4~12자 영문소문자, 숫자, 언더라인(_) 사용가능
                           </div>
@@ -262,7 +250,7 @@ class SignupProcess extends Component {
                           type="password"
                           onChange={this.handleInputChange}
                           name="passwordCheck"
-                        ></input>
+                        />
                       </div>
                     </td>
                   </tr>
@@ -273,10 +261,7 @@ class SignupProcess extends Component {
                     </th>
                     <td>
                       <div className="memberWarning">
-                        <input
-                          onChange={this.handleInputChange}
-                          name="name"
-                        ></input>
+                        <input onChange={this.handleInputChange} name="name" />
                       </div>
                     </td>
                   </tr>
@@ -288,16 +273,10 @@ class SignupProcess extends Component {
                     <td>
                       <div className="memberWarning">
                         <input
-                          // className="inputEmail"
                           type="text"
                           name="email"
                           onChange={this.handleInputChange}
                         />
-                        {/* <select id="emailDomain" name="emailDomain">
-                          <option value="self">직접입력</option>
-                          <option value="naver.com">naver.com</option>
-                          <option value="gmail.com">gmail.com</option>
-                        </select> */}
                       </div>
                       <div className="memberWarning jsEmail"></div>
                       <div className="formElement">
@@ -324,7 +303,7 @@ class SignupProcess extends Component {
                           type="tel"
                           name="phone"
                           onChange={this.handleInputChange}
-                        ></input>
+                        />
                       </div>
                       <div className="formElement">
                         <input
@@ -385,7 +364,7 @@ class SignupProcess extends Component {
           <button className="btnMemberJoin" onClick={this.clickJoin}>
             회원가입
           </button>
-          {isDaumPost ? (
+          {isDaumPost && (
             <DaumPostcode
               onComplete={this.handleAddress}
               autoClose
@@ -394,7 +373,7 @@ class SignupProcess extends Component {
               style={modalStyle}
               isDaumPost={isDaumPost}
             />
-          ) : null}
+          )}
         </div>
       </div>
     );
