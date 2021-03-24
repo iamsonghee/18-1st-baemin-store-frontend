@@ -112,9 +112,9 @@ class SignupProcess extends Component {
           name: this.state.name,
           phone_number: this.state.phone,
           email: this.state.email,
-          address: '0000',
-          postal_code: '00000',
-          detailed_address: '0000',
+          address: this.state.fullAddress,
+          postal_code: this.state.zoneCode,
+          detailed_address: this.state.detailAddress,
         }),
       }) //
         .then(res => res.json())
@@ -123,8 +123,8 @@ class SignupProcess extends Component {
           // if (response.status === 400) {
           //   alert('다시 한번 확인해주세요');
           // } else {
-          //   alert('가입완료!');
-          //   this.props.history.push('/login');
+          alert('가입완료!');
+          this.props.history.push('/login');
           //   window.location.reload();
           // }
         });
@@ -168,7 +168,7 @@ class SignupProcess extends Component {
   };
 
   render() {
-    console.log(this.state.zoneCode);
+    console.log(this.state);
     const { isModalShow, isModalClose } = this.props;
     const {
       name,
