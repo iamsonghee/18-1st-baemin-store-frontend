@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import './Order.scss';
+import OrderInfo from './OrderInfo';
 import OrderItem from './OrderItem';
+import DaumPostcode from 'react-daum-postcode';
 import product1 from './product1.JPG';
 
 class Order extends Component {
   state = {
     cartItems: null,
+    user: null,
     seletedCartItems: {},
   };
 
@@ -40,12 +43,19 @@ class Order extends Component {
   };
 
   componentDidMount() {
-    fetch('http://localhost:3000/data/cartItems.json')
+    fetch('http://10.58.2.56:8000/order', {
+      // method: 'GET',
+      headers: {
+        Authorization:
+          'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyfQ.wlCljldMPYhX12CrF2N1-nCSvDqf_HXKYFd68gFQPVY',
+      },
+    })
       .then(res => res.json())
       .then(res => {
         console.log(res);
         this.setState({
-          cartItems: res.cartItems,
+          cartItems: res.products,
+          user: res.user,
         });
       });
   }
@@ -121,16 +131,16 @@ class Order extends Component {
                             rowspan={
                               index === 0 ? this.state.cartItems.length : null
                             }
-                            count={cartItem.count}
-                            price={cartItem.price}
-                            name={cartItem.name}
+                            count={cartItem.quantity}
+                            price={cartItem.total_price}
+                            name={cartItem.product_name}
                             id={cartItem.id}
                             onClickCheck={this.handleClickCheck}
                           />
                         );
                       })
                     ) : (
-                      <p>장바구니가 비었습니다. 텅~</p>
+                      <p>주문페이지가 빔</p>
                     )}
                   </tbody>
                 </div>
@@ -138,7 +148,7 @@ class Order extends Component {
             </form>
             <div className="btnContinue">
               <a>
-                <em> &lt; 쇼핑 계속하기</em>
+                <em> &lt; 장바구니 가기</em>
               </a>
             </div>
             <div className="priceSum">
@@ -173,22 +183,9 @@ class Order extends Component {
                 </dl>
               </div>
             </div>
-            <div className="btnOrderBox">
-              <div className="btnLeftOrder">
-                <button onClick={this.handleDelete}>선택상품 삭제</button>
-                <button>선택상품 찜</button>
-              </div>
-              <div className="btnRightOrder">
-                <button>선택상품 주문</button>
-                <button>전체상품 주문</button>
-              </div>
-            </div>
-            <div className="checkPoint">
-              <em>
-                ❕ 주문서 작성단계에서 할인/적립금 적용을 하실 수 있습니다.
-              </em>
-            </div>
           </div>
+          <OrderInfo point={this.state.user?.point} />
+          {/* point={this.state.user.point} */}
         </div>
       </div>
     );

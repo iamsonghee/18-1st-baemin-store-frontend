@@ -35,11 +35,6 @@ class OrderItem extends Component {
         <td className="tdOrderAmount">
           <div className="orderNumber">
             <strong>{this.props.count}개</strong>
-            <div className="orderNumberChange">
-              <a>
-                <span>옵션/수량변경</span>
-              </a>
-            </div>
           </div>
         </td>
         <td className="tdOrderPrice">
