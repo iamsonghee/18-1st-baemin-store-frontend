@@ -32,7 +32,7 @@ class CatProdudctList extends PureComponent {
 
   render() {
     // console.log('CartProduct this.props : ', this.props.match);
-    console.log('this.state.productList : ', this.state.productList);
+    // console.log('this.state.productList : ', this.state.productList);
     return (
       <div className="catProductList">
         <Header />

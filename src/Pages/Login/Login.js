@@ -17,7 +17,7 @@ class Login extends Component {
   handleLogin = e => {
     e.preventDefault();
 
-    fetch('http://10.58.2.56:8000/user/login', {
+    fetch('http://10.58.4.38:8000/user/login', {
       method: 'POST',
       body: JSON.stringify({
         username: this.state.userId,
@@ -32,7 +32,7 @@ class Login extends Component {
           window.sessionStorage.setItem('access_token', result.token);
 
           alert('result.message');
-          this.props.history.push('/signin');
+          this.props.history.push('/main');
           this.setState({
             isLogin: true,
             userId: this.state.userId,

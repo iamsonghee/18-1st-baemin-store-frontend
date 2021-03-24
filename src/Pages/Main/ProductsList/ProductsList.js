@@ -19,9 +19,10 @@ class ProductsList extends Component {
   render() {
     return (
       <div className="productsList">
-        {this.state.productList.map(product => {
+        {this.state.productList.map((product, index) => {
           return (
             <Product
+              key={index}
               id={product.id}
               productName={product.productName}
               imgURL={product.imgURL}

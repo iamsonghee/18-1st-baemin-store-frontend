@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 
 import './Header.scss';
+import SearchBox from './SearchBox/SearchBox';
 
 class Header extends Component {
   constructor() {
@@ -9,16 +10,20 @@ class Header extends Component {
     this.state = {
       clickedId: null,
       didScroll: false,
-      closeSearchBox: false,
+
+      isLogined: false,
     };
   }
 
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll);
+    sessionStorage.getItem('access_token') &&
+      this.setState({ isLogined: true });
   }
-  // componentWillUnmount() {
-  //   window.removeEventListener('scroll');
-  // }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
 
   handleMenuClick = (idx, menu) => {
     this.setState({
@@ -44,19 +49,6 @@ class Header extends Component {
       });
     }
   };
-  handleDeleteAll = () => {};
-
-  handleCloseSearchBox = () => {
-    this.setState({
-      closeSearchBox: false,
-    });
-  };
-
-  handleFocusSearchBox = () => {
-    this.setState({
-      closeSearchBox: true,
-    });
-  };
   render() {
     return (
       <header>
@@ -65,55 +57,24 @@ class Header extends Component {
             <img src="/Images/logo_main.png" alt="mainlogo" />
           </div>
           <ul className="userMenu">
-            {Object.keys(USERMENU).map((menu, index) => {
-              return (
-                <li key={index}>
-                  <Link to={menu}>{USERMENU[menu]}</Link>
-                </li>
-              );
-            })}
+            {this.state.isLogined
+              ? LOGIN_USERMENU.map((menu, index) => {
+                  return (
+                    <li key={index}>
+                      <Link to={menu.path}>{menu.name}</Link>
+                    </li>
+                  );
+                })
+              : DEFAULT_USERMENU.map((menu, index) => {
+                  return (
+                    <li key={index}>
+                      <Link to={menu.path}>{menu.name}</Link>
+                    </li>
+                  );
+                })}
           </ul>
         </div>
-        <div className={'headerSearch ' + (this.state.didScroll && 'none')}>
-          <div className="content">
-            <div className="mainLogo">
-              <Link to="/main">
-                <img src="/Images/logo_main.png" alt="mainlogo" />
-              </Link>
-            </div>
-            <div className="searchBar">
-              <input
-                placeholder="검색어를 입력해주세요"
-                onFocus={this.handleFocusSearchBox}
-              ></input>
-              <button>
-                <i className="fas fa-search fa-lg"></i>
-              </button>
-              <div
-                className={
-                  'searchHisBox ' + (!this.state.closeSearchBox && 'none')
-                }
-              >
-                <div className="histories">
-                  <div className="latestTitle">최근검색어</div>
-                  <ul className="latestWords">
-                    <li className="word">
-                      <span>양말</span>
-                      <span>
-                        2021.03.23<i>X</i>
-                      </span>
-                    </li>
-                    <li>스티커</li>
-                  </ul>
-                </div>
-                <div className="endButtons">
-                  <button onClick={this.handleDeleteAll}>전체삭제</button>
-                  <button onClick={this.handleCloseSearchBox}>닫기</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <SearchBox didScroll={this.state.didScroll} />
         <nav className="headerMenu">
           <ul>
             {MENUARR.map((menu, idx) => {
@@ -141,6 +102,40 @@ const USERMENU = {
   '/main': '마이페이지',
   '/cart': '장바구니',
 };
+const LOGIN_USERMENU = [
+  {
+    name: '로그아웃',
+    path: '/main',
+  },
+  {
+    name: '마이페이지',
+    path: '/main',
+  },
+  {
+    name: '장바구니',
+    path: '/cart',
+  },
+];
+
+const DEFAULT_USERMENU = [
+  {
+    name: '로그인',
+    path: '/login',
+  },
+  {
+    name: '회원가입',
+    path: '/signup',
+  },
+  {
+    name: '마이페이지',
+    path: '/main',
+  },
+  {
+    name: '장바구니',
+    path: '/cart',
+  },
+];
+
 const MENUARR = [
   '전체',
   '문구',
