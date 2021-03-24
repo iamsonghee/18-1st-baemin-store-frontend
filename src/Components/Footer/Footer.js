@@ -4,15 +4,27 @@ import footerLogo from './footerLogo.png';
 
 class Footer extends Component {
   render() {
+    const ulName = [
+      '공지사항',
+      '1:1문의',
+      '이용약관',
+      '개인정보처리방침',
+      '판매처 안내',
+    ];
     return (
       <div className="footerComponent">
-        <div className="footer">
+        <footer className="footer">
           <div className="footerLogo">
             <img src={footerLogo} alt="logo" />
           </div>
           <div className="footerContents">
             <ul className="footerTop">
-              <li>
+              {ulName.map(el => (
+                <li>
+                  <a> el </a>
+                </li>
+              ))}
+              {/* <li>
                 <a>공지사항</a>
               </li>
               <li>
@@ -26,7 +38,7 @@ class Footer extends Component {
               </li>
               <li>
                 <a>판매처 안내</a>
-              </li>
+              </li> */}
             </ul>
             <div className="footerInfomation">
               <dl>
@@ -92,7 +104,7 @@ class Footer extends Component {
               © durumi Brothers Corp. All right Reserved
             </p>
           </div>
-        </div>
+        </footer>
       </div>
     );
   }
