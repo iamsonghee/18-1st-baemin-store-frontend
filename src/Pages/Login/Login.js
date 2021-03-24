@@ -17,7 +17,7 @@ class Login extends Component {
   handleLogin = e => {
     e.preventDefault();
 
-    fetch('http://10.58.4.112:8000/user/login', {
+    fetch('http://10.58.2.56:8000/user/login', {
       method: 'POST',
       body: JSON.stringify({
         username: this.state.userId,
