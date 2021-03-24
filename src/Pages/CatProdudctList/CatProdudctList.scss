@@ -1,0 +1,13 @@
+.catProductList {
+  width: 100%;
+  .wrap {
+    display: flex;
+    justify-content: center;
+    .productsList {
+      display: grid;
+      grid-gap: 10px;
+      padding-top: 250px;
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}
