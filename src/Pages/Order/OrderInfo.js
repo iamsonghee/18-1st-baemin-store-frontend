@@ -47,24 +47,6 @@ class OrderInfo extends Component {
   //input
   값;
   handleInputChange = e => {
-    const idPattern = /^[a-z0-9_]{4,12}$/;
-    const pwPattern = /^[a-z0-9_]{4,12}$/;
-
-    if (
-      e.target.name === 'userId' &&
-      idPattern.test(e.target.value) === false
-    ) {
-      this.setState({ userId: '' });
-      return;
-    }
-    if (
-      e.target.name === 'password' &&
-      pwPattern.test(e.target.value) === false
-    ) {
-      this.setState({ password: '' });
-      return;
-    }
-
     this.setState({
       [e.target.name]: e.target.value,
     });
@@ -164,9 +146,7 @@ class OrderInfo extends Component {
         <form id="formJoin" name="formJoin" method="post">
           <div className="baseInputBox">
             <h3>주문자정보</h3>
-            <span class="important">
-              ◾ 표시는 반드시 입력하셔야 하는 항목입니다.
-            </span>
+
             <div className="baseInformation">
               <table border="0" cellpadding="0" cellspacing="0">
                 <colgroup>
@@ -181,10 +161,9 @@ class OrderInfo extends Component {
                     <td>
                       <div className="memberWarning">
                         <input
-                          className="inputEmail"
+                          className="inputgray"
                           type="text"
-                          onChange={this.handleInputChange}
-                          name="userId"
+                          value={this.props.name}
                         ></input>
                       </div>
                     </td>
@@ -197,9 +176,9 @@ class OrderInfo extends Component {
                     <td>
                       <div className="memberWarning">
                         <input
-                          type="password"
-                          onChange={this.handleInputChange}
-                          name="password"
+                          type="text"
+                          className="inputgray"
+                          value={this.props.phoneNumber}
                         />
                       </div>
                     </td>
@@ -212,9 +191,9 @@ class OrderInfo extends Component {
                     <td>
                       <div className="memberWarning">
                         <input
-                          type="password"
-                          onChange={this.handleInputChange}
-                          name="passwordCheck"
+                          type="text"
+                          className="inputgray"
+                          value={this.props.email}
                         ></input>
                       </div>
                     </td>
@@ -228,9 +207,7 @@ class OrderInfo extends Component {
         <form id="formJoin" name="formJoin" method="post">
           <div className="baseInputBox">
             <h3>배송정보</h3>
-            <span class="important">
-              ◾ 표시는 반드시 입력하셔야 하는 항목입니다.
-            </span>
+
             <div className="baseInformation">
               <table border="0" cellpadding="0" cellspacing="0">
                 <colgroup>
@@ -245,10 +222,9 @@ class OrderInfo extends Component {
                     <td>
                       <div className="memberWarning">
                         <input
-                          className="inputEmail"
                           type="text"
                           onChange={this.handleInputChange}
-                          name="userId"
+                          name="receiver"
                         ></input>
                       </div>
                     </td>
@@ -297,9 +273,9 @@ class OrderInfo extends Component {
                     <td>
                       <div className="memberWarning">
                         <input
-                          type="password"
+                          type="text"
                           onChange={this.handleInputChange}
-                          name="password"
+                          name="phoneNumber"
                         />
                       </div>
                     </td>
@@ -314,7 +290,7 @@ class OrderInfo extends Component {
                         <input
                           type="text"
                           onChange={this.handleInputChange}
-                          name="passwordCheck"
+                          name="customerMessage"
                         ></input>
                       </div>
                     </td>
@@ -328,11 +304,11 @@ class OrderInfo extends Component {
                       <div className="memberWarning">
                         <input
                           type="checkbox"
-                          id="mailing"
-                          name="mailing"
+                          id="addMyAddress"
+                          name="addMyAddress"
                           onClick={this.handleMarketing}
                         />
-                        <label htmlFor="mailing">
+                        <label htmlFor="addMyAddress">
                           나의 배송지에 추가됩니다
                         </label>
                       </div>

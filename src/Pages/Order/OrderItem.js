@@ -5,20 +5,11 @@ class OrderItem extends Component {
   render() {
     return (
       <tr>
-        <td className="tdCheck">
-          <div className="formElement">
-            <input
-              type="checkbox"
-              onChange={() => this.props.onClickCheck(this.props.id)}
-            />
-            <label></label>
-          </div>
-        </td>
         <td className="tdLeft">
           <div className="pickContent">
             <span className="pickImage">
               <a>
-                <img src={product1} />
+                <img src={this.props.thumbnail} />
               </a>
             </span>
             <div className="pickInformation">
@@ -29,6 +20,11 @@ class OrderItem extends Component {
                             </div> */}
 
               <a>{this.props.name} </a>
+              {this.props.optinkey && (
+                <div>
+                  {this.props.optionKey} :{this.props.optionValue}
+                </div>
+              )}
             </div>
           </div>
         </td>

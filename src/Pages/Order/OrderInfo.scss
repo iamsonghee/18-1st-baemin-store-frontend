@@ -15,10 +15,7 @@
         margin-right: 380px;
         margin-bottom: 40px;
       }
-      span {
-        font-size: 12px;
-        text-align: left;
-      }
+
       .baseInformation {
         table {
           width: 1200px;
@@ -49,6 +46,9 @@
                     border: 1px solid #d6d6d6;
                     height: 31px;
                     width: 350px;
+                  }
+                  .inputgray {
+                    background: #ebebeb;
                   }
                   select {
                     width: 100px;
