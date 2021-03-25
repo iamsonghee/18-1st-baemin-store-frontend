@@ -1,0 +1,291 @@
+.cart {
+  padding-top: 200px;
+
+  a {
+    text-decoration: none;
+  }
+
+  .orderWrap {
+    width: 1200px;
+    margin: 0 auto;
+    padding: 40px 0 150px;
+
+    .orderTitle {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 60px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #dbdbdb;
+
+      h2 {
+        font-size: 28px;
+        font-weight: bold;
+      }
+
+      ol {
+        display: flex;
+
+        .pageOn {
+          color: #d1d1d1;
+        }
+
+        li {
+          font-size: 14px;
+          font-weight: bold;
+
+          span {
+            padding: 0 7px;
+
+            img {
+              width: 10px;
+              padding-left: 5px;
+
+              &.doneArrow {
+                opacity: 0.2;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .cartContent {
+      form {
+        .cartContentList {
+          font-size: 12px;
+          font-weight: bold;
+
+          .orderTable {
+            text-align: center;
+
+            thead {
+              tr {
+                th {
+                  padding: 10px 0;
+                  background: #f7f7f7;
+                  border-bottom: 1px solid #dbdbdb;
+                  border-top: 1px solid #999999;
+                }
+              }
+            }
+
+            tbody {
+              tr {
+                td {
+                  padding: 30px 0;
+                  vertical-align: middle;
+                  border-bottom: 1px solid #dbdbdb;
+                  color: #777777;
+                }
+
+                .tdCheck {
+                  text-align: middle;
+                }
+
+                .tdLeft {
+                  .pickContent {
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+
+                    .pickImage {
+                      margin-right: 5px;
+
+                      a {
+                        img {
+                          width: 40px;
+                        }
+                      }
+                    }
+
+                    .pickInformation {
+                      text-align: left;
+                      a {
+                        color: black;
+                      }
+
+                      div {
+                        margin-top: 10px;
+                        text-align: left;
+                        font-weight: 500;
+                      }
+                    }
+
+                    .orderStatus {
+                      position: absolute;
+                      right: 0;
+                      margin-right: 20px;
+                      color: #29c1bc;
+                    }
+                  }
+                }
+
+                .tdOrderAmount {
+                  .orderNumber {
+                    strong {
+                      width: 100px;
+                      display: block;
+                      margin-bottom: 5px;
+                      color: #333333;
+                      font-size: 13px;
+                      font-weight: 600;
+                    }
+
+                    .orderNumberChange {
+                      a {
+                        font-size: 11px;
+                        display: block;
+                        padding: 5px;
+                        border: 1px solid #dbdbdb;
+                        color: #333;
+                        font-weight: normal;
+                        cursor: pointer;
+
+                        &:hover {
+                          background-color: rgb(245, 245, 245);
+                        }
+                      }
+                    }
+                  }
+                }
+
+                .tdOrderPrice {
+                  vertical-align: middle;
+                  color: black;
+                }
+
+                .tdDelivery {
+                  border-left: 1px solid #ebebeb;
+                  font-weight: 500;
+                }
+              }
+
+              p {
+                padding-bottom: 60px;
+                font-weight: 500;
+                border-bottom: 1px solid #dbdbdb;
+              }
+            }
+          }
+        }
+      }
+
+      .btnContinue {
+        height: 20px;
+        font-size: 12px;
+        text-align: left;
+        a {
+          border-bottom: 1px solid #333333;
+          display: inline-block;
+
+          em {
+          }
+        }
+      }
+      .priceSum {
+        border: 2px solid #d6d6d6;
+        padding: 30px 40px;
+        margin-top: 30px;
+        font-size: 16px;
+
+        .priceSumContent {
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+
+          dl {
+            font-size: 16px;
+            text-align: right;
+
+            dt {
+              font-size: 16px;
+              display: inline-block;
+              margin-bottom: 5px;
+
+              strong {
+                font-weight: bold;
+              }
+            }
+
+            dd {
+              strong {
+                font-weight: bold;
+              }
+
+              .dl3Amount {
+                color: #29c1bc;
+                font-size: 18px;
+              }
+            }
+          }
+
+          span {
+            display: inline-block;
+            padding: 0 20px;
+
+            img {
+              width: 22px;
+
+              &.sumImg {
+                opacity: 0.2;
+              }
+            }
+          }
+        }
+      }
+
+      .btnOrderBox {
+        padding-top: 30px;
+        display: flex;
+        justify-content: space-between;
+
+        .btnLeftOrder {
+          font-size: 12px;
+
+          button {
+            font-size: 12px;
+            width: 120px;
+            border: 1px solid #a3a3a3;
+            line-height: 28px;
+            height: 30px;
+            color: #626262;
+            background: white;
+            margin-right: 10px;
+            cursor: pointer;
+            &:enabled {
+              outline: none;
+            }
+          }
+        }
+
+        .btnRightOrder {
+          font-size: 14px;
+
+          button {
+            width: 190px;
+            height: 55px;
+            padding: 0 20px;
+            color: white;
+            font-size: 14px;
+            background: black;
+            border: 1px solid #000;
+            cursor: pointer;
+            font-weight: bold;
+            margin-left: 10px;
+          }
+        }
+      }
+
+      em {
+        font-size: 12px;
+        margin-top: 10px;
+        float: right;
+
+        img {
+          width: 10px;
+        }
+      }
+    }
+  }
+}
