@@ -32,7 +32,7 @@ class Login extends Component {
           window.sessionStorage.setItem('access_token', result.token);
 
           alert('result.message');
-          this.props.history.push('/signin');
+          this.props.history.push('/main');
           this.setState({
             isLogin: true,
             userId: this.state.userId,
