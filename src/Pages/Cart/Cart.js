@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Header from '../../Components/Header/Header';
 import CartItem from './Components/CartItem/CartItem';
 import OptionModal from './Components/OptionModal/OptionModal';
+import CARTAPI from '../../config';
 import './Cart.scss';
 
 class Cart extends Component {
@@ -12,7 +12,7 @@ class Cart extends Component {
   };
 
   componentDidMount() {
-    fetch('http://10.58.2.56:8000/order/cart', {
+    fetch(CARTAPI, {
       headers: {
         Authorization: sessionStorage.access_token,
       },
@@ -38,7 +38,7 @@ class Cart extends Component {
     this.setState({
       cartItems: cartItems.filter(item => !selectedCartItems[item.id]),
     });
-    fetch('http://10.58.2.56:8000/order/cart', {
+    fetch(CARTAPI, {
       method: 'DELETE',
       headers: {
         Authorization: sessionStorage.access_token,
@@ -72,7 +72,7 @@ class Cart extends Component {
     this.setState({
       cartItems: cartItems.filter(item => !selectedCartItems[item.id]),
     });
-    fetch('http://10.58.2.56:8000/order/cart', {
+    fetch(CARTAPI, {
       method: 'PATCH',
       headers: {
         Authorization: sessionStorage.access_token,
@@ -99,7 +99,7 @@ class Cart extends Component {
     this.setState({
       cartItems: null,
     });
-    fetch('http://10.58.2.56:8000/order/cart', {
+    fetch(CARTAPI, {
       method: 'PATCH',
       headers: {
         Authorization: sessionStorage.access_token,
