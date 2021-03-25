@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import OptionArea from './Components/OptionArea';
 import { CARTAPI, WISHLISTAPI } from '../../../../config';
 import './ItemPhotoInfoSec.scss';
@@ -126,7 +127,7 @@ class ItemPhotoInfoSec extends Component {
             Authorization: sessionStorage.access_token,
           },
           body: JSON.stringify({
-            results: [
+            selected_products: [
               {
                 product_id: id,
                 quantity: showOptions[0].counts,
@@ -141,29 +142,33 @@ class ItemPhotoInfoSec extends Component {
             if (result.message === 'SUCCESS') {
               alert('장바구니로 이동합니다');
               this.props.history.push('/cart');
+              return;
             } else if (result.message === 'OPTION_NOT_SELECTED') {
               alert('옵션을 선택해 주세요');
+              return;
             }
             alert('로그인이 필요합니다');
-            this.props.history.push('/login');
+            this.props.history?.push('/login');
           })
       : fetch(CARTAPI, {
           method: 'POST',
           headers: {
             Authorization: sessionStorage.access_token,
           },
-          body: JSON.stringify({ results: opsData }),
+          body: JSON.stringify({ selected_products: opsData }),
         })
           .then(response => response.json())
           .then(result => {
             if (result.message === 'SUCCESS') {
               alert('장바구니로 이동합니다');
-              this.props.history.push('/cart');
+              this.props.history?.push('/cart');
+              return;
             } else if (result.message === 'OPTION_NOT_SELECTED') {
               alert('옵션을 선택해 주세요');
+              return;
             }
             alert('로그인이 필요합니다');
-            this.props.history.push('/login');
+            this.props.history?.push('/login');
           });
   };
 
@@ -197,12 +202,14 @@ class ItemPhotoInfoSec extends Component {
           .then(result => {
             if (result.message === 'SUCCESS') {
               alert('찜리스트로 이동합니다');
-              this.props.history.push('/wishlist');
+              this.props.history?.push('/wishlist');
+              return;
             } else if (result.message === 'OPTION_NOT_SELECTED') {
               alert('옵션을 선택해 주세요');
+              return;
             }
             alert('로그인이 필요합니다');
-            this.props.history.push('/login');
+            this.props.history?.push('/login');
           })
       : fetch(WISHLISTAPI, {
           method: 'POST',
@@ -215,12 +222,14 @@ class ItemPhotoInfoSec extends Component {
           .then(result => {
             if (result.message === 'SUCCESS') {
               alert('찜리스트로 이동합니다');
-              this.props.history.push('/wishlist');
+              this.props.history?.push('/wishlist');
+              return;
             } else if (result.message === 'OPTION_NOT_SELECTED') {
               alert('옵션을 선택해 주세요');
+              return;
             }
             alert('로그인이 필요합니다');
-            this.props.history.push('/login');
+            this.props.history?.push('/login');
           });
   };
 
@@ -394,4 +403,4 @@ class ItemPhotoInfoSec extends Component {
   }
 }
 
-export default ItemPhotoInfoSec;
+export default withRouter(ItemPhotoInfoSec);

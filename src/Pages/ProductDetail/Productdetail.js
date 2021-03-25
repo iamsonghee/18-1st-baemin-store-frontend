@@ -3,7 +3,7 @@ import ItemPhotoInfoSec from './Components/ItemPhotoInfoSec/ItemPhotoInfoSec';
 import ItemGoodsTab from './Components/ItemGoodsTab/ItemGoodsTab';
 import TableElements from './Components/TableElements/TableElements';
 import Review from './Components/Review/Review';
-import PRODUCTAPI from '../.././config';
+import { PRODUCTAPI } from '../.././config';
 import './Productdetail.scss';
 
 class Productdetail extends Component {
@@ -13,6 +13,7 @@ class Productdetail extends Component {
   }
 
   componentDidMount() {
+    console.log(PRODUCTAPI);
     fetch(PRODUCTAPI)
       .then(res => res.json())
       .then(res =>
