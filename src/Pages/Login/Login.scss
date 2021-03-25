@@ -1,5 +1,3 @@
-@import '../../Styles/common.scss';
-
 .loginComponent {
   width: 303px;
   margin: 100px auto;
@@ -13,7 +11,6 @@
     margin-bottom: 20px;
     .loginInput {
       margin-bottom: 12px;
-
       input {
         width: 90%;
         height: 40px;
@@ -43,7 +40,7 @@
       //   display: inline-block;
       //   width: 20px;
       //   height: 20px;
-      //   border: 2px solid #bcbcbc;
+      //   border: 2px solid #BCBCBC;
       //   cursor: pointer;
       // }
     }
@@ -62,7 +59,6 @@
   }
   .btnLoginBox {
     width: 100%;
-
     ul {
       display: flex;
       justify-content: center;
@@ -81,18 +77,15 @@
       li:nth-child(2):before {
         content: '';
         position: absolute;
-
         width: 1px;
         height: 16px;
         background: gray;
         top: 3px;
         left: -3px;
       }
-
       li:nth-child(3):before {
         content: '';
         position: absolute;
-
         width: 1px;
         height: 16px;
         background: gray;

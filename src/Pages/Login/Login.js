@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './Login.scss';
-
 class Login extends Component {
   state = {
     userId: '0',
@@ -17,7 +17,7 @@ class Login extends Component {
   handleLogin = e => {
     e.preventDefault();
 
-    fetch('http://10.58.4.112:8000/user/login', {
+    fetch('http://10.58.2.56:8000/user/login', {
       method: 'POST',
       body: JSON.stringify({
         username: this.state.userId,
@@ -88,7 +88,7 @@ class Login extends Component {
           <ul>
             <li>
               <button type="button" className="btnMemberJoisn">
-                회원가입
+                <Link to="/signupprocess"> 회원가입</Link>
               </button>
             </li>
             <li>
