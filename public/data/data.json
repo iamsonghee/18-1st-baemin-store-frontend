@@ -1,0 +1,21 @@
+{
+  "product_id": 1,
+  "counts": 1,
+  "product_name": "매거진F 파운드:",
+  "product_thumbnail": "https://store.baemin.com/data/goods/20/08/33/306/306_magnify_097.jpg",
+  "images_list": [
+    "https://store.baemin.com/data/editor/goods/201028/8dccbe91add6cabb9ca4d498421281d8_145712.jpg",
+    "https://store.baemin.com/data/editor/goods/200821/f5e9ee3c1634ec56178c39d7e85cef9b_125133.jpg"
+  ],
+  "product_price": 18000,
+  "discount_rate": 10,
+  "product_stock": 10,
+  "options_list": [],
+  "detailed_description": {
+    "name": "그냥 양말입니다",
+    "material": "면, 폴리에스터, 우레탄",
+    "size_cm": "작은발200~255mm, 큰발 260~300mm",
+    "manufacture_country": "한국",
+    "caution": "양말을 먹지 마세요, 질식할 위험이 있습니다."
+  }
+}

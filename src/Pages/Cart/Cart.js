@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Header from '../../Components/Header/Header';
 import CartItem from './Components/CartItem/CartItem';
 import OptionModal from './Components/OptionModal/OptionModal';
 import './Cart.scss';
@@ -150,7 +151,8 @@ class Cart extends Component {
       ?.filter(item => selectedCartItems[item.id])
       .map(total => total.product_price * total.quantity);
     return (
-      <div className="cartComponent">
+      <div className="cart">
+        <Header />
         {isModal && (
           <OptionModal handleModal={handleModal} cartItems={cartItems} />
         )}
