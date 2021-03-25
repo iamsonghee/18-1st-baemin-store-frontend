@@ -1,0 +1,43 @@
+.optionModal {
+  position: absolute;
+  width: 623px;
+  top: 106px;
+  left: 434.5px;
+  margin: 0px;
+  padding: 20px;
+  border: 2px solid #555555;
+  background: #ffffff;
+  font-size: 12px;
+  z-index: 9999;
+
+  header {
+    display: flex;
+    position: relative;
+    border-bottom: 1px solid #999999;
+
+    h4 {
+      padding-bottom: 15px;
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    span {
+      cursor: pointer;
+
+      img {
+        position: absolute;
+        width: 18px;
+        right: 0;
+      }
+    }
+  }
+
+  main {
+    height: 386px;
+    font-size: 12px;
+
+    dl {
+      display: flex;
+    }
+  }
+}

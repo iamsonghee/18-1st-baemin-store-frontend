@@ -55,7 +55,7 @@ class ItemPhotoInfoSec extends Component {
     const foundObj = showOptions.find(
       data => data.id === Number(e.target.name)
     );
-    if (!onlyNum.test(e.target.value) && Number(e.target.value) === 0) return;
+    if (!onlyNum.test(e.target.value) || Number(e.target.value) === 0) return;
     if (Number(e.target.value) > foundObj.stock) {
       alert('선택 가능한 수량을 초과했습니다');
       return;
