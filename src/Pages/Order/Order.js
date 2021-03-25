@@ -225,10 +225,10 @@ class Order extends Component {
                     <col style={{ width: '50%' }}></col>
                     {/* <col></col> */}
                     <col style={{ width: '10%' }}></col>
-                    <col style={{ width: '5%' }}></col>
                     <col style={{ width: '7%' }}></col>
+                    <col style={{ width: '4%' }}></col>
                     <col style={{ width: '7%' }}></col>
-                    <col style={{ width: '7%' }}></col>
+                    <col style={{ width: '8%' }}></col>
                   </colgroup>
                   <thead>
                     <tr>
