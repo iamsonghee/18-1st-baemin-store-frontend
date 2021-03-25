@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import './Login.scss';
 class Login extends Component {
   state = {
     userId: '0',
@@ -88,7 +90,7 @@ class Login extends Component {
           <ul>
             <li>
               <button type="button" className="btnMemberJoisn">
-                회원가입
+                <Link to="/signupprocess"> 회원가입</Link>
               </button>
             </li>
             <li>
