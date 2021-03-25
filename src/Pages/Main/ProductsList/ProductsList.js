@@ -3,36 +3,24 @@ import Product from '../../../Components/Product/Product';
 import './ProductsList.scss';
 
 class ProductsList extends Component {
-  constructor() {
-    super();
-    this.state = {
-      productList: [],
-    };
-  }
-
-  componentDidMount() {
-    fetch('/data/products.json')
-      .then(res => res.json())
-      .then(res => this.setState({ productList: res }));
-  }
-
   render() {
     return (
       <div className="productsList">
-        {this.state.productList.map(product => {
+        {this.props.productList?.map((product, index) => {
           return (
             <Product
-              id={product.id}
-              productName={product.productName}
-              imgURL={product.imgURL}
-              isSale={product.isSale}
-              isBest={product.isBest}
-              isNew={product.isNew}
-              isJjim={product.isJjim}
-              discountRate={product.discountRate}
-              beforePrice={product.beforePrice}
-              finalPrice={product.finalPrice}
-              stockCount={product.stockCount}
+              key={index}
+              id={product.product_id}
+              productName={product.product_name}
+              imgURL={product.product_thumbnail}
+              isBest={product.is_best === 1 ? true : false}
+              isNew={product.is_new === 1 ? true : false}
+              isSale={product.is_sale === 1 ? true : false}
+              isJjim={product.is_in_wishlist === 1 ? true : false}
+              discountRate={product.discount_rate}
+              beforePrice={product.product_price}
+              finalPrice={product.discounted_price}
+              stockCount={product.stock}
             />
           );
         })}

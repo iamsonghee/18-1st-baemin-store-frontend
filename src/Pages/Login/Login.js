@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import './Login.scss';
 class Login extends Component {
   state = {
     userId: '0',
@@ -30,7 +32,7 @@ class Login extends Component {
           window.sessionStorage.setItem('access_token', result.token);
 
           alert('result.message');
-          this.props.history.push('/signin');
+          this.props.history.push('/main');
           this.setState({
             isLogin: true,
             userId: this.state.userId,
@@ -44,6 +46,8 @@ class Login extends Component {
 
   render() {
     console.log(this.state.password);
+    console.log('logibn!@!!!! : ', this.props);
+
     return (
       <div class="loginComponent">
         <h3> 회원로그인</h3>
@@ -86,7 +90,7 @@ class Login extends Component {
           <ul>
             <li>
               <button type="button" className="btnMemberJoisn">
-                회원가입
+                <Link to="/signupprocess"> 회원가입</Link>
               </button>
             </li>
             <li>
