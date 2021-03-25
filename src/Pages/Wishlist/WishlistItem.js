@@ -45,7 +45,7 @@ class WishlistItem extends Component {
             </div>
           </div>
         </td>
-        <td className="btnOrderBox">
+        <td className="btnOrderBoxItem">
           <button className="btnRightOrder">장바구니</button>
           <button className="btnLeftOrder">삭제하기</button>
         </td>
