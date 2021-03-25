@@ -9,7 +9,7 @@ class OrderItem extends Component {
           <div className="pickContent">
             <span className="pickImage">
               <a>
-                <img src={this.props.thumbnail} />
+                <img src={this.props.thumbnail} width="30px" />
               </a>
             </span>
             <div className="pickInformation">

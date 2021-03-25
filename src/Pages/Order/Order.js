@@ -39,7 +39,7 @@ class Order extends Component {
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res);
+        console.log('ㅋㅋㅋㅋㅋㅋㅋ', res);
         this.setState({
           cartItems: res.products,
           user: res.user,
@@ -57,21 +57,34 @@ class Order extends Component {
 
   //결제하기
   handlePayment = () => {
-    fetch('http://10.58.2.56:8888/user/sign-up', {
+    fetch('http://10.58.2.56:8000/order', {
       method: 'POST',
+      headers: {
+        Authorization:
+          'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyfQ.wlCljldMPYhX12CrF2N1-nCSvDqf_HXKYFd68gFQPVY',
+        //sessionStorage.getItem('token'),
+      },
       body: JSON.stringify({
-        name: this.state.name,
-        phone_number: this.state.phone_number,
+        product_id: this.state.products.product_id,
+        product_option_id: this.state.products.product_option_id,
+        order_id: this.state.productsorder_id16,
+        //
+        name: this.state.user.name,
+        phone_number: this.state.user.phone_number,
+        email: this.state.user.email,
         delivery_address: this.state.delivery_address,
         postal_code: this.state.postal_code,
         detailed_address: this.state.detailed_address,
         customor_message: this.state.customor_message,
+        //
         add_my_address: this.state.add_my_address,
         point_used: this.state.point_used,
+        point: 340,
       }),
     }) //
       .then(res => res.json())
-      .then(result => {
+      .then(res => {
+        console.log(res);
         // if (response.status === 400) {
         //   alert('다시 한번 확인해주세요');
         // } else {
@@ -124,6 +137,11 @@ class Order extends Component {
   };
 
   render() {
+    const totalPrice = this.state.cartItems?.reduce(
+      (acc, cur) => acc + cur.total_price,
+      0
+    );
+    console.log('sssss', this.state?.cartItems);
     console.log(this.state?.zoneCode, this.state?.fullAddress);
     const { isModalShow, isModalClose } = this.props;
     const {
@@ -202,7 +220,7 @@ class Order extends Component {
                             count={cartItem.quantity}
                             price={cartItem.product_price}
                             priceTotal={cartItem.total_price}
-                            thumbnail={cartItem.total_product_thumbnail}
+                            thumbnail={cartItem.product_thumbnail}
                             name={cartItem.product_name}
                             optionKey={cartItem.product_option_classification}
                             optionValue={cartItem.product_option_name}
@@ -234,10 +252,10 @@ class Order extends Component {
               <div className="priceSumContent">
                 <dl className="dl1">
                   <dt>
-                    총<strong>2 </strong>개의 상품금액
+                    총<strong>{this.state.user?.length} </strong>개의 상품금액
                   </dt>
                   <dd>
-                    <strong>34,900</strong>원
+                    <strong>{totalPrice}</strong>원
                   </dd>
                 </dl>
                 <span>
@@ -247,7 +265,7 @@ class Order extends Component {
                 <dl className="dl2">
                   <dt> 배송비</dt>
                   <dd>
-                    <strong>0</strong>원
+                    <strong>{totalPrice >= 30000 ? 0 : '2,500'}</strong>원
                   </dd>
                 </dl>
                 <span>
@@ -257,7 +275,7 @@ class Order extends Component {
                 <dl className="dl3">
                   <dt>합계</dt>
                   <dd>
-                    <strong className="dl3Amount">34,900</strong>원
+                    <strong className="dl3Amount">{totalPrice}</strong>원
                   </dd>
                 </dl>
               </div>
@@ -284,7 +302,7 @@ class Order extends Component {
                             <input
                               className="inputgray"
                               type="text"
-                              value={this.props.name}
+                              value={this.state.user?.name}
                             />
                           </div>
                         </td>
@@ -299,7 +317,7 @@ class Order extends Component {
                             <input
                               type="text"
                               className="inputgray"
-                              value={this.props.phoneNumber}
+                              value={this.state.user?.phone_number}
                             />
                           </div>
                         </td>
@@ -314,7 +332,7 @@ class Order extends Component {
                             <input
                               type="text"
                               className="inputgray"
-                              value={this.props.email}
+                              value={this.state.user?.email}
                             />
                           </div>
                         </td>
@@ -460,7 +478,7 @@ class Order extends Component {
                           <span className="important">◾ 합계금액 </span>
                         </th>
                         <td>
-                          <div className="memberWarning">579,100원</div>
+                          <div className="memberWarning">{totalPrice}원</div>
                         </td>
                       </tr>
 
@@ -469,7 +487,9 @@ class Order extends Component {
                           <span className="important">배송비</span>
                         </th>
                         <td>
-                          <div className="memberWarning">0원</div>
+                          <div className="memberWarning">
+                            {totalPrice >= 30000 ? 0 : '2,500'}원
+                          </div>
                         </td>
                       </tr>
 
@@ -495,7 +515,10 @@ class Order extends Component {
                               onClick={this.handleMarketing}
                             />
                             <label htmlFor="mailing">전액 사용하기</label> */}
-                            <span> (보유적립금 {this.state.point}원)</span>
+                            <span>
+                              {' '}
+                              (보유적립금 {this.state.user?.point}원)
+                            </span>
                             {/* {this.props.point} */}
                           </div>
                         </td>
@@ -506,7 +529,9 @@ class Order extends Component {
                           <span className="important">◾ 최종결제금액 </span>
                         </th>
                         <td>
-                          <div className="memberWarning">579,100원</div>
+                          <div className="memberWarning">
+                            {totalPrice - this.state.point_used}원
+                          </div>
                         </td>
                       </tr>
                     </tbody>
