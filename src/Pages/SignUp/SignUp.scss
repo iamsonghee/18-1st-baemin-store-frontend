@@ -1,0 +1,25 @@
+@import '../../Styles/common.scss';
+
+.signupComponent {
+  width: 460px;
+  margin: 100px auto;
+  text-align: center;
+
+  .btnJoin {
+    width: 460px;
+    padding: 30px 0;
+    margin-bottom: 20px;
+    text-align: center;
+    background: black;
+    color: white;
+    font-size: 30px;
+  }
+  .loginGuide {
+    font-size: 12px;
+    Link {
+      color: #333;
+      text-decoration: none;
+      font-weight: 700;
+    }
+  }
+}
