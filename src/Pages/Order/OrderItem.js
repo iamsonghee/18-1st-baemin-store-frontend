@@ -28,7 +28,7 @@ class OrderItem extends Component {
             </div>
           </div>
         </td>
-        <td className="tdOrderAmount">
+        <td cla ssName="tdOrderAmount">
           <div className="orderNumber">
             <strong>{this.props.count}개</strong>
           </div>

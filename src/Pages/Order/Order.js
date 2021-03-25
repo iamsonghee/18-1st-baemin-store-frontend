@@ -43,7 +43,7 @@ class Order extends Component {
         this.setState({
           cartItems: res.products,
           user: res.user,
-          amountTotal: res.products.length,
+          // amountTotal: res.products.length,
         });
       });
   }
@@ -173,13 +173,13 @@ class Order extends Component {
               <div className="cartContentList">
                 <div className="orderTable">
                   <colgroup>
-                    <col style={{ width: '53%' }}></col>
-                    <col></col>
+                    <col style={{ width: '50%' }}></col>
+                    {/* <col></col> */}
+                    <col style={{ width: '10%' }}></col>
                     <col style={{ width: '5%' }}></col>
-                    <col style={{ width: '10%' }}></col>
-                    <col style={{ width: '13%' }}></col>
-                    <col style={{ width: '10%' }}></col>
-                    <col style={{ width: '10%' }}></col>
+                    <col style={{ width: '7%' }}></col>
+                    <col style={{ width: '7%' }}></col>
+                    <col style={{ width: '7%' }}></col>
                   </colgroup>
                   <thead>
                     <tr>
