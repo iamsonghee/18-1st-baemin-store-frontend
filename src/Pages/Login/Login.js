@@ -43,9 +43,6 @@ class Login extends Component {
   };
 
   render() {
-<<<<<<< HEAD
-    return <div>login</div>;
-=======
     console.log(this.state.password);
     return (
       <div class="loginComponent">
@@ -106,7 +103,6 @@ class Login extends Component {
         </div>
       </div>
     );
->>>>>>> master
   }
 }
 
