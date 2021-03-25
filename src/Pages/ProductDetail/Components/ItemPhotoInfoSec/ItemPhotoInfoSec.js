@@ -137,13 +137,16 @@ class ItemPhotoInfoSec extends Component {
           }),
         })
           .then(response => response.json())
-          .then(result =>
-            result.message === 'SUCCESS'
-              ? console.log('장바구니로 이동')
-              : result.message === 'OPTION_NOT_SELECTED'
-              ? alert('옵션을 선택해 주세요')
-              : alert('로그인이 필요합니다')
-          )
+          .then(result => {
+            if (result.message === 'SUCCESS') {
+              alert('장바구니로 이동합니다');
+              this.props.history.push('/cart');
+            } else if (result.message === 'OPTION_NOT_SELECTED') {
+              alert('옵션을 선택해 주세요');
+            }
+            alert('로그인이 필요합니다');
+            this.props.history.push('/login');
+          })
       : fetch(CARTAPI, {
           method: 'POST',
           headers: {
@@ -152,13 +155,16 @@ class ItemPhotoInfoSec extends Component {
           body: JSON.stringify({ results: opsData }),
         })
           .then(response => response.json())
-          .then(result =>
-            result.message === 'SUCCESS'
-              ? console.log('장바구니로 이동')
-              : result.message === 'OPTION_NOT_SELECTED'
-              ? alert('옵션을 선택해 주세요')
-              : alert('로그인이 필요합니다')
-          );
+          .then(result => {
+            if (result.message === 'SUCCESS') {
+              alert('장바구니로 이동합니다');
+              this.props.history.push('/cart');
+            } else if (result.message === 'OPTION_NOT_SELECTED') {
+              alert('옵션을 선택해 주세요');
+            }
+            alert('로그인이 필요합니다');
+            this.props.history.push('/login');
+          });
   };
 
   addWish = () => {
@@ -188,14 +194,17 @@ class ItemPhotoInfoSec extends Component {
           }),
         })
           .then(response => response.json())
-          .then(result =>
-            result.message === 'SUCCESS'
-              ? console.log('장바구니로 이동')
-              : result.message === 'OPTION_NOT_SELECTED'
-              ? alert('옵션을 선택해 주세요')
-              : alert('로그인이 필요합니다')
-          )
-      : fetch(CARTAPI, {
+          .then(result => {
+            if (result.message === 'SUCCESS') {
+              alert('찜리스트로 이동합니다');
+              this.props.history.push('/wishlist');
+            } else if (result.message === 'OPTION_NOT_SELECTED') {
+              alert('옵션을 선택해 주세요');
+            }
+            alert('로그인이 필요합니다');
+            this.props.history.push('/login');
+          })
+      : fetch(WISHLISTAPI, {
           method: 'POST',
           headers: {
             Authorization: sessionStorage.access_token,
@@ -203,13 +212,16 @@ class ItemPhotoInfoSec extends Component {
           body: JSON.stringify({ results: opsData }),
         })
           .then(response => response.json())
-          .then(result =>
-            result.message === 'SUCCESS'
-              ? console.log('장바구니로 이동')
-              : result.message === 'OPTION_NOT_SELECTED'
-              ? alert('옵션을 선택해 주세요')
-              : alert('로그인이 필요합니다')
-          );
+          .then(result => {
+            if (result.message === 'SUCCESS') {
+              alert('찜리스트로 이동합니다');
+              this.props.history.push('/wishlist');
+            } else if (result.message === 'OPTION_NOT_SELECTED') {
+              alert('옵션을 선택해 주세요');
+            }
+            alert('로그인이 필요합니다');
+            this.props.history.push('/login');
+          });
   };
 
   render() {
