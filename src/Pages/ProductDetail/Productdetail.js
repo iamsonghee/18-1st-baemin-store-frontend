@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Header from '../../Components/Header/Header';
 import ItemPhotoInfoSec from './Components/ItemPhotoInfoSec/ItemPhotoInfoSec';
 import ItemGoodsTab from './Components/ItemGoodsTab/ItemGoodsTab';
 import TableElements from './Components/TableElements/TableElements';
@@ -38,7 +37,6 @@ class Productdetail extends Component {
     } = this.state.data;
     return (
       <div className="productDetail">
-        <Header />
         <ItemPhotoInfoSec
           id={product_id}
           counts={counts}
