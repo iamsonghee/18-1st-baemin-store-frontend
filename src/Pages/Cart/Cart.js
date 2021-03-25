@@ -11,8 +11,23 @@ class Cart extends Component {
     isModal: false,
   };
 
+  componentDidMount() {
+    fetch('http://10.58.2.56:8000/order/cart', {
+      headers: {
+        Authorization: sessionStorage.access_token,
+      },
+    })
+      .then(res => res.json())
+      .then(res => {
+        res.results.map((id, index) => (id.id = index));
+        this.setState({
+          cartItems: res.results,
+        });
+      });
+  }
+
   // componentDidMount() {
-  //   fetch('http://10.58.2.56:8000/order/cart', {
+  //   fetch('data/cartData.json', {
   //     headers: {
   //       Authorization:
   //         'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyfQ.wlCljldMPYhX12CrF2N1-nCSvDqf_HXKYFd68gFQPVY',
@@ -26,22 +41,6 @@ class Cart extends Component {
   //       });
   //     });
   // }
-
-  componentDidMount() {
-    fetch('data/cartData.json', {
-      headers: {
-        Authorization:
-          'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyfQ.wlCljldMPYhX12CrF2N1-nCSvDqf_HXKYFd68gFQPVY',
-      },
-    })
-      .then(res => res.json())
-      .then(res => {
-        res.results.map((id, index) => (id.id = index));
-        this.setState({
-          cartItems: res.results,
-        });
-      });
-  }
 
   handleDelete = () => {
     const { cartItems, selectedCartItems } = this.state;
@@ -61,7 +60,7 @@ class Cart extends Component {
         Authorization: sessionStorage.access_token,
       },
       body: JSON.stringify({
-        results: [sendDelete],
+        results: sendDelete,
       }),
     })
       .then(response => response.json())
@@ -86,56 +85,58 @@ class Cart extends Component {
       .map(data => ({
         product_id: data.product_id,
         product_option_id: data.product_option_id,
-        order_id: data.order_id,
       }));
     this.setState({
       cartItems: cartItems.filter(item => !selectedCartItems[item.id]),
     });
     fetch('http://10.58.2.56:8000/order/cart', {
-      method: 'POST',
+      method: 'PATCH',
       headers: {
         Authorization: sessionStorage.access_token,
       },
       body: JSON.stringify({
-        results: [sendSelected],
+        results: sendSelected,
       }),
     })
       .then(response => response.json())
-      .then(result => console.log(result))
+      .then(
+        result =>
+          result.message === 'SUCCESS' && this.props.history.push('/order')
+      )
       .then(alert('구매 페이지로 이동합니다'));
   };
 
   orderAll = () => {
     const { cartItems } = this.state;
-    const sendAll = cartItems
-      .filter(product => cartItems[product.id])
-      .map(data => ({
-        product_id: data.product_id,
-        product_option_id: data.product_option_id,
-        order_id: data.order_id,
-      }));
+    const sendAll = cartItems.map(data => ({
+      product_id: data.product_id,
+      product_option_id: data.product_option_id,
+    }));
+
     this.setState({
       cartItems: null,
     });
     fetch('http://10.58.2.56:8000/order/cart', {
-      method: 'POST',
+      method: 'PATCH',
       headers: {
         Authorization: sessionStorage.access_token,
       },
       body: JSON.stringify({
-        results: [sendAll],
+        results: sendAll,
       }),
     })
       .then(response => response.json())
-      .then(result => console.log(result))
+      .then(
+        result =>
+          result.message === 'SUCCESS' && this.props.history.push('/order')
+      )
       .then(alert('구매 페이지로 이동합니다'));
   };
 
-  handleModal = e => {
+  handleModal = () => {
     this.setState({
       isModal: !this.state.isModal,
     });
-    console.log(e.target.name);
   };
 
   render() {

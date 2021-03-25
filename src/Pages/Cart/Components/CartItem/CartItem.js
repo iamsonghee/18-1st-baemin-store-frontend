@@ -38,7 +38,7 @@ class CartItem extends Component {
             </div>
             <div
               className="orderStatus"
-              style={{ display: orderStatus === '결제전' && 'none' }}
+              style={{ display: orderStatus !== '결제중' && 'none' }}
             >
               결제중
             </div>
