@@ -10,11 +10,30 @@ import SignupProcess from './Pages/Signup/SignupProcess';
 import Cart from './Pages/Cart/Cart';
 import Wishlist from './Pages/Wishlist/Wishlist';
 import CatProdudctList from './Pages/CatProdudctList/CatProdudctList';
+import Header from './Components/Header/Header';
+import Footer from './Components/Footer/Footer';
 
 class Routes extends Component {
+  constructor() {
+    super();
+    this.state = {
+      showHeader: true,
+    };
+  }
+
+  handleHeaderChange = () => {
+    this.setState({
+      showHeader: false,
+    });
+  };
+
   render() {
     return (
       <Router>
+        {/* {this.state.showHeader ? (
+          <Header handleHeaderChange={this.handleHeaderChange} />
+        ) : null} */}
+        <Header />
         <Switch>
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/signupprocess" component={SignupProcess} />
@@ -26,6 +45,7 @@ class Routes extends Component {
           <Route exact path="/wishlist" component={Wishlist} />
           <Route exact path="/ct/:id" component={CatProdudctList} />
         </Switch>
+        <Footer />
       </Router>
     );
   }

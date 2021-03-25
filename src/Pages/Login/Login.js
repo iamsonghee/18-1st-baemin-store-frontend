@@ -46,6 +46,8 @@ class Login extends Component {
 
   render() {
     console.log(this.state.password);
+    console.log('logibn!@!!!! : ', this.props);
+
     return (
       <div class="loginComponent">
         <h3> 회원로그인</h3>

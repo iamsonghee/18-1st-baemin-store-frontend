@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 
 import './Header.scss';
+import SearchBox from './SearchBox/SearchBox';
 
 class Header extends Component {
   constructor() {
@@ -9,22 +10,34 @@ class Header extends Component {
     this.state = {
       clickedId: null,
       didScroll: false,
-      closeSearchBox: false,
+      isLogined: false,
     };
   }
 
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll);
+    sessionStorage.getItem('access_token') &&
+      this.setState({ isLogined: true });
   }
-  // componentWillUnmount() {
-  //   window.removeEventListener('scroll');
-  // }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  handleLogout = () => {
+    alert('로그아웃 하였습니다.');
+    sessionStorage.removeItem('access_token');
+    this.setState({
+      isLogined: false,
+    });
+  };
 
   handleMenuClick = (idx, menu) => {
     this.setState({
       clickedId: idx,
     });
-    this.props.history.push(`/ct/${Object.values(menu)[0]}`);
+    this.props.history.push(`/ct/${Object.values(menu)[0]}?category=${idx}`);
+    this.handleAddClassName(idx);
   };
 
   handleAddClassName = idx => {
@@ -44,19 +57,6 @@ class Header extends Component {
       });
     }
   };
-  handleDeleteAll = () => {};
-
-  handleCloseSearchBox = () => {
-    this.setState({
-      closeSearchBox: false,
-    });
-  };
-
-  handleFocusSearchBox = () => {
-    this.setState({
-      closeSearchBox: true,
-    });
-  };
   render() {
     return (
       <header>
@@ -65,55 +65,33 @@ class Header extends Component {
             <img src="/Images/logo_main.png" alt="mainlogo" />
           </div>
           <ul className="userMenu">
-            {Object.keys(USERMENU).map((menu, index) => {
-              return (
-                <li key={index}>
-                  <Link to={menu}>{USERMENU[menu]}</Link>
-                </li>
-              );
-            })}
+            {this.state.isLogined
+              ? LOGIN_USERMENU.map((menu, index) => {
+                  return (
+                    <li
+                      key={index}
+                      onClick={menu.path === '/main' && this.handleLogout}
+                    >
+                      <Link to={menu.path}>{menu.name}</Link>
+                    </li>
+                  );
+                })
+              : DEFAULT_USERMENU.map((menu, index) => {
+                  return (
+                    <li
+                      key={index}
+                      onClick={() => {
+                        this.props.history.push(menu.path);
+                        this.props.handleHeaderChange();
+                      }}
+                    >
+                      {menu.name}
+                    </li>
+                  );
+                })}
           </ul>
         </div>
-        <div className={'headerSearch ' + (this.state.didScroll && 'none')}>
-          <div className="content">
-            <div className="mainLogo">
-              <Link to="/main">
-                <img src="/Images/logo_main.png" alt="mainlogo" />
-              </Link>
-            </div>
-            <div className="searchBar">
-              <input
-                placeholder="검색어를 입력해주세요"
-                onFocus={this.handleFocusSearchBox}
-              ></input>
-              <button>
-                <i className="fas fa-search fa-lg"></i>
-              </button>
-              <div
-                className={
-                  'searchHisBox ' + (!this.state.closeSearchBox && 'none')
-                }
-              >
-                <div className="histories">
-                  <div className="latestTitle">최근검색어</div>
-                  <ul className="latestWords">
-                    <li className="word">
-                      <span>양말</span>
-                      <span>
-                        2021.03.23<i>X</i>
-                      </span>
-                    </li>
-                    <li>스티커</li>
-                  </ul>
-                </div>
-                <div className="endButtons">
-                  <button onClick={this.handleDeleteAll}>전체삭제</button>
-                  <button onClick={this.handleCloseSearchBox}>닫기</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <SearchBox didScroll={this.state.didScroll} />
         <nav className="headerMenu">
           <ul>
             {MENUARR.map((menu, idx) => {
@@ -135,12 +113,32 @@ class Header extends Component {
   }
 }
 
-const USERMENU = {
-  '/login': '로그인',
-  '/signup': '회원가입',
-  '/main': '마이페이지',
-  '/cart': '장바구니',
-};
+const LOGIN_USERMENU = [
+  {
+    name: '로그아웃',
+    path: '/main',
+  },
+  {
+    name: '마이페이지',
+    path: '/wishlist',
+  },
+  {
+    name: '장바구니',
+    path: '/cart',
+  },
+];
+
+const DEFAULT_USERMENU = [
+  {
+    name: '로그인',
+    path: '/login',
+  },
+  {
+    name: '회원가입',
+    path: '/signup',
+  },
+];
+
 const MENUARR = [
   '전체',
   '문구',
