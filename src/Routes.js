@@ -9,6 +9,7 @@ import Login from './Pages/Login/Login';
 import Cart from './Pages/Cart/Cart';
 import CatProdudctList from './Pages/CatProdudctList/CatProdudctList';
 import Header from './Components/Header/Header';
+import Footer from './Components/Footer/Footer';
 
 class Routes extends Component {
   constructor() {
@@ -48,6 +49,7 @@ class Routes extends Component {
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/ct/:id" component={CatProdudctList} />
         </Switch>
+        <Footer />
       </Router>
     );
   }
