@@ -44,12 +44,25 @@ class CatProdudctList extends PureComponent {
         {/* <Header /> */}
         <div className="wrap">
           <div className="productsList">
-            {this.state.productList?.map(product => {
+            {this.state.productList?.map((product, index) => {
               return (
                 <Product
+                  // id={product.product_id}
+                  // productName={product.product_name}
+                  // imgURL={product.product_thumbnail}
+                  // discountRate={product.discount_rate}
+                  // beforePrice={product.product_price}
+                  // finalPrice={product.discounted_price}
+                  // stockCount={product.stock}
+
+                  key={index}
                   id={product.product_id}
                   productName={product.product_name}
                   imgURL={product.product_thumbnail}
+                  isBest={product.is_best === 1 ? true : false}
+                  isNew={product.is_new === 1 ? true : false}
+                  isSale={product.is_sale === 1 ? true : false}
+                  isJjim={product.is_in_wishlist === 1 ? true : false}
                   discountRate={product.discount_rate}
                   beforePrice={product.product_price}
                   finalPrice={product.discounted_price}

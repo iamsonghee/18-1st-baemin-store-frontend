@@ -58,7 +58,6 @@ class Header extends Component {
     }
   };
   render() {
-    console.log('************ : ', this.props);
     return (
       <header>
         <div className="headerTop">
@@ -119,6 +118,14 @@ const LOGIN_USERMENU = [
     name: '로그아웃',
     path: '/main',
   },
+  {
+    name: '마이페이지',
+    path: '/wishlist',
+  },
+  {
+    name: '장바구니',
+    path: '/cart',
+  },
 ];
 
 const DEFAULT_USERMENU = [
@@ -129,11 +136,6 @@ const DEFAULT_USERMENU = [
   {
     name: '회원가입',
     path: '/signup',
-  },
-
-  {
-    name: '장바구니',
-    path: '/cart',
   },
 ];
 

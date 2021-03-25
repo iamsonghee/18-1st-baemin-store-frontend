@@ -18,13 +18,7 @@ class Routes extends Component {
       showHeader: true,
     };
   }
-  componentDidMount() {
-    console.log('componentDidMount');
-  }
 
-  componentDidUpdate() {
-    console.log('componentDidUpdate');
-  }
   handleHeaderChange = () => {
     this.setState({
       showHeader: false,
@@ -32,14 +26,12 @@ class Routes extends Component {
   };
 
   render() {
-    const ARR = ['/signup', '/login'];
-    console.log('showHeader:', this.state.showHeader);
-
     return (
       <Router>
-        {this.state.showHeader ? (
+        {/* {this.state.showHeader ? (
           <Header handleHeaderChange={this.handleHeaderChange} />
-        ) : null}
+        ) : null} */}
+        <Header />
         <Switch>
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/signupprocess" component={SignupProcess} />
