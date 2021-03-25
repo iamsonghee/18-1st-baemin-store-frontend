@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './Order.scss';
-import OrderInfo from './OrderInfo';
 import OrderItem from './OrderItem';
 import DaumPostcode from 'react-daum-postcode';
 import product1 from './product1.JPG';
@@ -16,6 +15,7 @@ class Order extends Component {
     //백 > 프론트
     cartItems: null,
     user: null,
+    sum: '',
     //프론트 > 백1
     name: '',
     phone_number: '',
@@ -43,6 +43,7 @@ class Order extends Component {
         this.setState({
           cartItems: res.products,
           user: res.user,
+          amountTotal: res.products.length,
         });
       });
   }
@@ -71,7 +72,6 @@ class Order extends Component {
     }) //
       .then(res => res.json())
       .then(result => {
-        console.log('잘됐음', result);
         // if (response.status === 400) {
         //   alert('다시 한번 확인해주세요');
         // } else {
@@ -124,7 +124,7 @@ class Order extends Component {
   };
 
   render() {
-    console.log('재밌', this.state?.add_my_address);
+    console.log(this.state?.zoneCode, this.state?.fullAddress);
     const { isModalShow, isModalClose } = this.props;
     const {
       name,
@@ -200,7 +200,8 @@ class Order extends Component {
                               index === 0 ? this.state.cartItems.length : null
                             }
                             count={cartItem.quantity}
-                            price={cartItem.total_price}
+                            price={cartItem.product_price}
+                            priceTotal={cartItem.total_price}
                             thumbnail={cartItem.total_product_thumbnail}
                             name={cartItem.product_name}
                             optionKey={cartItem.product_option_classification}
@@ -284,7 +285,7 @@ class Order extends Component {
                               className="inputgray"
                               type="text"
                               value={this.props.name}
-                            ></input>
+                            />
                           </div>
                         </td>
                       </tr>
@@ -314,7 +315,7 @@ class Order extends Component {
                               type="text"
                               className="inputgray"
                               value={this.props.email}
-                            ></input>
+                            />
                           </div>
                         </td>
                       </tr>
@@ -345,7 +346,7 @@ class Order extends Component {
                               type="text"
                               onChange={this.handleInputChange}
                               name="name"
-                            ></input>
+                            />
                           </div>
                         </td>
                       </tr>
@@ -413,7 +414,7 @@ class Order extends Component {
                               type="text"
                               onChange={this.handleInputChange}
                               name="customor_message"
-                            ></input>
+                            />
                           </div>
                         </td>
                       </tr>
@@ -483,7 +484,7 @@ class Order extends Component {
                               type="text"
                               onChange={this.handleInputChange}
                               name="point_used"
-                            ></input>{' '}
+                            />
                             원
                           </div>
                           <div className="memberWarning">

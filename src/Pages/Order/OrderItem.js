@@ -38,18 +38,18 @@ class OrderItem extends Component {
           <p></p>
         </td>
         <td className="tdOrderPrice">
-          <strong>{this.props.price}원</strong>
+          <strong>{this.props.price * 0.01}원</strong>
           <p></p>
         </td>
         <td className="tdOrderPrice">
-          <strong>{this.props.price}원</strong>
+          <strong>{this.props.priceTotal}원</strong>
           <p></p>
         </td>
         {this.props.rowspan ? (
           <td className="tdDelivery" rowspan={this.props.rowspan}>
             기본배송비
             <br />
-            2,500원
+            0원
             <br />
             (택배-선결제)
           </td>
