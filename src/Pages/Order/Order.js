@@ -70,14 +70,16 @@ class Order extends Component {
         phone_number: this.state.user.phone_number,
         email: this.state.user.email,
         delivery_address: this.state.fullAddress,
-        postal_code: this.state.zonecode,
+        postal_code: this.state.zoneCode,
         detailed_address: this.state.detailed_address,
         customor_message: this.state.customor_message,
       },
       user: {
         add_my_address: this.state.add_my_address,
         point_used: Number(this.state.point_used),
-        point: totalPrice * 0.01,
+        point:
+          this.state.cartItems?.reduce((acc, cur) => acc + cur.total_price, 0) *
+          0.01,
       },
     });
     const totalPrice = this.state.cartItems?.reduce(
@@ -105,7 +107,7 @@ class Order extends Component {
         user: {
           add_my_address: this.state.add_my_address,
           point_used: Number(this.state.point_used),
-          point: totalPrice * 0.01,
+          point: 3450,
         },
 
         //
@@ -117,8 +119,8 @@ class Order extends Component {
         // if (response.status === 400) {
         //   alert('다시 한번 확인해주세요');
         // } else {
-        // alert('구매완료!');
-        // this.props.history.push('/main');
+        alert('구매완료!');
+        this.props.history.push('/main');
         //   window.location.reload();
       });
   };
