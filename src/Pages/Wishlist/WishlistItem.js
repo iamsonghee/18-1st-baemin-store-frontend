@@ -36,7 +36,8 @@ class WishlistItem extends Component {
         <td className="tdOrderAmount">
           <div className="orderNumber">
             <strong>
-              {this.props.price}원 /{this.props.count}개
+              {parseInt(this.props.price).toLocaleString()}원 /
+              {this.props.count}개
             </strong>
             <div className="orderNumberChange">
               <a>

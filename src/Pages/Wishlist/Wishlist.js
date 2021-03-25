@@ -77,8 +77,12 @@ class Wishlist extends Component {
           <div className="orderTitle">
             <h2>푸핫 반가워요, 찜💘리스트</h2>
             <p>
-              적립금 : 무려{' '}
-              <strong>{this.state.wishlistItems[1]?.point}</strong>원
+              적립금 : 무려
+              <strong>
+                {parseInt(this.state.wishlistItems[1]?.point).toLocaleString()}
+              </strong>
+              원
+              {/* {parseInt(this.state.wishlistItems[1]?.point).toLocaleString()} */}
             </p>
             {/* <ol>
               <li className="pageOn">
