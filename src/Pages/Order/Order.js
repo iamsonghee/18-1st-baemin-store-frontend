@@ -57,6 +57,33 @@ class Order extends Component {
 
   //결제하기
   handlePayment = () => {
+    const { cartItems } = this.state;
+    const orderProduct = cartItems.map(data => ({
+      product_id: data.product_id,
+      product_option_id: data.product_option_id,
+      order_id: data.order_id,
+    }));
+    console.log({
+      products: orderProduct,
+      receiver: {
+        name: this.state.user.name,
+        phone_number: this.state.user.phone_number,
+        email: this.state.user.email,
+        delivery_address: this.state.fullAddress,
+        postal_code: this.state.zonecode,
+        detailed_address: this.state.detailed_address,
+        customor_message: this.state.customor_message,
+      },
+      user: {
+        add_my_address: this.state.add_my_address,
+        point_used: Number(this.state.point_used),
+        point: totalPrice * 0.01,
+      },
+    });
+    const totalPrice = this.state.cartItems?.reduce(
+      (acc, cur) => acc + cur.total_price,
+      0
+    );
     fetch('http://10.58.2.56:8000/order', {
       method: 'POST',
       headers: {
@@ -65,21 +92,23 @@ class Order extends Component {
         //sessionStorage.getItem('token'),
       },
       body: JSON.stringify({
-        product_id: this.state.products.product_id,
-        product_option_id: this.state.products.product_option_id,
-        order_id: this.state.productsorder_id16,
+        products: orderProduct,
+        receiver: {
+          name: this.state.user.name,
+          phone_number: this.state.user.phone_number,
+          email: this.state.user.email,
+          delivery_address: this.state.fullAddress,
+          postal_code: this.state.zoneCode,
+          detailed_address: this.state.detailed_address,
+          customor_message: this.state.customor_message,
+        },
+        user: {
+          add_my_address: this.state.add_my_address,
+          point_used: Number(this.state.point_used),
+          point: totalPrice * 0.01,
+        },
+
         //
-        name: this.state.user.name,
-        phone_number: this.state.user.phone_number,
-        email: this.state.user.email,
-        delivery_address: this.state.delivery_address,
-        postal_code: this.state.postal_code,
-        detailed_address: this.state.detailed_address,
-        customor_message: this.state.customor_message,
-        //
-        add_my_address: this.state.add_my_address,
-        point_used: this.state.point_used,
-        point: 340,
       }),
     }) //
       .then(res => res.json())
@@ -88,8 +117,8 @@ class Order extends Component {
         // if (response.status === 400) {
         //   alert('다시 한번 확인해주세요');
         // } else {
-        alert('구매완료!');
-        this.props.history.push('/main');
+        // alert('구매완료!');
+        // this.props.history.push('/main');
         //   window.location.reload();
       });
   };
@@ -141,7 +170,7 @@ class Order extends Component {
       (acc, cur) => acc + cur.total_price,
       0
     );
-    console.log('sssss', this.state?.cartItems);
+    console.log('sssss', totalPrice);
     console.log(this.state?.zoneCode, this.state?.fullAddress);
     const { isModalShow, isModalClose } = this.props;
     const {
