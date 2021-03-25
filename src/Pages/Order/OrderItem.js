@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import product1 from './product1.JPG';
 
-class WishlistItem extends Component {
+class OrderItem extends Component {
   render() {
-    console.log('모야모야', this.props.price);
     return (
       <tr>
         <td className="tdLeft">
@@ -31,24 +30,33 @@ class WishlistItem extends Component {
         </td>
         <td cla ssName="tdOrderAmount">
           <div className="orderNumber">
-            <strong>
-              {parseInt(this.props.price).toLocaleString()}원 /
-              {this.props.count}개
-            </strong>
-            <div className="orderNumberChange">
-              <a>
-                <span>옵션/수량변경</span>
-              </a>
-            </div>
+            <strong>{this.props.count}개</strong>
           </div>
         </td>
-        <td className="btnOrderBoxItem">
-          <button className="btnRightOrder">장바구니</button>
-          <button className="btnLeftOrder">삭제하기</button>
+        <td className="tdOrderPrice">
+          <strong>{this.props.price}원</strong>
+          <p></p>
         </td>
+        <td className="tdOrderPrice">
+          <strong>{this.props.price * 0.01}원</strong>
+          <p></p>
+        </td>
+        <td className="tdOrderPrice">
+          <strong>{this.props.priceTotal}원</strong>
+          <p></p>
+        </td>
+        {this.props.rowspan ? (
+          <td className="tdDelivery" rowspan={this.props.rowspan}>
+            기본배송비
+            <br />
+            0원
+            <br />
+            (택배-선결제)
+          </td>
+        ) : null}
       </tr>
     );
   }
 }
 
-export default WishlistItem;
+export default OrderItem;

@@ -1,0 +1,370 @@
+.cartComponent {
+  .orderWrap {
+    width: 1200px;
+    margin: 0 auto;
+    padding: 40px 0 150px 0;
+    .orderTitle {
+      border-bottom: 1px solid #dbdbdb;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+
+      h2 {
+        font-size: 28px;
+        font-weight: bold;
+      }
+      ol {
+        display: flex;
+        .pageOn {
+          color: #d1d1d1;
+        }
+        li {
+          font-size: 14px;
+          font-weight: bold;
+          //   color: #d1d1d1;
+          span {
+            padding: 0 7px;
+            img {
+            }
+          }
+        }
+      }
+    }
+
+    .cartContent {
+      form {
+        .cartContentList {
+          // margin: 50px 0 10px 0;
+          font-size: 12px;
+          font-weight: bold;
+          .orderTable {
+            text-align: center;
+
+            colgroup {
+            }
+            thead {
+              // padding: 10px 0;
+              border-collapse: collapse;
+              text-align: center;
+              tr {
+                th {
+                  padding: 10px 0;
+                  background: #f7f7f7;
+
+                  border-bottom: 1px solid #dbdbdb;
+                  border-top: 1px solid #999999;
+                  .formElement {
+                    input {
+                    }
+                    label {
+                    }
+                  }
+                }
+              }
+            }
+            tbody {
+              tr {
+                td {
+                  padding: 30px 0;
+                  vertical-align: middle;
+                  border-bottom: 1px solid #dbdbdb;
+
+                  color: #777777;
+                }
+                .tdCheck {
+                  text-align: middle;
+                  div {
+                    input {
+                    }
+                    label {
+                    }
+                  }
+                }
+                .tdLeft {
+                  .pickContent {
+                    display: flex;
+                    align-items: center;
+                    .pickImage {
+                      margin-right: 5px;
+                      a {
+                        img {
+                        }
+                      }
+                    }
+                    .pickInformation {
+                      // .pickBtnCoupon {
+                      //   a {
+                      //     img {
+                      //     }
+                      //   }
+                      // }
+
+                      a {
+                      }
+                    }
+                  }
+                }
+
+                .tdOrderAmount {
+                  .orderNumber {
+                    strong {
+                      width: 100px;
+                      display: block;
+                      color: #333333;
+                      font-size: 13px;
+                      font-weight: 600;
+                      margin-bottom: 5px;
+                    }
+                    .orderNumberChange {
+                      a {
+                        font-size: 11px;
+                        display: block;
+                        padding: 5px;
+                        border: 1px solid #dbdbdb;
+                        vertical-align: middle;
+                        color: #333;
+                        span {
+                        }
+                      }
+                    }
+                  }
+                }
+                .tdOrderPrice {
+                  vertical-align: middle;
+                  strong {
+                  }
+                  p {
+                  }
+                }
+                .tdDelivery {
+                  border-left: 1px solid #ebebeb;
+                  br {
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      .btnContinue {
+        height: 20px;
+        font-size: 12px;
+        text-align: left;
+        a {
+          border-bottom: 1px solid #333333;
+          display: inline-block;
+          em {
+          }
+        }
+      }
+      .priceSum {
+        border: 2px solid #d6d6d6;
+        padding: 30px 40px;
+        margin-top: 30px;
+        font-size: 16px;
+        .priceSumContent {
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+
+          dl {
+            font-size: 16px;
+            text-align: right;
+
+            dt {
+              font-size: 16px;
+              display: inline-block;
+              margin-bottom: 5px;
+              strong {
+                font-weight: bold;
+              }
+            }
+            dd {
+              strong {
+                font-weight: bold;
+              }
+              .dl3Amount {
+                color: #29c1bc !important;
+                font-size: 18px;
+              }
+            }
+          }
+          span {
+            display: inline-block;
+            padding: 0 20px;
+
+            img {
+            }
+          }
+          .priceTotal {
+          }
+        }
+      }
+      .btnOrderBox {
+        padding-top: 30px;
+        display: flex;
+        justify-content: space-between;
+        .btnLeftOrder {
+          font-size: 12px;
+          button {
+            font-size: 12px;
+            width: 120px;
+            border: 1px solid #a3a3a3;
+            line-height: 28px;
+            height: 30px;
+            color: #626262;
+            background: white;
+            margin-right: 10px;
+          }
+        }
+        .btnRightOrder {
+          font-size: 14px;
+          button {
+            width: 190px;
+            height: 55px;
+            padding: 0 20px;
+            color: white;
+            font-size: 14px;
+            background: black;
+            border: 1px solid #000;
+            cursor: pointer;
+            font-weight: bold;
+            margin-left: 10px;
+          }
+        }
+      }
+      em {
+        font-size: 12px;
+        margin-top: 10px;
+        float: right;
+      }
+    }
+    .orderInfoComponent {
+      width: 1200px;
+      margin: 0 auto;
+      padding: 50px 0;
+
+      //depth2
+      form {
+        display: flex;
+        justify-content: left;
+        .baseInputBox {
+          width: 1200px;
+          margin-bottom: 20px;
+          h3 {
+            display: inline-block;
+            margin-right: 380px;
+            margin-bottom: 40px;
+          }
+
+          .baseInformation {
+            table {
+              width: 1200px;
+              colgroup {
+              }
+              tbody {
+                tr:first-child {
+                  border-top: 2px solid #b3b1b1;
+                }
+                tr {
+                  border-bottom: 1px solid #dcdcdc;
+                  th {
+                    background: #fbfbfb;
+                    padding: 20px 25px;
+                    font-size: 12px;
+                    font-weight: 800;
+                    text-align: left;
+                    span {
+                    }
+                  }
+                  td {
+                    padding: 10px 25px;
+                    .divAddMyAddress {
+                      display: flex;
+                      align-items: center;
+                      .inputAddMyAddress {
+                        width: 20px;
+                        margin-right: 5px;
+                      }
+                    }
+                    div {
+                      margin-bottom: 5px;
+                      font-size: 12px;
+                      input {
+                        outline: none;
+                        border: 1px solid #d6d6d6;
+                        height: 31px;
+                        width: 350px;
+                      }
+                      .inputgray {
+                        background: #ebebeb;
+                      }
+                      .inputAddressButton {
+                        width: 100px;
+                        height: 35px;
+                        background: white;
+                        color: black;
+                        outline: none;
+                        border: 1px solid black;
+                      }
+                      //칸 줄이는
+                      .inputEmail {
+                        width: 240px;
+                        margin-right: 10px;
+                      }
+                      .inputAddress {
+                        width: 240px;
+                        margin-right: 10px;
+                      }
+
+                      .inputAddressBottom {
+                        margin-top: 5px;
+                      }
+                    }
+                    .jsEmail {
+                    }
+                    .formElement {
+                      text-align: left;
+                      input {
+                        width: 12px;
+                        height: 12px;
+                      }
+                      label {
+                        font-size: 10px;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      //depth2
+      .btnFinalBox {
+        text-align: center;
+        .btnMemberCancel {
+          width: 150px;
+          height: 45px;
+          color: #3e3d3c;
+          font-weight: bold;
+          cursor: pointer;
+          background: #fff;
+          border: 1px solid #cccccc;
+          margin-right: 10px;
+        }
+        .btnMemberJoin {
+          width: 150px;
+          height: 45px;
+          color: #fff;
+          font-weight: bold;
+          cursor: pointer;
+          background: black;
+        }
+      }
+    }
+  }
+}
