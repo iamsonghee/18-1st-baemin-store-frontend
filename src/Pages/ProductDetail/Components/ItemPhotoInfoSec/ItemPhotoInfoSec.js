@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import OptionArea from './Components/OptionArea';
+import { CARTAPI, WISHLISTAPI } from '../../../../config';
 import './ItemPhotoInfoSec.scss';
 
 class ItemPhotoInfoSec extends Component {
@@ -119,7 +120,7 @@ class ItemPhotoInfoSec extends Component {
       product_option_quantity: data.counts,
     }));
     this.props.options.length === 0
-      ? fetch('http://10.58.2.56:8000/order/cart', {
+      ? fetch(CARTAPI, {
           method: 'POST',
           headers: {
             Authorization: sessionStorage.access_token,
@@ -143,7 +144,7 @@ class ItemPhotoInfoSec extends Component {
               ? alert('옵션을 선택해 주세요')
               : alert('로그인이 필요합니다')
           )
-      : fetch('http://10.58.2.56:8000/order/cart', {
+      : fetch(CARTAPI, {
           method: 'POST',
           headers: {
             Authorization: sessionStorage.access_token,
@@ -170,7 +171,7 @@ class ItemPhotoInfoSec extends Component {
       product_option_quantity: data.counts,
     }));
     this.props.options.length === 0
-      ? fetch('http://10.58.0.59:8000/user/wishlist', {
+      ? fetch(WISHLISTAPI, {
           method: 'POST',
           headers: {
             Authorization: sessionStorage.access_token,
@@ -194,7 +195,7 @@ class ItemPhotoInfoSec extends Component {
               ? alert('옵션을 선택해 주세요')
               : alert('로그인이 필요합니다')
           )
-      : fetch('http://10.58.2.56:8000/order/cart', {
+      : fetch(CARTAPI, {
           method: 'POST',
           headers: {
             Authorization: sessionStorage.access_token,
