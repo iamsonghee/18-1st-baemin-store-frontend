@@ -26,22 +26,6 @@ class Cart extends Component {
       });
   }
 
-  // componentDidMount() {
-  //   fetch('data/cartData.json', {
-  //     headers: {
-  //       Authorization:
-  //         'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyfQ.wlCljldMPYhX12CrF2N1-nCSvDqf_HXKYFd68gFQPVY',
-  //     },
-  //   })
-  //     .then(res => res.json())
-  //     .then(res => {
-  //       res.results.map((id, index) => (id.id = index));
-  //       this.setState({
-  //         cartItems: res.results,
-  //       });
-  //     });
-  // }
-
   handleDelete = () => {
     const { cartItems, selectedCartItems } = this.state;
     const sendDelete = cartItems
@@ -64,7 +48,6 @@ class Cart extends Component {
       }),
     })
       .then(response => response.json())
-      .then(result => console.log(result))
       .then(alert('삭제되었습니다'));
   };
 
@@ -153,7 +136,6 @@ class Cart extends Component {
       .map(total => total.product_price * total.quantity);
     return (
       <div className="cart">
-        <Header />
         {isModal && (
           <OptionModal handleModal={handleModal} cartItems={cartItems} />
         )}
