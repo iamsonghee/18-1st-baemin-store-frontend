@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Header from '../../Components/Header/Header';
 import ItemPhotoInfoSec from './Components/ItemPhotoInfoSec/ItemPhotoInfoSec';
 import ItemGoodsTab from './Components/ItemGoodsTab/ItemGoodsTab';
 import TableElements from './Components/TableElements/TableElements';
@@ -12,7 +13,7 @@ class Productdetail extends Component {
   }
 
   componentDidMount() {
-    fetch('http://10.58.2.56:8000/product/7')
+    fetch('data/data.json')
       .then(res => res.json())
       .then(res =>
         this.setState({
@@ -36,6 +37,7 @@ class Productdetail extends Component {
     } = this.state.data;
     return (
       <div className="productDetail">
+        <Header />
         <ItemPhotoInfoSec
           id={product_id}
           counts={counts}
