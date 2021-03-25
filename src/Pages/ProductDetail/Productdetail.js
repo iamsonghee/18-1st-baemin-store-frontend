@@ -13,7 +13,8 @@ class Productdetail extends Component {
   }
 
   componentDidMount() {
-    fetch('data/data.json')
+    const id = window.location.search.split('=')[1];
+    fetch(`http://10.58.2.56:8000/product/${id}`)
       .then(res => res.json())
       .then(res =>
         this.setState({
