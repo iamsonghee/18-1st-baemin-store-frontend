@@ -23,7 +23,13 @@ class CatProdudctList extends PureComponent {
 
   handleFetch() {
     const category = this.props.match.params.id;
-    fetch(`http://10.58.2.56:8000/product/category/${category}`)
+    fetch(`http://10.58.2.56:8000/product/category/${category}`, {
+      headers: {
+        Authorization: sessionStorage.getItem('access_token')
+          ? sessionStorage.getItem('access_token')
+          : '',
+      },
+    })
       .then(res => res.json())
       .then(res => {
         this.setState({ productList: res['results'] });
@@ -31,14 +37,14 @@ class CatProdudctList extends PureComponent {
   }
 
   render() {
-    // console.log('CartProduct this.props : ', this.props.match);
-    // console.log('this.state.productList : ', this.state.productList);
+    console.log('CartProduct this.props : ', this.props);
+    console.log('this.state.productList : ', this.state.productList);
     return (
       <div className="catProductList">
-        <Header />
+        {/* <Header /> */}
         <div className="wrap">
           <div className="productsList">
-            {this.state.productList.map(product => {
+            {this.state.productList?.map(product => {
               return (
                 <Product
                   id={product.product_id}

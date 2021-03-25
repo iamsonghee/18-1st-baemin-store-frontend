@@ -36,7 +36,8 @@ class Header extends Component {
     this.setState({
       clickedId: idx,
     });
-    this.props.history.push(`/ct/${Object.values(menu)[0]}`);
+    this.props.history.push(`/ct/${Object.values(menu)[0]}?category=${idx}`);
+    this.handleAddClassName(idx);
   };
 
   handleAddClassName = idx => {
@@ -57,6 +58,7 @@ class Header extends Component {
     }
   };
   render() {
+    console.log('************ : ', this.props);
     return (
       <header>
         <div className="headerTop">
@@ -77,8 +79,14 @@ class Header extends Component {
                 })
               : DEFAULT_USERMENU.map((menu, index) => {
                   return (
-                    <li key={index}>
-                      <Link to={menu.path}>{menu.name}</Link>
+                    <li
+                      key={index}
+                      onClick={() => {
+                        this.props.history.push(menu.path);
+                        this.props.handleHeaderChange();
+                      }}
+                    >
+                      {menu.name}
                     </li>
                   );
                 })}

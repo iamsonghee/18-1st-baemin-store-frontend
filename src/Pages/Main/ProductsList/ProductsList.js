@@ -11,9 +11,22 @@ class ProductsList extends Component {
   }
 
   componentDidMount() {
-    fetch('/data/products.json')
+    // fetch('/data/products.json')
+    //   .then(res => res.json())
+    //   .then(res => this.setState({ productList: res }));
+
+    fetch(`http://10.58.2.56:8000/product/main`, {
+      headers: {
+        Authorization: sessionStorage.getItem('access_token')
+          ? sessionStorage.getItem('access_token')
+          : '',
+      },
+    })
       .then(res => res.json())
-      .then(res => this.setState({ productList: res }));
+      .then(res => {
+        console.log('res::::::', res);
+        this.setState({ productList: res });
+      });
   }
 
   render() {

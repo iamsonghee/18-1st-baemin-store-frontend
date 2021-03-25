@@ -10,9 +10,10 @@ class Product extends Component {
     };
   }
 
-  goToDetail = () => {
+  goToDetail = e => {
+    const id = this.props.id;
     if (this.props.stockCount > 0) {
-      this.props.history.push('/productdetail');
+      this.props.history.push(`/productdetail?id=${id}`);
     }
   };
 
@@ -23,7 +24,9 @@ class Product extends Component {
   };
 
   render() {
+    console.log('product Props : ', this.props);
     const {
+      id,
       imgURL,
       isSale,
       isBest,

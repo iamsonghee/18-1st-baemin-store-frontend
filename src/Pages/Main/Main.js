@@ -9,7 +9,7 @@ class Main extends Component {
   render() {
     return (
       <main onScroll={this.handleScroll}>
-        <Header />
+        {/* <Header /> */}
         <SlideBanner />
         <div className="contents">
           {Object.keys(MAINMENU).map((menu, index) => {
