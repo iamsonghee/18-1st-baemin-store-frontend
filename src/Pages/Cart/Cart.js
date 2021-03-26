@@ -24,6 +24,7 @@ class Cart extends Component {
           cartItems: res.results,
         });
       });
+    window.scrollTo(0, 0);
   }
 
   handleDelete = () => {
@@ -143,21 +144,14 @@ class Cart extends Component {
                 <span>01</span>
                 장바구니
                 <span>
-                  <img
-                    alt="우측 화살표"
-                    src="https://www.flaticon.com/svg/vstatic/svg/626/626045.svg?token=exp=1616545103~hmac=d2a3120ec7740e741d1cf8136a93bd24"
-                  />
+                  <i class="fas fa-long-arrow-alt-right"></i>
                 </span>
               </li>
               <li className="pageOn">
                 <span>02</span>
                 주문서작성/결제
                 <span>
-                  <img
-                    className="doneArrow"
-                    alt="우측 화살표"
-                    src="https://www.flaticon.com/svg/vstatic/svg/626/626045.svg?token=exp=1616545103~hmac=d2a3120ec7740e741d1cf8136a93bd24"
-                  />
+                  <i class="fas fa-long-arrow-alt-right"></i>
                 </span>
               </li>
               <li className="pageOn">
@@ -232,11 +226,7 @@ class Cart extends Component {
                   </dd>
                 </dl>
                 <span>
-                  <img
-                    className="sumImg"
-                    alt="더하기 기호"
-                    src="https://www.flaticon.com/svg/vstatic/svg/1828/1828919.svg?token=exp=1616546039~hmac=9ccc3c5e199c3aa6dc35bc938ca1b797"
-                  />
+                  <i class="fas fa-plus-circle"></i>
                 </span>
                 <dl className="dl2">
                   <dt> 배송비</dt>
@@ -254,10 +244,7 @@ class Cart extends Component {
                   </dd>
                 </dl>
                 <span>
-                  <img
-                    alt="등호"
-                    src="https://www.flaticon.com/svg/vstatic/svg/261/261989.svg?token=exp=1616546424~hmac=1dc403aec5009b862c76aa7eeb743c21"
-                  />
+                  <i class="fas fa-equals"></i>
                 </span>
                 <dl className="dl3">
                   <dt> 합계</dt>
@@ -296,11 +283,8 @@ class Cart extends Component {
               style={{ display: !cartItems && 'none' }}
             >
               <em>
-                <img
-                  alt="주의"
-                  src="https://www.flaticon.com/svg/vstatic/svg/87/87980.svg?token=exp=1616546588~hmac=511270859503ced14a4ea4e3dfbfa715"
-                />{' '}
-                주문서 작성단계에서 할인/적립금 적용을 하실 수 있습니다.
+                <i class="fas fa-exclamation"></i> 주문서 작성단계에서
+                할인/적립금 적용을 하실 수 있습니다.
               </em>
             </div>
           </div>

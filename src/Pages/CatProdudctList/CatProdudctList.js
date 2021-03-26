@@ -19,6 +19,7 @@ class CatProdudctList extends PureComponent {
     if (prevProps.match.params.id !== this.props.match.params.id) {
       this.handleFetch();
     }
+    window.scrollTo(0, 0);
   }
 
   handleFetch() {
@@ -37,24 +38,13 @@ class CatProdudctList extends PureComponent {
   }
 
   render() {
-    console.log('CartProduct this.props : ', this.props);
-    console.log('this.state.productList : ', this.state.productList);
     return (
       <div className="catProductList">
-        {/* <Header /> */}
         <div className="wrap">
           <div className="productsList">
             {this.state.productList?.map((product, index) => {
               return (
                 <Product
-                  // id={product.product_id}
-                  // productName={product.product_name}
-                  // imgURL={product.product_thumbnail}
-                  // discountRate={product.discount_rate}
-                  // beforePrice={product.product_price}
-                  // finalPrice={product.discounted_price}
-                  // stockCount={product.stock}
-
                   key={index}
                   id={product.product_id}
                   productName={product.product_name}

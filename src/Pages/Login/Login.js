@@ -7,6 +7,10 @@ class Login extends Component {
     password: '0',
     isLogin: false,
   };
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
   //input 창 입력
   handleInput = e => {
     this.setState({
@@ -31,13 +35,14 @@ class Login extends Component {
           console.log('서버연결 성공!💟');
           window.sessionStorage.setItem('access_token', result.token);
 
-          alert('result.message');
+          alert('성공!💟');
           this.props.history.push('/main');
           this.setState({
             isLogin: true,
             userId: this.state.userId,
             password: this.state.password,
           });
+          window.location.reload();
         } else {
           alert('로그인 실패 ');
         }
@@ -45,9 +50,6 @@ class Login extends Component {
   };
 
   render() {
-    console.log(this.state.password);
-    console.log('logibn!@!!!! : ', this.props);
-
     return (
       <div class="loginComponent">
         <h3> 회원로그인</h3>

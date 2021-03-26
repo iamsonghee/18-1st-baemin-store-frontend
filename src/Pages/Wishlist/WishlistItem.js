@@ -6,6 +6,9 @@ class WishlistItem extends Component {
     console.log('모야모야', this.props.price);
     return (
       <tr>
+        <td>
+          <input type="checkbox" />
+        </td>
         <td className="tdLeft">
           <div className="pickContent">
             <span className="pickImage">
@@ -32,7 +35,8 @@ class WishlistItem extends Component {
         <td cla ssName="tdOrderAmount">
           <div className="orderNumber">
             <strong>
-              {this.props.price}원 /{this.props.count}개
+              {parseInt(this.props.price).toLocaleString()}원 /
+              {this.props.count}개
             </strong>
             <div className="orderNumberChange">
               <a>

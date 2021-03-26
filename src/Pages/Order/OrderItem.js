@@ -34,15 +34,15 @@ class OrderItem extends Component {
           </div>
         </td>
         <td className="tdOrderPrice">
-          <strong>{this.props.price}원</strong>
+          <strong>{this.props.price.toLocaleString()}원</strong>
           <p></p>
         </td>
         <td className="tdOrderPrice">
-          <strong>{this.props.price * 0.01}원</strong>
+          <strong>{(this.props.price * 0.01).toLocaleString()}원</strong>
           <p></p>
         </td>
         <td className="tdOrderPrice">
-          <strong>{this.props.priceTotal}원</strong>
+          <strong>{this.props.priceTotal.toLocaleString()}원</strong>
           <p></p>
         </td>
         {this.props.rowspan ? (

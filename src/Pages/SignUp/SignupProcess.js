@@ -43,7 +43,7 @@ class SignupProcess extends Component {
   값;
   handleInputChange = e => {
     const idPattern = /^[a-z0-9_]{4,12}$/;
-    const pwPattern = /^[a-z0-9_]{4,12}$/;
+    const pwPattern = /^(?=.*[!-/:-@])(?!.*[ㄱ-ㅣ가-힣]).{8,20}$/;
 
     if (
       e.target.name === 'userId' &&
@@ -95,7 +95,7 @@ class SignupProcess extends Component {
     }
 
     if (true) {
-      fetch('http://10.58.2.56:8888/user/sign-up', {
+      fetch('http://10.58.2.56:8000/user/sign-up', {
         method: 'POST',
         body: JSON.stringify({
           name: this.state.name,
@@ -233,7 +233,7 @@ class SignupProcess extends Component {
                         />
                         {!this.state.password && (
                           <div style={{ color: 'red', fontSize: '10px' }}>
-                            4~12자 영문소문자, 숫자, 언더라인(_) 사용가능
+                            8자이상 특수문자 포함
                           </div>
                         )}
                       </div>

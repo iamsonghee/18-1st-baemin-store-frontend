@@ -12,9 +12,9 @@ class Product extends Component {
 
   goToDetail = e => {
     const id = this.props.id;
-    if (this.props.stockCount > 0) {
-      this.props.history.push(`/productdetail?id=${id}`);
-    }
+    // if (this.props.stockCount > 0) {
+    this.props.history.push(`/productdetail?id=${id}`);
+    // }
   };
 
   handleJjim = () => {
@@ -24,7 +24,6 @@ class Product extends Component {
   };
 
   render() {
-    console.log('product Props : ', this.props);
     const {
       id,
       imgURL,

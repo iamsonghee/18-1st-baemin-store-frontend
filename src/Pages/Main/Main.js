@@ -31,6 +31,7 @@ class Main extends Component {
           sale_products: res.sale_products,
         });
       });
+    window.scrollTo(0, 0);
   }
 
   render() {

@@ -10,7 +10,7 @@ class ItemPhotoInfoSec extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    if (prevProps !== this.props && this.props.options.length === 0) {
+    if (prevProps !== this.props && this.props.options?.length === 0) {
       this.setState({ showOptions: [this.props] });
     }
   }
@@ -24,6 +24,7 @@ class ItemPhotoInfoSec extends Component {
     const foundObj = showOptions.find(
       data => data.id === Number(e.target.name)
     );
+
     if (foundObj.counts === foundObj.stock) {
       alert('선택 가능한 수량을 초과했습니다');
       return;
@@ -41,8 +42,8 @@ class ItemPhotoInfoSec extends Component {
     const findIndex = showOptions.findIndex(
       data => data.id === Number(e.target.name)
     );
-    if (showOptions[findIndex].counts <= 1) return;
     const updNum = [...showOptions];
+    if (showOptions[findIndex]?.counts <= 1) return;
     updNum[findIndex].counts = updNum[findIndex].counts - 1;
     this.setState({ showOptions: updNum });
   };
