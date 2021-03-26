@@ -3,7 +3,6 @@ import ItemPhotoInfoSec from './Components/ItemPhotoInfoSec/ItemPhotoInfoSec';
 import ItemGoodsTab from './Components/ItemGoodsTab/ItemGoodsTab';
 import TableElements from './Components/TableElements/TableElements';
 import Review from './Components/Review/Review';
-import { PRODUCTAPI } from '../.././config';
 import './Productdetail.scss';
 
 class Productdetail extends Component {
@@ -13,14 +12,15 @@ class Productdetail extends Component {
   }
 
   componentDidMount() {
-    console.log(PRODUCTAPI);
-    fetch(PRODUCTAPI)
+    const id = window.location.search.split('=')[1];
+    fetch(`http://10.58.2.56:8000/product/${id}`)
       .then(res => res.json())
       .then(res =>
         this.setState({
           data: res,
         })
       );
+    window.scrollTo(0, 0);
   }
 
   render() {

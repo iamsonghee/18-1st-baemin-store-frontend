@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Header from '../../Components/Header/Header';
 import CartItem from './Components/CartItem/CartItem';
 import OptionModal from './Components/OptionModal/OptionModal';
+import { CARTAPI } from '../../config';
 import './Cart.scss';
 
 class Cart extends Component {
@@ -12,14 +12,14 @@ class Cart extends Component {
   };
 
   componentDidMount() {
-    fetch('http://10.58.2.56:8000/order/cart', {
+    fetch(CARTAPI, {
       headers: {
         Authorization: sessionStorage.access_token,
       },
     })
       .then(res => res.json())
       .then(res => {
-        res.results.map((id, index) => (id.id = index));
+        res.results?.map((id, index) => (id.id = index));
         this.setState({
           cartItems: res.results,
         });
@@ -38,17 +38,17 @@ class Cart extends Component {
     this.setState({
       cartItems: cartItems.filter(item => !selectedCartItems[item.id]),
     });
-    fetch('http://10.58.2.56:8000/order/cart', {
-      method: 'DELETE',
-      headers: {
-        Authorization: sessionStorage.access_token,
-      },
-      body: JSON.stringify({
-        results: sendDelete,
-      }),
-    })
-      .then(response => response.json())
-      .then(alert('삭제되었습니다'));
+    sendDelete.length === 0
+      ? alert('상품을 선택해주세요')
+      : fetch(CARTAPI, {
+          method: 'DELETE',
+          headers: {
+            Authorization: sessionStorage.access_token,
+          },
+          body: JSON.stringify({
+            selected_products: sendDelete,
+          }),
+        }).then(res => res.status === 204 && alert('삭제되었습니다'));
   };
 
   handleClickCheck = id => {
@@ -69,24 +69,24 @@ class Cart extends Component {
         product_id: data.product_id,
         product_option_id: data.product_option_id,
       }));
-    this.setState({
-      cartItems: cartItems.filter(item => !selectedCartItems[item.id]),
-    });
-    fetch('http://10.58.2.56:8000/order/cart', {
-      method: 'PATCH',
-      headers: {
-        Authorization: sessionStorage.access_token,
-      },
-      body: JSON.stringify({
-        results: sendSelected,
-      }),
-    })
-      .then(response => response.json())
-      .then(
-        result =>
-          result.message === 'SUCCESS' && this.props.history.push('/order')
-      )
-      .then(alert('구매 페이지로 이동합니다'));
+    sendSelected.length === 0
+      ? alert('상품을 선택해주세요')
+      : fetch(CARTAPI, {
+          method: 'PATCH',
+          headers: {
+            Authorization: sessionStorage.access_token,
+          },
+          body: JSON.stringify({
+            selected_products: sendSelected,
+          }),
+        })
+          .then(response => response.json())
+          .then(result => {
+            if (result.message === 'SUCCESS') {
+              alert('구매 페이지로 이동합니다');
+              this.props.history.push('/order');
+            }
+          });
   };
 
   orderAll = () => {
@@ -95,25 +95,21 @@ class Cart extends Component {
       product_id: data.product_id,
       product_option_id: data.product_option_id,
     }));
-
-    this.setState({
-      cartItems: null,
-    });
-    fetch('http://10.58.2.56:8000/order/cart', {
+    alert('구매 페이지로 이동합니다');
+    fetch(CARTAPI, {
       method: 'PATCH',
       headers: {
         Authorization: sessionStorage.access_token,
       },
       body: JSON.stringify({
-        results: sendAll,
+        selected_products: sendAll,
       }),
     })
       .then(response => response.json())
       .then(
         result =>
           result.message === 'SUCCESS' && this.props.history.push('/order')
-      )
-      .then(alert('구매 페이지로 이동합니다'));
+      );
   };
 
   handleModal = () => {
