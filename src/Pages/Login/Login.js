@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { BACKAPI } from '../../config';
+
 import './Login.scss';
 class Login extends Component {
   state = {
@@ -21,7 +23,7 @@ class Login extends Component {
   handleLogin = e => {
     e.preventDefault();
 
-    fetch('http://10.58.2.56:8000/user/login', {
+    fetch(`${BACKAPI}/user/login`, {
       method: 'POST',
       body: JSON.stringify({
         username: this.state.userId,

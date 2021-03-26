@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import './Order.scss';
 import OrderItem from './OrderItem';
 import DaumPostcode from 'react-daum-postcode';
-import product1 from './product1.JPG';
 import { Link } from 'react-router-dom';
+
+import product1 from './product1.JPG';
+import { BACKAPI } from '../../config';
+import './Order.scss';
 
 class Order extends Component {
   state = {
@@ -30,7 +32,7 @@ class Order extends Component {
   };
 
   componentDidMount() {
-    fetch('http://10.58.2.56:8000/order', {
+    fetch(`${BACKAPI}/order`, {
       // method: 'GET',
       headers: {
         Authorization: sessionStorage.getItem('access_token'),
@@ -86,7 +88,7 @@ class Order extends Component {
       (acc, cur) => acc + cur.total_price,
       0
     );
-    fetch('http://10.58.2.56:8000/order', {
+    fetch(`${BACKAPI}/order`, {
       method: 'POST',
       headers: {
         Authorization:

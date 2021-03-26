@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
-import Header from '../../Components/Header/Header';
 import Product from '../../Components/Product/Product';
+import { BACKAPI } from '../../config';
 import './CatProdudctList.scss';
 
 class CatProdudctList extends PureComponent {
@@ -24,7 +24,7 @@ class CatProdudctList extends PureComponent {
 
   handleFetch() {
     const category = this.props.match.params.id;
-    fetch(`http://10.58.2.56:8000/product/category/${category}`, {
+    fetch(`${BACKAPI}/product/category/${category}`, {
       headers: {
         Authorization: sessionStorage.getItem('access_token')
           ? sessionStorage.getItem('access_token')

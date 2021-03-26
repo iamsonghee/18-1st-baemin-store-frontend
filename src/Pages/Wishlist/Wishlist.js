@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Wishlist.scss';
 import WishlistItem from './WishlistItem';
+import { BACKAPI } from '../../config';
 import product1 from './product1.JPG';
 
 class Wishlist extends Component {
@@ -51,7 +52,7 @@ class Wishlist extends Component {
   // }
 
   componentDidMount() {
-    fetch('http://10.58.2.56:8000/user/wishlist', {
+    fetch(`${BACKAPI}/user/wishlist`, {
       // method: 'GET',
       headers: {
         Authorization: sessionStorage.getItem('access_token'),

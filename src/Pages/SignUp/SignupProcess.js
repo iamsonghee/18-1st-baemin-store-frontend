@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import DaumPostcode from 'react-daum-postcode';
+
+import { BACKAPI } from '../../config';
 import './SignupProcess.scss';
 
 class SignupProcess extends Component {
@@ -95,7 +97,7 @@ class SignupProcess extends Component {
     }
 
     if (true) {
-      fetch('http://10.58.2.56:8000/user/sign-up', {
+      fetch(`${BACKAPI}/user/sign-up`, {
         method: 'POST',
         body: JSON.stringify({
           name: this.state.name,
