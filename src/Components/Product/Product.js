@@ -12,9 +12,9 @@ class Product extends Component {
 
   goToDetail = e => {
     const id = this.props.id;
-    if (this.props.stockCount > 0) {
-      this.props.history.push(`/productdetail?id=${id}`);
-    }
+    // if (this.props.stockCount > 0) {
+    this.props.history.push(`/productdetail?id=${id}`);
+    // }
   };
 
   handleJjim = () => {
