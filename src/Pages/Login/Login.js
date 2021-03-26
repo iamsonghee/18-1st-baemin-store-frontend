@@ -7,6 +7,10 @@ class Login extends Component {
     password: '0',
     isLogin: false,
   };
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
   //input 창 입력
   handleInput = e => {
     this.setState({
@@ -46,9 +50,6 @@ class Login extends Component {
   };
 
   render() {
-    console.log(this.state.password);
-    console.log('logibn!@!!!! : ', this.props);
-
     return (
       <div class="loginComponent">
         <h3> 회원로그인</h3>

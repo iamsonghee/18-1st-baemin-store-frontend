@@ -6,6 +6,9 @@ class WishlistItem extends Component {
     console.log('모야모야', this.props.price);
     return (
       <tr>
+        <td>
+          <input type="checkbox" />
+        </td>
         <td className="tdLeft">
           <div className="pickContent">
             <span className="pickImage">

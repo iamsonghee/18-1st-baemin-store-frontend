@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Header from '../../Components/Header/Header';
 import CartItem from './Components/CartItem/CartItem';
 import OptionModal from './Components/OptionModal/OptionModal';
+import { CARTAPI } from '../../config';
 import './Cart.scss';
 
 class Cart extends Component {
@@ -12,18 +12,19 @@ class Cart extends Component {
   };
 
   componentDidMount() {
-    fetch('http://10.58.2.56:8000/order/cart', {
+    fetch(CARTAPI, {
       headers: {
         Authorization: sessionStorage.access_token,
       },
     })
       .then(res => res.json())
       .then(res => {
-        res.results.map((id, index) => (id.id = index));
+        res.results?.map((id, index) => (id.id = index));
         this.setState({
           cartItems: res.results,
         });
       });
+    window.scrollTo(0, 0);
   }
 
   handleDelete = () => {
@@ -38,17 +39,17 @@ class Cart extends Component {
     this.setState({
       cartItems: cartItems.filter(item => !selectedCartItems[item.id]),
     });
-    fetch('http://10.58.2.56:8000/order/cart', {
-      method: 'DELETE',
-      headers: {
-        Authorization: sessionStorage.access_token,
-      },
-      body: JSON.stringify({
-        results: sendDelete,
-      }),
-    })
-      .then(response => response.json())
-      .then(alert('삭제되었습니다'));
+    sendDelete.length === 0
+      ? alert('상품을 선택해주세요')
+      : fetch(CARTAPI, {
+          method: 'DELETE',
+          headers: {
+            Authorization: sessionStorage.access_token,
+          },
+          body: JSON.stringify({
+            selected_products: sendDelete,
+          }),
+        }).then(res => res.status === 204 && alert('삭제되었습니다'));
   };
 
   handleClickCheck = id => {
@@ -69,24 +70,24 @@ class Cart extends Component {
         product_id: data.product_id,
         product_option_id: data.product_option_id,
       }));
-    this.setState({
-      cartItems: cartItems.filter(item => !selectedCartItems[item.id]),
-    });
-    fetch('http://10.58.2.56:8000/order/cart', {
-      method: 'PATCH',
-      headers: {
-        Authorization: sessionStorage.access_token,
-      },
-      body: JSON.stringify({
-        results: sendSelected,
-      }),
-    })
-      .then(response => response.json())
-      .then(
-        result =>
-          result.message === 'SUCCESS' && this.props.history.push('/order')
-      )
-      .then(alert('구매 페이지로 이동합니다'));
+    sendSelected.length === 0
+      ? alert('상품을 선택해주세요')
+      : fetch(CARTAPI, {
+          method: 'PATCH',
+          headers: {
+            Authorization: sessionStorage.access_token,
+          },
+          body: JSON.stringify({
+            selected_products: sendSelected,
+          }),
+        })
+          .then(response => response.json())
+          .then(result => {
+            if (result.message === 'SUCCESS') {
+              alert('구매 페이지로 이동합니다');
+              this.props.history.push('/order');
+            }
+          });
   };
 
   orderAll = () => {
@@ -95,25 +96,21 @@ class Cart extends Component {
       product_id: data.product_id,
       product_option_id: data.product_option_id,
     }));
-
-    this.setState({
-      cartItems: null,
-    });
-    fetch('http://10.58.2.56:8000/order/cart', {
+    alert('구매 페이지로 이동합니다');
+    fetch(CARTAPI, {
       method: 'PATCH',
       headers: {
         Authorization: sessionStorage.access_token,
       },
       body: JSON.stringify({
-        results: sendAll,
+        selected_products: sendAll,
       }),
     })
       .then(response => response.json())
       .then(
         result =>
           result.message === 'SUCCESS' && this.props.history.push('/order')
-      )
-      .then(alert('구매 페이지로 이동합니다'));
+      );
   };
 
   handleModal = () => {
@@ -147,21 +144,14 @@ class Cart extends Component {
                 <span>01</span>
                 장바구니
                 <span>
-                  <img
-                    alt="우측 화살표"
-                    src="https://www.flaticon.com/svg/vstatic/svg/626/626045.svg?token=exp=1616545103~hmac=d2a3120ec7740e741d1cf8136a93bd24"
-                  />
+                  <i class="fas fa-long-arrow-alt-right"></i>
                 </span>
               </li>
               <li className="pageOn">
                 <span>02</span>
                 주문서작성/결제
                 <span>
-                  <img
-                    className="doneArrow"
-                    alt="우측 화살표"
-                    src="https://www.flaticon.com/svg/vstatic/svg/626/626045.svg?token=exp=1616545103~hmac=d2a3120ec7740e741d1cf8136a93bd24"
-                  />
+                  <i class="fas fa-long-arrow-alt-right"></i>
                 </span>
               </li>
               <li className="pageOn">
@@ -236,11 +226,7 @@ class Cart extends Component {
                   </dd>
                 </dl>
                 <span>
-                  <img
-                    className="sumImg"
-                    alt="더하기 기호"
-                    src="https://www.flaticon.com/svg/vstatic/svg/1828/1828919.svg?token=exp=1616546039~hmac=9ccc3c5e199c3aa6dc35bc938ca1b797"
-                  />
+                  <i class="fas fa-plus-circle"></i>
                 </span>
                 <dl className="dl2">
                   <dt> 배송비</dt>
@@ -258,10 +244,7 @@ class Cart extends Component {
                   </dd>
                 </dl>
                 <span>
-                  <img
-                    alt="등호"
-                    src="https://www.flaticon.com/svg/vstatic/svg/261/261989.svg?token=exp=1616546424~hmac=1dc403aec5009b862c76aa7eeb743c21"
-                  />
+                  <i class="fas fa-equals"></i>
                 </span>
                 <dl className="dl3">
                   <dt> 합계</dt>
@@ -300,11 +283,8 @@ class Cart extends Component {
               style={{ display: !cartItems && 'none' }}
             >
               <em>
-                <img
-                  alt="주의"
-                  src="https://www.flaticon.com/svg/vstatic/svg/87/87980.svg?token=exp=1616546588~hmac=511270859503ced14a4ea4e3dfbfa715"
-                />{' '}
-                주문서 작성단계에서 할인/적립금 적용을 하실 수 있습니다.
+                <i class="fas fa-exclamation"></i> 주문서 작성단계에서
+                할인/적립금 적용을 하실 수 있습니다.
               </em>
             </div>
           </div>

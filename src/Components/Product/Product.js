@@ -24,7 +24,6 @@ class Product extends Component {
   };
 
   render() {
-    console.log('product Props : ', this.props);
     const {
       id,
       imgURL,

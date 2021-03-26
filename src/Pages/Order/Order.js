@@ -3,6 +3,7 @@ import './Order.scss';
 import OrderItem from './OrderItem';
 import DaumPostcode from 'react-daum-postcode';
 import product1 from './product1.JPG';
+import { Link } from 'react-router-dom';
 
 class Order extends Component {
   state = {
@@ -32,9 +33,7 @@ class Order extends Component {
     fetch('http://10.58.2.56:8000/order', {
       // method: 'GET',
       headers: {
-        Authorization:
-          'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyfQ.wlCljldMPYhX12CrF2N1-nCSvDqf_HXKYFd68gFQPVY',
-        //sessionStorage.getItem('token'),
+        Authorization: sessionStorage.getItem('access_token'),
       },
     })
       .then(res => res.json())
@@ -46,6 +45,7 @@ class Order extends Component {
           // amountTotal: res.products.length,
         });
       });
+    window.scrollTo(0, 0);
   }
 
   //input
@@ -172,8 +172,6 @@ class Order extends Component {
       (acc, cur) => acc + cur.total_price,
       0
     );
-    console.log('sssss', totalPrice);
-    console.log(this.state?.zoneCode, this.state?.fullAddress);
     const { isModalShow, isModalClose } = this.props;
     const {
       name,
@@ -275,9 +273,9 @@ class Order extends Component {
               </div>
             </form>
             <div className="btnContinue">
-              <a>
+              <Link to="/cart">
                 <em> &lt; 장바구니 가기</em>
-              </a>
+              </Link>
             </div>
             <div className="priceSum">
               <div className="priceSumContent">
@@ -286,7 +284,7 @@ class Order extends Component {
                     총<strong>{this.state.user?.length} </strong>개의 상품금액
                   </dt>
                   <dd>
-                    <strong>{totalPrice}</strong>원
+                    <strong>{totalPrice?.toLocaleString()}</strong>원
                   </dd>
                 </dl>
                 <span>
@@ -306,7 +304,10 @@ class Order extends Component {
                 <dl className="dl3">
                   <dt>합계</dt>
                   <dd>
-                    <strong className="dl3Amount">{totalPrice}</strong>원
+                    <strong className="dl3Amount">
+                      {totalPrice?.toLocaleString()}
+                    </strong>
+                    원
                   </dd>
                 </dl>
               </div>
@@ -509,7 +510,9 @@ class Order extends Component {
                           <span className="important">◾ 합계금액 </span>
                         </th>
                         <td>
-                          <div className="memberWarning">{totalPrice}원</div>
+                          <div className="memberWarning">
+                            {totalPrice?.toLocaleString()}원
+                          </div>
                         </td>
                       </tr>
 
@@ -548,7 +551,11 @@ class Order extends Component {
                             <label htmlFor="mailing">전액 사용하기</label> */}
                             <span>
                               {' '}
-                              (보유적립금 {this.state.user?.point}원)
+                              (보유적립금{' '}
+                              {parseInt(
+                                this.state.user?.point
+                              ).toLocaleString()}
+                              원)
                             </span>
                             {/* {this.props.point} */}
                           </div>
@@ -561,7 +568,10 @@ class Order extends Component {
                         </th>
                         <td>
                           <div className="memberWarning">
-                            {totalPrice - this.state.point_used}원
+                            {(
+                              totalPrice - this.state.point_used
+                            ).toLocaleString()}
+                            원
                           </div>
                         </td>
                       </tr>

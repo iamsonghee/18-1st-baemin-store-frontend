@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import OptionArea from './Components/OptionArea';
 import { CARTAPI, WISHLISTAPI } from '../../../../config';
 import './ItemPhotoInfoSec.scss';
@@ -9,7 +10,7 @@ class ItemPhotoInfoSec extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    if (prevProps !== this.props && this.props.options.length === 0) {
+    if (prevProps !== this.props && this.props.options?.length === 0) {
       this.setState({ showOptions: [this.props] });
     }
   }
@@ -23,6 +24,7 @@ class ItemPhotoInfoSec extends Component {
     const foundObj = showOptions.find(
       data => data.id === Number(e.target.name)
     );
+
     if (foundObj.counts === foundObj.stock) {
       alert('선택 가능한 수량을 초과했습니다');
       return;
@@ -40,8 +42,8 @@ class ItemPhotoInfoSec extends Component {
     const findIndex = showOptions.findIndex(
       data => data.id === Number(e.target.name)
     );
-    if (showOptions[findIndex].counts <= 1) return;
     const updNum = [...showOptions];
+    if (showOptions[findIndex]?.counts <= 1) return;
     updNum[findIndex].counts = updNum[findIndex].counts - 1;
     this.setState({ showOptions: updNum });
   };
@@ -126,7 +128,7 @@ class ItemPhotoInfoSec extends Component {
             Authorization: sessionStorage.access_token,
           },
           body: JSON.stringify({
-            results: [
+            selected_products: [
               {
                 product_id: id,
                 quantity: showOptions[0].counts,
@@ -137,28 +139,36 @@ class ItemPhotoInfoSec extends Component {
           }),
         })
           .then(response => response.json())
-          .then(result =>
-            result.message === 'SUCCESS'
-              ? console.log('장바구니로 이동')
-              : result.message === 'OPTION_NOT_SELECTED'
-              ? alert('옵션을 선택해 주세요')
-              : alert('로그인이 필요합니다')
-          )
+          .then(result => {
+            if (result.message === 'SUCCESS') {
+              alert('장바구니로 이동합니다');
+              this.props.history.push('/cart');
+              return;
+            } else {
+              alert('로그인이 필요합니다');
+              this.props.history.push('/login');
+            }
+          })
+      : opsData.length === 0
+      ? alert('옵션을 선택해 주세요')
       : fetch(CARTAPI, {
           method: 'POST',
           headers: {
             Authorization: sessionStorage.access_token,
           },
-          body: JSON.stringify({ results: opsData }),
+          body: JSON.stringify({ selected_products: opsData }),
         })
           .then(response => response.json())
-          .then(result =>
-            result.message === 'SUCCESS'
-              ? console.log('장바구니로 이동')
-              : result.message === 'OPTION_NOT_SELECTED'
-              ? alert('옵션을 선택해 주세요')
-              : alert('로그인이 필요합니다')
-          );
+          .then(result => {
+            if (result.message === 'SUCCESS') {
+              alert('장바구니로 이동합니다');
+              this.props.history.push('/cart');
+              return;
+            } else {
+              alert('로그인이 필요합니다');
+              this.props.history.push('/login');
+            }
+          });
   };
 
   addWish = () => {
@@ -177,7 +187,7 @@ class ItemPhotoInfoSec extends Component {
             Authorization: sessionStorage.access_token,
           },
           body: JSON.stringify({
-            results: [
+            selected_products: [
               {
                 product_id: id,
                 quantity: showOptions[0].counts,
@@ -188,28 +198,133 @@ class ItemPhotoInfoSec extends Component {
           }),
         })
           .then(response => response.json())
-          .then(result =>
-            result.message === 'SUCCESS'
-              ? console.log('장바구니로 이동')
-              : result.message === 'OPTION_NOT_SELECTED'
-              ? alert('옵션을 선택해 주세요')
-              : alert('로그인이 필요합니다')
-          )
+          .then(result => {
+            if (result.message === 'SUCCESS') {
+              alert('찜리스트로 이동합니다');
+              this.props.history.push('/wishlist');
+              return;
+            } else if (result.message === 'OPTION_NOT_SELECTED') {
+              alert('옵션을 선택해 주세요');
+              return;
+            }
+            alert('로그인이 필요합니다');
+            this.props.history.push('/login');
+          })
+      : fetch(WISHLISTAPI, {
+          method: 'POST',
+          headers: {
+            Authorization: sessionStorage.access_token,
+          },
+          body: JSON.stringify({ selected_products: opsData }),
+        })
+          .then(response => response.json())
+          .then(result => {
+            if (result.message === 'SUCCESS') {
+              alert('찜리스트로 이동합니다');
+              this.props.history.push('/wishlist');
+              return;
+            } else if (result.message === 'OPTION_NOT_SELECTED') {
+              alert('옵션을 선택해 주세요');
+              return;
+            }
+            alert('로그인이 필요합니다');
+            this.props.history.push('/login');
+          });
+  };
+
+  directOrder = () => {
+    const { showOptions } = this.state;
+    const { id } = this.props;
+    const opsData = showOptions.map(data => ({
+      product_id: id,
+      quantity: 0,
+      product_option_id: data.id,
+      product_option_quantity: data.counts,
+    }));
+    const sendSelected = showOptions.map(data => ({
+      product_id: id,
+      product_option_id: data.id,
+    }));
+    this.props.options.length === 0
+      ? fetch(CARTAPI, {
+          method: 'POST',
+          headers: {
+            Authorization: sessionStorage.access_token,
+          },
+          body: JSON.stringify({
+            selected_products: [
+              {
+                product_id: id,
+                quantity: showOptions[0].counts,
+                product_option_id: '',
+                product_option_quantity: '',
+              },
+            ],
+          }),
+        })
+          .then(response => response.json())
+          .then(result => {
+            if (result.message === 'SUCCESS') {
+              fetch(CARTAPI, {
+                method: 'PATCH',
+                headers: {
+                  Authorization: sessionStorage.access_token,
+                },
+                body: JSON.stringify({
+                  selected_products: [
+                    {
+                      product_id: id,
+                      product_option_id: '',
+                    },
+                  ],
+                }),
+              })
+                .then(response => response.json())
+                .then(result => {
+                  if (result.message === 'SUCCESS') {
+                    alert('구매 페이지로 이동합니다');
+                    this.props.history.push('/order');
+                  }
+                });
+              return;
+            } else {
+              alert('로그인이 필요합니다');
+              this.props.history.push('/login');
+            }
+          })
+      : opsData.length === 0
+      ? alert('옵션을 선택해 주세요')
       : fetch(CARTAPI, {
           method: 'POST',
           headers: {
             Authorization: sessionStorage.access_token,
           },
-          body: JSON.stringify({ results: opsData }),
+          body: JSON.stringify({ selected_products: opsData }),
         })
           .then(response => response.json())
-          .then(result =>
-            result.message === 'SUCCESS'
-              ? console.log('장바구니로 이동')
-              : result.message === 'OPTION_NOT_SELECTED'
-              ? alert('옵션을 선택해 주세요')
-              : alert('로그인이 필요합니다')
-          );
+          .then(result => {
+            if (result.message === 'SUCCESS') {
+              fetch(CARTAPI, {
+                method: 'PATCH',
+                headers: {
+                  Authorization: sessionStorage.access_token,
+                },
+                body: JSON.stringify({
+                  selected_products: sendSelected,
+                }),
+              })
+                .then(response => response.json())
+                .then(result => {
+                  if (result.message === 'SUCCESS') {
+                    alert('구매 페이지로 이동합니다');
+                    this.props.history.push('/order');
+                  }
+                });
+            } else {
+              alert('로그인이 필요합니다');
+              this.props.history.push('/login');
+            }
+          });
   };
 
   render() {
@@ -222,6 +337,7 @@ class ItemPhotoInfoSec extends Component {
       totalSum,
       sendData,
       addWish,
+      directOrder,
     } = this;
     const { showOptions } = this.state;
     const { id, name, img, price, sale, stock, options } = this.props;
@@ -366,7 +482,7 @@ class ItemPhotoInfoSec extends Component {
             <button id="cartBtn" onClick={sendData}>
               장바구니
             </button>
-            <button id="orderBtn" onClick={sendData}>
+            <button id="orderBtn" onClick={directOrder}>
               바로 구매
             </button>
           </div>
@@ -382,4 +498,4 @@ class ItemPhotoInfoSec extends Component {
   }
 }
 
-export default ItemPhotoInfoSec;
+export default withRouter(ItemPhotoInfoSec);

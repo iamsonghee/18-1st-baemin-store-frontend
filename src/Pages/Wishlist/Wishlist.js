@@ -51,33 +51,29 @@ class Wishlist extends Component {
   // }
 
   componentDidMount() {
-    fetch('http://10.58.7.238:8000/user/wishlist', {
+    fetch('http://10.58.2.56:8000/user/wishlist', {
       // method: 'GET',
       headers: {
-        Authorization:
-          'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozfQ.utPCtoLZIVza5JOceW67nglVDTtKboMPZ6VklHUDRIQ',
-        // Authorization: sessionStorage.getItem('token'),
+        Authorization: sessionStorage.getItem('access_token'),
       },
     })
       .then(res => res.json())
       .then(res => {
-        console.log('페치', res);
+        console.log('찜받아오기', res);
         this.setState({
-          wishlistItems: res.result,
+          wishlistItems: res.results,
         });
       });
   }
 
   render() {
-    console.log('상위컴포넌트 렌더', this.state);
-    console.log(this.state.wishlistItems[1]?.point);
     return (
       <div className="wishlistComponent">
         <div className="orderWrap">
           <div className="orderTitle">
             <h2>푸핫 반가워요, 찜💘리스트</h2>
             <p>
-              적립금 : 무려
+              적립금 : 무려 &nbsp;
               <strong>
                 {parseInt(this.state.wishlistItems[1]?.point).toLocaleString()}
               </strong>
@@ -152,14 +148,20 @@ class Wishlist extends Component {
                             count={wishlistItem.quantity}
                             price={wishlistItem.product_price}
                             name={wishlistItem.product_name}
-                            thumnail={wishlistItem.product_thumnail}
+                            thumbnail={wishlistItem.product_thumnail}
                             // id={wishlistItem.id}
                             onClickCheck={this.handleClickCheck}
                           />
                         );
                       })
                     ) : (
-                      <p>장바구니가 비었습니다. 텅~</p>
+                      <tr>
+                        <td></td>
+                        <td>장바구니가 비었습니다. 텅~</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
                     )}
                   </tbody>
                 </div>
