@@ -82,7 +82,6 @@ class Header extends Component {
                       key={index}
                       onClick={() => {
                         this.props.history.push(menu.path);
-                        this.props.handleHeaderChange();
                       }}
                     >
                       {menu.name}
