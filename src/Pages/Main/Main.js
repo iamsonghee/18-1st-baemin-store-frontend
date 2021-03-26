@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from '../../Components/Header/Header';
 import ProductsList from './ProductsList/ProductsList';
 import SlideBanner from './SlideBanner/SlideBanner';
+import { BACKAPI } from '../../config';
 
 import './Main.scss';
 
@@ -16,7 +17,7 @@ class Main extends Component {
   }
 
   componentDidMount() {
-    fetch(`http://10.58.2.56:8000/product/main`, {
+    fetch(`${BACKAPI}/product/main`, {
       headers: {
         Authorization: sessionStorage.getItem('access_token')
           ? sessionStorage.getItem('access_token')
