@@ -27,6 +27,7 @@
 - 주문
 - 검색(추가 구현 사항)
 - 마이페이지(추가 구현 사항)
+![image](https://user-images.githubusercontent.com/65877281/119315029-5a4a0b00-bcb0-11eb-8526-67b1d961e6ea.png)
 
 **로그인**
 
